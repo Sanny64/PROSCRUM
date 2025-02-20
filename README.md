@@ -1,3 +1,4 @@
 # PROSCRUM
 Golf-Handicap Calculator for University.
-Test Push
+
+we are doing a cool handicap calculator
