@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {onMounted, ref, watch, watchEffect} from "vue";
-import RoundsChart from "@/components/rounds-chart.vue";
+// import RoundsChart from "@/components/rounds-chart.vue";
 import type {FormData, Round, CalculationResult} from '../types/types.ts';
-import RoundsTable from "@/components/rounds-table.vue";
+// import RoundsTable from "@/components/rounds-table.vue";
 
 import { useI18n } from 'vue-i18n';
 
@@ -51,10 +51,10 @@ watchEffect(() => {
       </div>
     </div>
 
-      <div v-if="props.roundsResult.length>0" class="roundsInfo">
-        <rounds-chart :rounds-data="props.roundsResult"></rounds-chart>
-        <rounds-table :rounds-data="props.roundsResult"></rounds-table>
-      </div>
+<!--      <div v-if="props.roundsResult.length>0" class="roundsInfo">-->
+<!--        <rounds-chart :rounds-data="props.roundsResult"></rounds-chart>-->
+<!--        <rounds-table :rounds-data="props.roundsResult"></rounds-table>-->
+<!--      </div>-->
 
 
   </div>

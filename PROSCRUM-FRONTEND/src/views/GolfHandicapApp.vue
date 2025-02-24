@@ -11,7 +11,7 @@
 <script setup lang="ts">
 
 import NavBar from "@/components/nav-bar.vue";
-import GolfIntro from "@/components/golf-intro.vue";
+// import GolfIntro from "@/components/golf-intro.vue";
 import {onMounted, ref} from "vue";
 // import HomePage from "@/pages/HomePage.vue";
 
