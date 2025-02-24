@@ -1,0 +1,1988 @@
+{
+  "result": [
+    {
+      "round_number": 1,
+      "calc_result_2020": 50,
+      "calc_result_2021": 51.9,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        1,
+        10,
+        3,
+        7,
+        1,
+        1,
+        3,
+        2,
+        1,
+        6,
+        5,
+        6,
+        2,
+        7,
+        7,
+        9,
+        9,
+        5
+      ]
+    },
+    {
+      "round_number": 2,
+      "calc_result_2020": 30,
+      "calc_result_2021": 32.5,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        2,
+        9,
+        4,
+        8,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4,
+        7,
+        3,
+        6,
+        6,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "round_number": 3,
+      "calc_result_2020": 15,
+      "calc_result_2021": 13.0,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        3,
+        8,
+        5,
+        9,
+        3,
+        2,
+        5,
+        2,
+        3,
+        7,
+        3,
+        8,
+        4,
+        5,
+        5,
+        7,
+        7,
+        3
+      ]
+    },
+    {
+      "round_number": 4,
+      "calc_result_2020": 6,
+      "calc_result_2021": 4.2,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        4,
+        7,
+        6,
+        10,
+        4,
+        1,
+        6,
+        3,
+        4,
+        8,
+        2,
+        9,
+        5,
+        4,
+        4,
+        6,
+        6,
+        2
+      ]
+    },
+    {
+      "round_number": 5,
+      "calc_result_2020": 50,
+      "calc_result_2021": 51.9,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        1,
+        10,
+        3,
+        7,
+        1,
+        1,
+        3,
+        2,
+        1,
+        6,
+        5,
+        6,
+        2,
+        7,
+        7,
+        9,
+        9,
+        5
+      ]
+    },
+    {
+      "round_number": 6,
+      "calc_result_2020": 30,
+      "calc_result_2021": 32.5,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        2,
+        9,
+        4,
+        8,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4,
+        7,
+        3,
+        6,
+        6,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "round_number": 7,
+      "calc_result_2020": 15,
+      "calc_result_2021": 13.0,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        3,
+        8,
+        5,
+        9,
+        3,
+        2,
+        5,
+        2,
+        3,
+        7,
+        3,
+        8,
+        4,
+        5,
+        5,
+        7,
+        7,
+        3
+      ]
+    },
+    {
+      "round_number": 8,
+      "calc_result_2020": 6,
+      "calc_result_2021": 4.2,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        4,
+        7,
+        6,
+        10,
+        4,
+        1,
+        6,
+        3,
+        4,
+        8,
+        2,
+        9,
+        5,
+        4,
+        4,
+        6,
+        6,
+        2
+      ]
+    },
+    {
+      "round_number": 9,
+      "calc_result_2020": 50,
+      "calc_result_2021": 51.9,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        1,
+        10,
+        3,
+        7,
+        1,
+        1,
+        3,
+        2,
+        1,
+        6,
+        5,
+        6,
+        2,
+        7,
+        7,
+        9,
+        9,
+        5
+      ]
+    },
+    {
+      "round_number": 10,
+      "calc_result_2020": 30,
+      "calc_result_2021": 32.5,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        2,
+        9,
+        4,
+        8,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4,
+        7,
+        3,
+        6,
+        6,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "round_number": 11,
+      "calc_result_2020": 15,
+      "calc_result_2021": 13.0,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        3,
+        8,
+        5,
+        9,
+        3,
+        2,
+        5,
+        2,
+        3,
+        7,
+        3,
+        8,
+        4,
+        5,
+        5,
+        7,
+        7,
+        3
+      ]
+    },
+    {
+      "round_number": 12,
+      "calc_result_2020": 6,
+      "calc_result_2021": 4.2,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        4,
+        7,
+        6,
+        10,
+        4,
+        1,
+        6,
+        3,
+        4,
+        8,
+        2,
+        9,
+        5,
+        4,
+        4,
+        6,
+        6,
+        2
+      ]
+    },
+    {
+      "round_number": 13,
+      "calc_result_2020": 50,
+      "calc_result_2021": 51.9,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        1,
+        10,
+        3,
+        7,
+        1,
+        1,
+        3,
+        2,
+        1,
+        6,
+        5,
+        6,
+        2,
+        7,
+        7,
+        9,
+        9,
+        5
+      ]
+    },
+    {
+      "round_number": 14,
+      "calc_result_2020": 30,
+      "calc_result_2021": 32.5,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        2,
+        9,
+        4,
+        8,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4,
+        7,
+        3,
+        6,
+        6,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "round_number": 15,
+      "calc_result_2020": 15,
+      "calc_result_2021": 13.0,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        3,
+        8,
+        5,
+        9,
+        3,
+        2,
+        5,
+        2,
+        3,
+        7,
+        3,
+        8,
+        4,
+        5,
+        5,
+        7,
+        7,
+        3
+      ]
+    },
+    {
+      "round_number": 16,
+      "calc_result_2020": 6,
+      "calc_result_2021": 4.2,
+      "course": {
+        "course_id": 1,
+        "course_name": "Platz 1",
+        "course_par": 72,
+        "course_rating": 70.9,
+        "slope_rating": 115,
+        "holes": [
+          {
+            "hole": 1,
+            "par": 3,
+            "hdc": 4
+          },
+          {
+            "hole": 2,
+            "par": 4,
+            "hdc": 16
+          },
+          {
+            "hole": 3,
+            "par": 4,
+            "hdc": 1
+          },
+          {
+            "hole": 4,
+            "par": 5,
+            "hdc": 10
+          },
+          {
+            "hole": 5,
+            "par": 4,
+            "hdc": 7
+          },
+          {
+            "hole": 6,
+            "par": 4,
+            "hdc": 13
+          },
+          {
+            "hole": 7,
+            "par": 3,
+            "hdc": 5
+          },
+          {
+            "hole": 8,
+            "par": 4,
+            "hdc": 17
+          },
+          {
+            "hole": 9,
+            "par": 4,
+            "hdc": 2
+          },
+          {
+            "hole": 10,
+            "par": 5,
+            "hdc": 11
+          },
+          {
+            "hole": 11,
+            "par": 4,
+            "hdc": 8
+          },
+          {
+            "hole": 12,
+            "par": 4,
+            "hdc": 14
+          },
+          {
+            "hole": 13,
+            "par": 3,
+            "hdc": 6
+          },
+          {
+            "hole": 14,
+            "par": 4,
+            "hdc": 18
+          },
+          {
+            "hole": 15,
+            "par": 4,
+            "hdc": 3
+          },
+          {
+            "hole": 16,
+            "par": 5,
+            "hdc": 12
+          },
+          {
+            "hole": 17,
+            "par": 4,
+            "hdc": 9
+          },
+          {
+            "hole": 18,
+            "par": 4,
+            "hdc": 15
+          }
+        ]
+      },
+      "scores": [
+        4,
+        7,
+        6,
+        10,
+        4,
+        1,
+        6,
+        3,
+        4,
+        8,
+        2,
+        9,
+        5,
+        4,
+        4,
+        6,
+        6,
+        2
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Golf Handicap Calculator",
+  "home": "Home",
+  "course": "Course",
+  "rounds": "Rounds",
+  "login": "Login",
+  "signup": "Sign up",
+  "input": {
+    "input": "Input",
+    "round": "Round: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "courseSelection": "Select a course",
+    "holes": "Holes",
+    "hole": ". Hole: ",
+    "calculate": "Calculate"
+  },
+  "output": {
+    "output": "Output",
+    "yourCurrentHandicap": "Your current handicap:",
+    "until2021": "until 2020: ",
+    "from2021": "from 2021: ",
+    "results": "Results",
+    "until2021Chart": "Until 2020",
+    "from2021Chart": "From 2021",
+    "round": "Round",
+    "rounds": "Rounds",
+    "resultsFrom2021": "Results from 2021",
+    "resultsUntil2020": "Results until 2020",
+    "scoreDifferential": "Score Differential",
+    "more": "More",
+    "fewer": "Fewer"
+  },
+  "coursePage": {
+    "courseName": "Course name: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Hole: ",
+    "hdc": "HDC.: ",
+    "save": "Save",
+    "delete": "Delete",
+    "close": "Close"
+  },
+  "filter": {
+    "search": "Search...",
+    "maxCourseRating": "Max. Course Rating: ",
+    "maxSlopeRating": "Max. Slope Rating: "
+  }
+
+}
