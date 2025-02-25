@@ -227,7 +227,6 @@ def calculate_round_outs(round_ins: list[RoundIn]):
         round_score_differential = calc_result[2]
 
         new_round = RoundOut(
-            # is_old=round.is_old,
             round_number=round.round_number, 
             course=round.course, scores=round.scores, 
             calc_result_2020=new_calc_result_2020, 
