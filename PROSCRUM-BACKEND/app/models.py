@@ -18,3 +18,17 @@ class CourseCreate(CourseBase):
 
 class CourseWithID(CourseBase):
     course_id: int
+
+class RoundBase(BaseModel):
+    # user_id: int
+    round_number: int
+    course: CourseWithID 
+    scores: list[int]
+
+class RoundIn(RoundBase):
+    pass
+
+class RoundOut(RoundBase):
+    calc_result_2020: float
+    calc_result_2021: float
+    score_differential: float
