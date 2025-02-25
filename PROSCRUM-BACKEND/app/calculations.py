@@ -8,7 +8,7 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
         old_hdc_2020 = old_rounds[-1].calc_result_2020
         old_hdc_2021 = old_rounds[-1].calc_result_2021
     else:
-        old_hdc_2020 = 54  # Default value if list is empty
+        old_hdc_2020 = -54  # Default value if list is empty
         old_hdc_2021 = 54  # Default value if list is empty
 
     old_SDs = []
