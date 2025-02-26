@@ -114,7 +114,8 @@ def update_round(round_number: int, round: RoundOut):
     # Neuberechnung noch buggy. Eventuell liegt es an der calculation implementierung. Im Team besprechen
     if (
     updated_round.course.course_par != round.course.course_par or 
-    updated_round.course.course_rating != round.course.course_rating or
+    updated_round.course.course_rating_9 != round.course.course_rating_9 or
+    updated_round.course.course_rating_18 != round.course.course_rating_18 or
     updated_round.course.slope_rating != round.course.slope_rating or
     updated_round.course.holes != round.course.holes or
     updated_round.scores != round.scores):
@@ -130,7 +131,8 @@ def update_round(round_number: int, round: RoundOut):
         updated_round.score_differential = round.score_differential
         
     updated_round.course.course_par = round.course.course_par
-    updated_round.course.course_rating = round.course.course_rating
+    updated_round.course.course_rating_9 = round.course.course_rating_9
+    updated_round.course.course_rating_18 = round.course.course_rating_18
     updated_round.course.slope_rating = round.course.slope_rating
     updated_round.course.holes = round.course.holes
     updated_round.scores = round.scores

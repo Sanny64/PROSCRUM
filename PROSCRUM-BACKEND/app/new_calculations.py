@@ -1,4 +1,4 @@
-from models import RoundIn, HoleConfig, CourseWithID
+from app.models import RoundIn, HoleConfig, CourseWithID
 
 def calculate_score_differential(score, course_rating, slope_rating):
     """
