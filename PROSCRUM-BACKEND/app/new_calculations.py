@@ -1,4 +1,4 @@
-from app.models import RoundIn, HoleConfig, CourseWithID
+from models import RoundIn, HoleConfig, CourseWithID
 
 def calculate_score_differential(score, course_rating, slope_rating):
     """
@@ -138,8 +138,11 @@ def get_strokes_received(course_handicap : int, hole_hdc : int):
     :param hole_hdc: the stroke index of the hole
     :return: the handicap strokes received at that hole.
     """
-    strokes_received = (course_handicap * hole_hdc) / 18
-    return int(strokes_received)
+    base_strokes = course_handicap // 18
+    thresh_hold = course_handicap % 18
+    if hole_hdc <= thresh_hold:
+        base_strokes += 1
+    return base_strokes
 
 def convert_to_GBE_score_first_round(netto_scores : list[int], course : CourseWithID):
     """
