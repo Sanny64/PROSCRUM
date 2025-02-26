@@ -185,7 +185,8 @@ def update_course(id: int, course: CourseWithID):
     
     updated_course.course_name = course.course_name
     updated_course.course_par = course.course_par
-    updated_course.course_rating = course.course_rating
+    updated_course.course_rating_9 = course.course_rating_9
+    updated_course.course_rating_18 = course.course_rating_18
     updated_course.slope_rating = course.slope_rating
     updated_course.holes = course.holes
 
