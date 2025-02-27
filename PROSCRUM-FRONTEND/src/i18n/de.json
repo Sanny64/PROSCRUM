@@ -1,0 +1,51 @@
+{
+  "title": "Golf Handicap Rechner",
+  "home": "Zuhause",
+  "course": "Golfplatz",
+  "rounds": "Runden",
+  "login": "Anmeldung",
+  "signup": "Registrierung",
+  "input": {
+    "input": "Eingabe",
+    "round": "Runde: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "courseSelection": "Wähle einen Golfplatz",
+    "holes": "Löcher",
+    "hole": ". Loch: ",
+    "calculate": "Berechnen"
+  },
+  "output": {
+    "output": "Ergebnis",
+    "yourCurrentHandicap": "Ihr aktuelles Handicap:",
+    "until2021": "bis 2020: ",
+    "from2021": "ab 2021: ",
+    "results": "Ergebnisse",
+    "until2021Chart": "Bis 2020",
+    "from2021Chart": "Ab 2021",
+    "round": "Runde ",
+    "rounds": "Runden",
+    "resultsFrom2021": "Ergebnisse ab 2021",
+    "resultsUntil2020": "Ergebnisse bis 2020",
+    "scoreDifferential": "Score Differential",
+    "more": "Mehr",
+    "fewer": "Weniger"
+  },
+  "coursePage": {
+    "courseName": "Golfplatzname: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Loch: ",
+    "hdc": "HDC.: ",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "close": "Schließen"
+  },
+  "filter": {
+    "search": "Suchen...",
+    "maxCourseRating": "Max. Course Rating: ",
+    "maxSlopeRating": "Max. Slope Rating: "
+  }
+
+}

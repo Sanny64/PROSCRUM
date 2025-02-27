@@ -1,0 +1,51 @@
+{
+  "title": "Golf-Behinner-Rechna",
+  "home": "Doheem",
+  "course": "Golfwies",
+  "rounds": "Rundeche",
+  "signup": "Sich eitrage",
+  "login": "Meld dich aach",
+  "input": {
+    "input": "Rein mit de Zahle!",
+    "round": "Uff die Runnd: ",
+    "courseRating": "Wiesewärtung: ",
+    "slopeRating": "Hangbeschleunischung: ",
+    "courseSelection": "Such dir en schicke Golfacker aus",
+    "holes": "Löchä",
+    "hole": ". Baggerloch: ",
+    "calculate": "Machs mol aus!"
+  },
+  "output": {
+    "output": "Hier des Ergebniss!",
+    "yourCurrentHandicap": "Dei aktuelle Versagerlevel:",
+    "until2021": "Früha, bis 2020: ",
+    "from2021": "Neisch, ab 2021: ",
+    "results": "Wat du g’schafft hosch",
+    "until2021Chart": "Vum gute alte Zeit",
+    "from2021Chart": "Heit un jetzt",
+    "round": "Noch so ne Runnd ",
+    "rounds": "Runndeche",
+    "resultsFrom2021": "Wat de g’macht hosch ab 2021",
+    "resultsUntil2020": "Wat de g’macht hosch bis 2020",
+    "scoreDifferential": "Score Differential",
+    "more": "Noch mee",
+    "fewer": "Iss zu vill, mach’s wener!"
+  },
+  "coursePage": {
+    "courseName": "Name vun de Wiese: ",
+    "par": "Pärchen: ",
+    "courseRating": "Wiesewärtung: ",
+    "slopeRating": "Hangsteigung: ",
+    "hole": "Grobber: ",
+    "hdc": "HDC. (Hessischer Dappigkeits-Check): ",
+    "save": "Heb's uff!",
+    "delete": "Schmeiß wech!",
+    "close": "Mach de Babbe zu!"
+  },
+  "filter": {
+    "search": "Guck ma do...",
+    "maxCourseRating": "Höchschd Wiesewärtung: ",
+    "maxSlopeRating": "Höchschd Hangsteigung: "
+
+  }
+}
