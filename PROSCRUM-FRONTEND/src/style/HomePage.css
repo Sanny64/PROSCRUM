@@ -10,8 +10,9 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 20px; /* Space between components */
     width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
     overflow-y: auto;
+    /* Include padding and border in the element's total width and height */
 }
 
 

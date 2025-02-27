@@ -4,7 +4,7 @@ import GolfCourse from "@/components/golf-course.vue";
 import AddGolfCourse from "@/components/add-golf-course.vue";
 import type {Course, CourseWithoutID} from '../types/types.ts';
 import { apiCallCourses } from "@/composables/api-call-courses.ts";
-// import CourseFilter from "@/components/course-filter.vue";
+import CourseFilter from "@/components/course-filter.vue";
 
 const { apiResultCourse, getCoursesAPI, addCourseAPI, deleteCourseAPI } = apiCallCourses();
 const courseList = apiResultCourse;
@@ -68,10 +68,10 @@ function slopeRatingValueFunc(slopeRatingValueFunc: number) {
 
 <template>
   <div class="content">
-<!--    <div class="grid2">-->
+    <div class="grid2">
 
-<!--      <course-filter @text-value="textValueFunc" @course-rating-value="courseRatingValueFunc" @slope-rating-value="slopeRatingValueFunc" :course-list="courseList"></course-filter>-->
-<!--    </div>-->
+      <course-filter @text-value="textValueFunc" @course-rating-value="courseRatingValueFunc" @slope-rating-value="slopeRatingValueFunc" :course-list="courseList"></course-filter>
+    </div>
     <div class="grid">
       <div v-for="(course, index) in filteredCourseList" :key="course.course_id">
         <golf-course :course="course" @course-deleted="deleteCourse"></golf-course>

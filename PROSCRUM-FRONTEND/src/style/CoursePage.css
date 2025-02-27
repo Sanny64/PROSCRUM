@@ -34,7 +34,11 @@
 
 }
 
-
+@media (max-width: 1036px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Spalten statt 4 */
+    }
+}
 
 
 .filter{
