@@ -95,6 +95,21 @@ watch(() => props.courseList, (newValue, oldValue) => {
 <template>
   <div v-if="loadFilter" class="filter2">
 
+    <div class="TextInputContainer">
+      <input
+        :placeholder="$t('filter.search')" v-model="textValue"
+        id="input"
+        class="input"
+        name="text"
+        type="text"
+      />
+
+      <label class="labelforsearch" for="input">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+      </label>
+
+    </div>
+
     <div class="maxSlopeRating" @click.self="disableMaxSlopeRating">
       {{t('filter.maxSlopeRating')}}{{slopeRatingValue}}
       <input
@@ -121,26 +136,12 @@ watch(() => props.courseList, (newValue, oldValue) => {
         type="range"
         :disabled="disableMaxCourseRatingBoolean"
         min="0" :max="highestCourseRatingValue"
-
       />
-
       <label class="labelforsearch" for="input">
         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-golf"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18v-15l7 4l-7 4" /><path d="M9 17.67c-.62 .36 -1 .82 -1 1.33c0 1.1 1.8 2 4 2s4 -.9 4 -2c0 -.5 -.38 -.97 -1 -1.33" /></svg>
       </label>
     </div>
-    <div class="TextInputContainer">
-      <input
-        :placeholder="$t('filter.search')" v-model="textValue"
-        id="input"
-        class="input"
-        name="text"
-        type="text"
-      />
 
-      <label class="labelforsearch" for="input">
-        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-      </label>
-    </div>
 
   </div>
 
