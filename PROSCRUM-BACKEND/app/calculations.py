@@ -16,7 +16,7 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
         old_hdc_2020 = old_rounds[-1].calc_result_2020
         if new_round.date.year >= 2021:
             old_hdc_2021 = old_rounds[-1].calc_result_2021
-        else: 
+        else:
             old_hdc_2021 = -old_hdc_2020
     else:
         old_hdc_2020 = -54  # Default value if list is empty
@@ -46,6 +46,7 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
         course_rating = current_course.course_rating_1_to_9
         course_par = current_course.course_par_1_to_9
     else:
+        course_rating = current_course.course_rating_18
         nine_hole = False
         course_rating = current_course.course_rating_all
         course_par = current_course.course_par_all
@@ -57,3 +58,13 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     handicaps.append(result_new[1])
     return handicaps
 
+
+def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
+    """
+    Aktualisiert das Handicap nach einer Änderung in einer Runde für alle Runden
+
+    :param updated_round: die aktualisierte Runde
+    :param rounds: die Liste der Runden des Spielers
+    :return: die neue Liste an Runden (aktualisiert, provisorisch bis Datenbankanschluss)
+    """
+    return rounds
