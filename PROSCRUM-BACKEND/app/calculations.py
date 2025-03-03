@@ -30,3 +30,14 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     handicaps.append(result_new[0])
     handicaps.append(result_new[1])
     return handicaps
+
+
+def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
+    """
+    Aktualisiert das Handicap nach einer Änderung in einer Runde für alle Runden
+
+    :param updated_round: die aktualisierte Runde
+    :param rounds: die Liste der Runden des Spielers
+    :return: die neue Liste an Runden (aktualisiert, provisorisch bis Datenbankanschluss)
+    """
+    return rounds
