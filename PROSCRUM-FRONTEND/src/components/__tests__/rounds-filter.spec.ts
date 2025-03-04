@@ -1,27 +1,21 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
-import CalculationOutput from '../calculation-output.vue'
-import { createI18n } from 'vue-i18n'
-import type { Round } from '../../types/types'
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import { nextTick } from "vue";
+import RoundsFilter from "../rounds-filter.vue";
+import { createI18n } from "vue-i18n";
+import type { Round } from "../../types/types";
+import i18nMessages from "../../i18n/en.json"; // i18n-Daten importieren
+
 
 // 🔹 i18n für Tests mit englischer Übersetzung
 export const i18n = createI18n({
   legacy: false,
-  locale: 'en',
-  messages: {
-    en: {
-      output: {
-        output: 'Output',
-        yourCurrentHandicap: 'Your current handicap:',
-        until2021: 'until 2020: ',
-        from2021: 'from 2021: ',
-      },
-    },
-  },
-})
+  locale: "en",
+  messages: { en: i18nMessages },
+});
 
-// 🔹 Mock-Daten für Runden
-const mockRoundsResult: Round[] = [
+// 🔹 Mock-Daten für Rundenliste
+const mockRoundsList: Round[] = [
   {
     round_number: 1,
     course: {
@@ -236,67 +230,59 @@ const mockRoundsResult: Round[] = [
     calc_result_2021: 28.6,
     score_differential: 30.6,
   },
-]
+];
 
-describe('CalculationOutput.vue', () => {
-  let wrapper: ReturnType<typeof shallowMount>
+describe("RoundsFilter.vue", () => {
+  let wrapper: ReturnType<typeof shallowMount>;
 
-  beforeEach(() => {
-    vi.clearAllMocks()
-    wrapper = shallowMount(CalculationOutput, {
+  beforeEach(async () => {
+    vi.clearAllMocks();
+    wrapper = shallowMount(RoundsFilter, {
       global: { plugins: [i18n] },
-      props: {
-        pollingStatus: undefined,
-        roundsResult: mockRoundsResult,
-      },
-    })
-  })
+      props: { roundsList: [] }, // Props zunächst leer setzen
+    });
+
+    // Props nach dem Mounten setzen
+    await wrapper.setProps({ roundsList: mockRoundsList });
+  });
 
   afterEach(() => {
-    wrapper.unmount()
-  })
+    wrapper.unmount();
+  });
 
   // ✅ Test: Komponente sollte ohne Fehler gerendert werden
-  it('should render the CalculationOutput component', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it("should render the RoundsFilter component", () => {
+    expect(wrapper.exists()).toBe(true);
+  });
 
-  // ✅ Test: Überschriften sollten korrekt gerendert werden
-  it('should render the correct headings', () => {
-    expect(wrapper.find('h1').text()).toBe('Output')
-    expect(wrapper.find('h2').text()).toBe('Your current handicap:')
-  })
+  // ✅ Test: Suchfeld sollte gerendert werden
+  it("should render the search input with correct placeholder", () => {
+    const searchInput = wrapper.find(".TextInputContainer input");
+    expect(searchInput.exists()).toBe(true);
+    expect(searchInput.attributes("placeholder")).toBe("Search...");
+  });
 
-  // ✅ Test: Die berechneten Ergebnisse sollten korrekt angezeigt werden
-  it('should display the correct calculated results', () => {
-    const calcOutputs = wrapper.findAll('.calcOutput')
+  // ✅ Test: Eingabe ins Suchfeld emittiert "text-value" Event
+  it("should emit 'text-value' event when typing in search input", async () => {
+    const searchInput = wrapper.find(".TextInputContainer input");
+    await searchInput.setValue("Sunny");
+    expect(wrapper.emitted("text-value")).toBeTruthy();
+    expect(wrapper.emitted("text-value")?.[0]).toEqual(["Sunny"]);
+  });
 
-    expect(calcOutputs.at(0)?.text()).toContain('until 2020: ')
-    expect(calcOutputs.at(0)?.find('b')?.text()).toBe('53.8') // Letzter Wert aus mockRoundsResult
+  // ✅ Test: Zahlenfeld sollte gerendert werden
+  it("should render the number input with correct placeholder", () => {
+    const numberInput = wrapper.find(".NumberInputContainer input");
+    expect(numberInput.exists()).toBe(true);
+    expect(numberInput.attributes("placeholder")).toBe("Number");
+  });
 
-    expect(calcOutputs.at(1)?.text()).toContain('from 2021: ')
-    expect(calcOutputs.at(1)?.find('b')?.text()).toBe('28.6') // Letzter Wert aus mockRoundsResult
-  })
+  // ✅ Test: Eingabe in das Zahlenfeld emittiert "number-value" Event
+  it("should emit 'number-value' event when typing in number input", async () => {
+    const numberInput = wrapper.find(".NumberInputContainer input");
+    await numberInput.setValue("2");
+    expect(wrapper.emitted("number-value")).toBeTruthy();
+    expect(wrapper.emitted("number-value")?.[0]).toEqual([2]);
+  });
 
-  // ✅ Test: Das Lade-GIF sollte angezeigt werden, wenn pollingStatus 199 ist
-  it('should display loading GIF when pollingStatus is 199', async () => {
-    await wrapper.setProps({ pollingStatus: 199 })
-
-    expect(wrapper.find('.loadingGif').exists()).toBe(true)
-    expect(wrapper.find('.loadingGif img').attributes('alt')).toBe('loading-gif')
-  })
-
-  // ✅ Test: Runden-Chart und -Tabelle sollten gerendert werden, wenn Runden-Daten vorhanden sind
-  it('should render rounds-chart and rounds-table when roundsResult has data', () => {
-    expect(wrapper.findComponent({ name: 'RoundsChart' }).exists()).toBe(true)
-    expect(wrapper.findComponent({ name: 'RoundsTable' }).exists()).toBe(true)
-  })
-
-  // ✅ Test: Runden-Chart und -Tabelle sollten nicht gerendert werden, wenn keine Runden-Daten vorhanden sind
-  it('should not render rounds-chart and rounds-table when roundsResult is empty', async () => {
-    await wrapper.setProps({ roundsResult: [] })
-
-    expect(wrapper.findComponent({ name: 'RoundsChart' }).exists()).toBe(false)
-    expect(wrapper.findComponent({ name: 'RoundsTable' }).exists()).toBe(false)
-  })
-})
+});

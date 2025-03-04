@@ -1,13 +1,9 @@
-import {ref} from "vue";
-import type { Round } from '../types/types.ts';
-import {result} from '../mockResultsData.json'
-
-
+import { ref } from 'vue'
+import type { Round } from '../types/types.ts'
+import { result } from '../mockResultsData.json'
 
 export function apiCallRounds() {
-
-          const RoundsResult = ref<Round[]>([]);
-
+  const RoundsResult = ref<Round[]>([])
 
   async function getRoundsAPI() {
     try {
@@ -16,24 +12,20 @@ export function apiCallRounds() {
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
         },
-      });
+      })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse');
+        throw new Error('Fehler beim Laden der Kurse')
       }
 
-      const response = await rawResponse.json();
+      const response = await rawResponse.json()
 
-
-
-      RoundsResult.value = response.result;
-      console.log('1 Runden geladen:', RoundsResult.value);
-
+      RoundsResult.value = response.result
+      console.log('1 Runden geladen:', RoundsResult.value)
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error);
+      console.error('Fehler beim Starten der Berechnung:', error)
     }
   }
-
 
   async function addRoundAPI(round: Round) {
     try {
@@ -42,44 +34,65 @@ export function apiCallRounds() {
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
         },
-        body: JSON.stringify(round
-        ),
-      });
+        body: JSON.stringify(round),
+      })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Hinzufügen des Kurses');
+        throw new Error('Fehler beim Hinzufügen des Kurses')
       }
 
-      const response = await rawResponse.json();
-      console.log('Kurs hinzugefügt:', response);
+      const response = await rawResponse.json()
+      console.log('Kurs hinzugefügt:', response)
 
-      RoundsResult.value = response.result;
-
+      RoundsResult.value = response.result
     } catch (error) {
-      console.error('Fehler beim Hinzufügen des Kurses:', error);
+      console.error('Fehler beim Hinzufügen des Kurses:', error)
     }
   }
 
-    async function deleteRoundAPI(round: Round) {
+  async function updateRoundAPI(round: Round) {
+    try {
+      const rawResponse = await fetch(`http://localhost:8000/rounds/${round.round_number}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json', // Setzt den Content-Type-Header
+        },
+        body: JSON.stringify(round),
+      })
+
+      if (!rawResponse.ok) {
+        throw new Error('Fehler beim Aktualisieren des Kurses')
+      }
+
+      const response = await rawResponse.json()
+      console.log('Kurs aktualisiert:', response)
+
+      RoundsResult.value = response.result
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren des Kurses:', error)
+    }
+
+  }
+
+  async function deleteRoundAPI(round: Round) {
     try {
       const rawResponse = await fetch(`http://localhost:8000/rounds/${round.round_number}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
-        }
-      });
+        },
+      })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Löschen des Kurses');
+        throw new Error('Fehler beim Löschen des Kurses')
       }
 
-      const response = await rawResponse.json();
-      console.log('Runde gelöscht:', response);
+      const response = await rawResponse.json()
+      console.log('Runde gelöscht:', response)
 
-      RoundsResult.value = response.result;
-
+      RoundsResult.value = response.result
     } catch (error) {
-      console.error('Fehler beim Löschen des Kurses:', error);
+      console.error('Fehler beim Löschen des Kurses:', error)
     }
   }
 
@@ -87,6 +100,7 @@ export function apiCallRounds() {
     apiResultRounds: RoundsResult,
     getRoundsAPI,
     addRoundAPI,
+    updateRoundAPI,
     deleteRoundAPI,
-  };
+  }
 }
