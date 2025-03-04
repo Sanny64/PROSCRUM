@@ -76,8 +76,6 @@ const highestCourseRating = computed(() => {
 watch(
   () => props.roundsList,
   (newValue, oldValue) => {
-    console.log('highestSlopeRating: ', highestSlopeRating.value)
-    console.log('highestCourseRating: ', highestCourseRating.value)
     highestSlopeRatingValue.value = highestSlopeRating.value
     highestCourseRatingValue.value = highestCourseRating.value
     loadFilter.value = true
