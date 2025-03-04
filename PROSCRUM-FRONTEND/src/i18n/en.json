@@ -42,8 +42,28 @@
     "delete": "Delete",
     "close": "Close"
   },
+  "roundPage": {
+    "round_number": "Round number: ",
+    "score": "Score: ",
+    "date": "Date: ",
+    "score_differential": "Score Differential: ",
+    "courseName": "Course name: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Hole: ",
+    "hdc": "HDC.: ",
+    "save": "Save",
+    "delete": "Delete",
+    "close": "Close",
+    "update": "Update",
+    "back": "Back"
+  },
+
+
   "filter": {
     "search": "Search...",
+    "number": "Number",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   }

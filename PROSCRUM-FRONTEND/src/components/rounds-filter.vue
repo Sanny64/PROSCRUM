@@ -119,7 +119,7 @@ watch(
 
     <div class="NumberInputContainer">
       <input
-        placeholder="Zahl(i18n)"
+        :placeholder="$t('filter.number')"
         v-model="numberValue"
         id="input"
         class="input"

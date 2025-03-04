@@ -50,6 +50,30 @@ export function apiCallRounds() {
     }
   }
 
+  async function updateRoundAPI(round: Round) {
+    try {
+      const rawResponse = await fetch(`http://localhost:8000/rounds/${round.round_number}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json', // Setzt den Content-Type-Header
+        },
+        body: JSON.stringify(round),
+      })
+
+      if (!rawResponse.ok) {
+        throw new Error('Fehler beim Aktualisieren des Kurses')
+      }
+
+      const response = await rawResponse.json()
+      console.log('Kurs aktualisiert:', response)
+
+      RoundsResult.value = response.result
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren des Kurses:', error)
+    }
+
+  }
+
   async function deleteRoundAPI(round: Round) {
     try {
       const rawResponse = await fetch(`http://localhost:8000/rounds/${round.round_number}`, {
@@ -76,6 +100,7 @@ export function apiCallRounds() {
     apiResultRounds: RoundsResult,
     getRoundsAPI,
     addRoundAPI,
+    updateRoundAPI,
     deleteRoundAPI,
   }
 }

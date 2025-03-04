@@ -42,8 +42,27 @@
     "delete": "Löschen",
     "close": "Schließen"
   },
+  "roundPage": {
+    "round_number": "Runden Nummer: ",
+    "score": "Schläge: ",
+    "date": "Datum: ",
+    "score_differential": "Score Differential: ",
+    "courseName": "Golfplatzname: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Loch: ",
+    "hdc": "HDC.: ",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "close": "Schließen",
+    "update": "Updaten",
+    "back": "Zurück"
+  },
+
   "filter": {
     "search": "Suchen...",
+    "number": "Nummer",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   }

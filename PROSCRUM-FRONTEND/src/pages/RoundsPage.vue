@@ -1,20 +1,15 @@
 <
 <script setup lang="ts">
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
-import GolfCourse from '@/components/golf-course.vue'
-import AddGolfCourse from '@/components/add-golf-course.vue'
-import type {Course, Round} from '../types/types.ts'
-import { apiCallCourses } from '@/composables/api-call-courses.ts'
+import type { Round} from '../types/types.ts'
 import CalculationOutput from '@/components/calculation-output.vue'
-import CalculationInput from '@/components/calculation-input.vue'
 import { apiCallInlineResponse } from '@/composables/api-call-inline-response.ts'
 import { apiCallRounds } from '@/composables/api-call-rounds.ts'
 import GolfRound from '@/components/golf-round.vue'
 import RoundsFilter from '@/components/rounds-filter.vue'
 
-const { apiResultCourse, getCoursesAPI, addCourseAPI, deleteCourseAPI } = apiCallCourses()
 const { apiStatus, sendFormdata } = apiCallInlineResponse()
-const { apiResultRounds, getRoundsAPI } = apiCallRounds()
+const { apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
 const dataTree = reactive(apiResultRounds)
 const roundsList = apiResultRounds
 
@@ -22,22 +17,21 @@ const inputValue = ref<string>('')
 const numberValue = ref<number>()
 const filteredRoundsList = ref<Round[]>([])
 
-async function addCourse(newCourse: Course) {
-  await addCourseAPI(newCourse)
-  await nextTick()
-  await getCoursesAPI()
-}
 
-async function deleteCourse(course: Course) {
-  await deleteCourseAPI(course) // Warten, bis der API-Aufruf abgeschlossen ist
+
+async function updateRound(round: Round) {
+  console.log('Update Round: ')
+  await updateRoundAPI(round) // Warten, bis der API-Aufruf abgeschlossen ist
   await nextTick() // Warten auf den nächsten DOM-Tick oder reaktive Updates
-  await getCoursesAPI() // Danach die Kurse erneut abrufen
+  await getRoundsAPI() // Danach die Kurse erneut abrufen
 }
 
 function filterCourses() {
-  filteredRoundsList.value = roundsList.value.filter((round) =>
+
+  filteredRoundsList.value = roundsList.value.filter((round: Round) =>
     round.course.course_name.toLowerCase().includes(inputValue.value.toLowerCase()),
   )
+
 
   if (numberValue.value) {
     filteredRoundsList.value = filteredRoundsList.value.filter(
@@ -57,7 +51,6 @@ function numberValueFunc(number: number) {
 }
 
 onMounted(() => {
-  getCoursesAPI()
   getRoundsAPI()
 })
 </script>
@@ -74,7 +67,7 @@ onMounted(() => {
 
       <div class="grid">
         <div v-for="(rounds, index) in filteredRoundsList" :key="rounds.round_number">
-          <golf-round :rounds="rounds" @course-deleted="deleteCourse"></golf-round>
+          <golf-round :rounds="rounds" @updated-round="updateRound"></golf-round>
         </div>
       </div>
     </div>

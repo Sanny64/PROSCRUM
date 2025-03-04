@@ -2,9 +2,11 @@
 import type { Course } from '../types/types.ts'
 import { computed, defineEmits, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import Info from "@/components/info.vue";
 
 const { t } = useI18n()
-const emit = defineEmits(['course-deleted'])
+const emit = defineEmits(['updated-round'])
+const editMode = ref(false);
 
 const props = defineProps<{
   rounds: any
@@ -24,58 +26,134 @@ function openDetails() {
   gridView.value = false
 }
 
-// function deleteCourse() {
-//   gridView.value = true;
-//   console.log("Send Emit");
-//   emit('course-deleted', props.course);
-// }
+function openUpdate() {
+  editMode.value = true;
+}
+
+function backDetails() {
+  gridView.value = false
+  editMode.value = false;
+}
+
+function updateRound() {
+  editMode.value = false;
+  gridView.value = true;
+  emit('updated-round', props.rounds)
+}
+
+
 </script>
 
 <template>
   <div v-if="gridView" class="gridView" @click="openDetails()">
     <div class="gridViewText">
-      <div class="gridViewHeadline">Rounds Number: {{ props.rounds.round_number }}</div>
+      <div class="gridViewHeadline">{{t('roundPage.round_number')}}{{ props.rounds.round_number }}</div>
       <div class="gridViewDetails">
-        <div>Course Name: {{ props.rounds.course.course_name }}</div>
+        <div>{{t('roundPage.courseName')}}{{ props.rounds.course.course_name }}</div>
       </div>
     </div>
   </div>
 
-  <div class="inputView" v-if="!gridView">
+  <div class="inputView" v-if="!gridView && !editMode">
     <div class="formView">
-      <!--        <div class="form-group">-->
-      <!--          <label for="round">{{t('coursePage.courseName')}}</label>-->
-      <!--          <b>{{course.course_name}}</b>-->
-      <!--        </div>-->
-      <!--        <div class="form-group">-->
-      <!--          <label for="coursePar">{{t('coursePage.par')}}</label>-->
-      <!--          <b>{{course.course_par}}</b>-->
-      <!--        </div>-->
-      <!--        <div class="form-group">-->
-      <!--          <label for="courseRating">{{t('coursePage.courseRating')}}</label>-->
-      <!--          <b>{{course.course_rating_18}}</b>-->
-      <!--        </div>-->
-      <!--        <div class="form-group">-->
-      <!--          <label for="slopeRating">{{t('coursePage.slopeRating')}}</label>-->
-      <!--          <b>{{course.slope_rating}}</b>-->
-      <!--        </div>-->
+              <div class="form-group">
+                <label for="round">{{t('roundPage.round_number')}}</label>
+                <b>{{props.rounds.round_number}}</b>
+              </div>
+              <div class="form-group">
+                <label for="round">{{t('roundPage.courseName')}}</label>
+                <b>{{props.rounds.course.course_name}}</b>
+              </div>
+              <div class="form-group">
+                <label for="coursePar">{{t('roundPage.par')}}</label>
+                <b>{{props.rounds.course.course_par}}</b>
+              </div>
+              <div class="form-group">
+                <label for="courseRating">{{t('roundPage.courseRating')}}</label>
+                <b>{{props.rounds.course.course_rating_18}}</b>
+              </div>
+              <div class="form-group">
+                <label for="slopeRating">{{t('roundPage.slopeRating')}}</label>
+                <b>{{props.rounds.course.slope_rating}}</b>
+              </div>
 
-      <!--        &lt;!&ndash; Löcher &ndash;&gt;-->
-      <!--        <div class="holes-container">-->
-      <!--          <div-->
-      <!--            class="hole"-->
-      <!--            v-for="(hole) in course.holes"-->
-      <!--            :key="hole.hole"-->
-      <!--          >-->
-      <!--            <label :for="'hole-' + hole.hole">{{ hole.hole }}. {{t('coursePage.hole')}}-> {{t('coursePage.par')}}</label>-->
-      <!--            <b>{{hole.par}}</b>-->
-      <!--            <label :for="'hole-' + hole.hole">{{t('coursePage.hdc')}}</label>-->
-      <!--            <b>{{hole.hdc}}</b>-->
-      <!--          </div>-->
+              <!-- Löcher -->
+              <div class="holes-container">
+                <div
+                  class="hole"
+                  v-for="(hole) in props.rounds.course.holes"
+                  :key="hole.hole"
+                >
+                  <label :for="'hole-' + hole.hole">{{ hole.hole }}. {{t('coursePage.hole')}}-> {{t('coursePage.par')}}</label>
+                  <b>{{hole.par}}</b>
+                  <label :for="'hole-' + hole.hole">{{t('roundPage.hdc')}}</label>
+                  <b>{{hole.hdc}}</b>
+                  <label :for="'hole-' + hole.hole">{{t('roundPage.score')}}</label>
+                  <b>{{props.rounds.scores[hole.hole - 1]}}</b>
+                </div>
 
-      <!--        </div>-->
-      <!--      <button class="submit-btn" @click="deleteCourse()">{{t('coursePage.delete')}}</button>-->
-      <button class="submit-btn" @click="closeDetails()">{{ t('coursePage.close') }}</button>
+              </div>
+      <button class="submit-btn" @click="openUpdate()" >{{t('roundPage.update')}}</button>
+      <button class="submit-btn" @click="closeDetails()">{{ t('roundPage.close') }}</button>
+    </div>
+  </div>
+
+<!--  Update Mode-->
+
+  <div class="inputView" v-if="!gridView && editMode">
+    <div class="formView">
+      <form @submit.prevent="updateRound()">
+        <div class="form-group">
+          <label for="round">{{t('roundPage.round_number')}}</label>
+          <b>{{props.rounds.round_number}}</b>
+        </div>
+        <div class="form-group">
+          <label for="round">{{t('roundPage.courseName')}}</label>
+          <b>{{props.rounds.course.course_name}}</b>
+        </div>
+        <div class="form-group">
+          <label for="coursePar">{{t('roundPage.par')}}</label>
+          <b>{{props.rounds.course.course_par}}</b>
+        </div>
+        <div class="form-group">
+          <label for="courseRating">{{t('roundPage.courseRating')}}</label>
+          <b>{{props.rounds.course.course_rating_18}}</b>
+        </div>
+        <div class="form-group">
+          <label for="slopeRating">{{t('roundPage.slopeRating')}}</label>
+          <b>{{props.rounds.course.slope_rating}}</b>
+        </div>
+
+        <!-- Löcher -->
+        <div class="holes-container">
+          <div
+            class="hole"
+            v-for="(hole) in props.rounds.course.holes"
+            :key="hole.hole"
+          >
+            <label :for="'hole-' + hole.hole">{{ hole.hole }}. {{t('coursePage.hole')}}-> {{t('coursePage.par')}}</label>
+            <b>{{hole.par}}</b>
+            <label :for="'hole-' + hole.hole">{{t('roundPage.hdc')}}</label>
+            <b>{{hole.hdc}}</b>
+            <label :for="'hole-' + hole.hole">{{t('roundPage.score')}}</label>
+            <input
+              type="number"
+              :id="'hole-' + hole.hole"
+              v-model="props.rounds.scores[hole.hole - 1]"
+              min="1"
+              required>
+          </div>
+
+        </div>
+
+        <!-- Absenden -->
+        <button type="submit" class="submit-btn">{{ t('roundPage.update') }}</button>
+        <button type="button" class="submit-btn" @click="backDetails()">
+          {{ t('roundPage.back') }}
+        </button>
+      </form>
+
+<!--      <info v-if="info" @close="closeFunc" :infoText="infoText"></info>-->
     </div>
   </div>
 </template>
