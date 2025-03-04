@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GolfHandicapApp from "@/views/GolfHandicapApp.vue";
+import GolfHandicapApp from '@/views/GolfHandicapApp.vue'
 </script>
 
 <template>
@@ -8,5 +8,4 @@ import GolfHandicapApp from "@/views/GolfHandicapApp.vue";
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

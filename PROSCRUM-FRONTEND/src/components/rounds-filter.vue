@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { ref, watch, defineEmits, onMounted, computed } from 'vue'
-import type { Course } from '@/types/types.ts'
+import type {Course, Round} from '@/types/types.ts'
 import { useI18n } from 'vue-i18n'
-
 const { t } = useI18n()
 
 const emit = defineEmits()
 
 const props = defineProps<{
-  courseList: Course[]
+  roundsList: Round[]
 }>()
 
 const textValue = ref<string>('')
+const numberValue = ref<number>()
 const courseRatingValue = ref<number>()
 const slopeRatingValue = ref<number>()
 
@@ -28,6 +28,10 @@ let loadFilter = ref(false)
 
 watch(textValue, (newValue) => {
   emit('text-value', newValue)
+})
+
+watch(numberValue, (newValue) => {
+  emit('number-value', newValue)
 })
 
 watch(courseRatingValue, (newValue) => {
@@ -61,18 +65,16 @@ function disableMaxCourseRating() {
 }
 
 const highestSlopeRating = computed(() => {
-  return Math.ceil(props.courseList.reduce((max, course) => Math.max(max, course.slope_rating), 0))
+  return 100
 })
 
 // Berechnet den höchsten Course Rating Wert
 const highestCourseRating = computed(() => {
-  return Math.ceil(
-    props.courseList.reduce((max, course) => Math.max(max, course.course_rating_18), 0),
-  )
+  return 100
 })
 
 watch(
-  () => props.courseList,
+  () => props.roundsList,
   (newValue, oldValue) => {
     console.log('highestSlopeRating: ', highestSlopeRating.value)
     console.log('highestCourseRating: ', highestCourseRating.value)
@@ -95,7 +97,6 @@ watch(
         name="text"
         type="text"
       />
-
       <label class="labelforsearch" for="input">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -116,78 +117,19 @@ watch(
       </label>
     </div>
 
-    <div class="maxSlopeRating" @click.self="disableMaxSlopeRating">
-      {{ t('filter.maxSlopeRating') }}{{ slopeRatingValue }}
+    <div class="NumberInputContainer">
       <input
-        placeholder="i18n"
-        v-model="slopeRatingValue"
+        placeholder="Zahl(i18n)"
+        v-model="numberValue"
         id="input"
         class="input"
         name="text"
-        type="range"
-        :disabled="disableMaxSlopeRatingBoolean"
-        min="1"
-        :max="highestSlopeRatingValue"
+        type="number"
       />
-
-      <label class="labelforsearch" for="input">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-golf"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 18v-15l7 4l-7 4" />
-          <path
-            d="M9 17.67c-.62 .36 -1 .82 -1 1.33c0 1.1 1.8 2 4 2s4 -.9 4 -2c0 -.5 -.38 -.97 -1 -1.33"
-          />
-        </svg>
-      </label>
-    </div>
-    <div class="maxCourseRating" @click.self="disableMaxCourseRating">
-      {{ t('filter.maxCourseRating') }}{{ courseRatingValue }}
-      <input
-        placeholder="i18n"
-        v-model="courseRatingValue"
-        id="input"
-        class="input"
-        name="text"
-        type="range"
-        :disabled="disableMaxCourseRatingBoolean"
-        min="0"
-        :max="highestCourseRatingValue"
-      />
-      <label class="labelforsearch" for="input">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-golf"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 18v-15l7 4l-7 4" />
-          <path
-            d="M9 17.67c-.62 .36 -1 .82 -1 1.33c0 1.1 1.8 2 4 2s4 -.9 4 -2c0 -.5 -.38 -.97 -1 -1.33"
-          />
-        </svg>
-      </label>
     </div>
   </div>
 </template>
 
 <style scoped>
-@import '../style/course-filter.css';
+@import '../style/rounds-filter.css';
 </style>

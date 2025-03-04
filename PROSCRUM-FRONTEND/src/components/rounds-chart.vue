@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue';
-import { Line } from 'vue-chartjs';
+import { ref, watch, computed } from 'vue'
+import { Line } from 'vue-chartjs'
 import {
   Chart as ChartJS,
   Title,
@@ -10,28 +10,28 @@ import {
   PointElement,
   LinearScale,
   CategoryScale,
-} from 'chart.js';
-import type { ChartData, ChartOptions } from 'chart.js';
+} from 'chart.js'
+import type { ChartData, ChartOptions } from 'chart.js'
 
-import type { Round } from '../types/types.ts';
-import { useI18n } from 'vue-i18n';
+import type { Round } from '../types/types.ts'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 interface Props {
-  roundsData: Round[];
+  roundsData: Round[]
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 // Registriere die benötigten Chart.js-Komponenten
-ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale);
+ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale)
 
 // Reaktives Chart-Datenobjekt
 const chartData = ref<ChartData<'line'>>({
   labels: [],
   datasets: [],
-});
+})
 
 // Funktion zur Aktualisierung der Chart-Daten
 const updateChartData = () => {
@@ -53,11 +53,11 @@ const updateChartData = () => {
         tension: 0.4,
       },
     ],
-  };
-};
+  }
+}
 
 // `watch` auf `props.roundsData`, um die Chart-Daten zu aktualisieren
-watch(() => props.roundsData, updateChartData, { deep: true, immediate: true });
+watch(() => props.roundsData, updateChartData, { deep: true, immediate: true })
 
 // Chart-Optionen
 const chartOptions: ChartOptions<'line'> = {
@@ -88,7 +88,7 @@ const chartOptions: ChartOptions<'line'> = {
       beginAtZero: true,
     },
   },
-};
+}
 </script>
 
 <template>
