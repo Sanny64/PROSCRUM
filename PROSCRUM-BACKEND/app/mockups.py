@@ -242,3 +242,6 @@ def generate_mockups():
     round_in_list = generate_round_in(courses_list)
     round_out_list = calculate_round_outs(round_in_list)
     return round_out_list
+
+courses_list = generate_courses()
+my_rounds = generate_mockups()

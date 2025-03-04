@@ -73,3 +73,12 @@ Make sure to be in the `PROSCRUM-API` directory and enter:
 ```
 uvicorn app.main:app --reload
 ```
+
+## Database
+
+The Database Management System used in this project is PostgreSQL. A running PostgreSQL database is necessary.
+
+For the Python code to build up a connection the package `psycopg2` needs to be installed in the venv. This has been added in the `requirements.txt`:
+```
+pip install psycopg2
+```
