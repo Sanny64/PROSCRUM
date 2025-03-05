@@ -1,4 +1,4 @@
-from app.models import RoundIn, HoleConfig, CourseWithID
+from app.models import CourseWithID
 
 def calculate_score_differential(score, course_rating, slope_rating):
     """
@@ -9,7 +9,7 @@ def calculate_score_differential(score, course_rating, slope_rating):
     :param slope_rating: Slope Rating des gespielten Kurses.
     :return: Berechneter Score Differential.
     """
-    sD = round((score - course_rating) * 113 / slope_rating, 1)
+    sD = (score - course_rating) * 113 / slope_rating
     return sD
 
 def calculate_CH(hcpi : float, slope_rating : int, course_rating : float, par : int):
@@ -22,11 +22,15 @@ def calculate_CH(hcpi : float, slope_rating : int, course_rating : float, par : 
     """
     return round(((hcpi * slope_rating) / 113) + (course_rating - par))
 
-def calculate_whs_handicap(new_round: RoundIn, old_SDs: list[float], old_HCPI: float = 54, nine_holes : bool = False):
+def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: float, par: int, old_SDs: list[float], course : CourseWithID, old_HCPI: float = 54, nine_holes : bool = False):
     """
     Berechnet das Handicap nach dem World Handicap System (WHS).
 
-    :param new_round: Die neue gespielte Runde.
+    :param course: der gespielte Kurs
+    :param par: das Par der gepsielten Löcher
+    :param course_rating: das course rating des Platzes
+    :param slope_rating: das slope rating des Platzes
+    :param scores: die gespielten scores
     :param old_SDs: Liste von Score Differentials der letzten (maximal) 19 gespielten Runden.
     :param old_HCPI: der akutelle Handicap Index vor der Berechnung.
     :param nine_holes: Handelt es sich bei der neuesten runde um eine Runde mit 9 Löchern
@@ -34,26 +38,26 @@ def calculate_whs_handicap(new_round: RoundIn, old_SDs: list[float], old_HCPI: f
     """
 
     score_differentials = old_SDs[:]
-    if nine_holes:
-        course_rating = new_round.course.course_rating_9
+    course_handicap = calculate_CH(old_HCPI, slope_rating, course_rating, par)
+
+    if len(score_differentials) == 0:
+        round_score = convert_to_GBE_score_first_round(scores, course)
     else:
-        course_rating = new_round.course.course_rating_18
+        round_score = convert_to_GBE_score(scores, course, course_handicap)
 
-    course_handicap = calculate_CH(old_HCPI, new_round.course.slope_rating, course_rating, new_round.course.course_par)
-
-    if (len(score_differentials) == 0):
-        round_score = convert_to_GBE_score_first_round(new_round.scores, new_round.course)
-    else:
-        round_score = convert_to_GBE_score(new_round.scores, new_round.course, course_handicap) 
-
-    round_SD = calculate_score_differential(round_score, course_rating, new_round.course.slope_rating)
+    round_SD = calculate_score_differential(round_score, course_rating, slope_rating)
     
-    if (nine_holes):
+    if nine_holes:
         round_SD += get_SD_9_holes_for_HCPI(old_HCPI)
-
+    round_SD = round(round_SD,1)
     score_differentials.append(round_SD)
 
     handicap_index = get_HDC_for_SDs(score_differentials)
+
+    if old_HCPI >= 26.5:
+        if handicap_index > old_HCPI:
+            return old_HCPI
+
     return [round(handicap_index, 1), round_SD]
 
 
@@ -130,7 +134,7 @@ def convert_to_GBE_score(netto_scores : list[int], course: CourseWithID, course_
         GBE_score += min(netto_double_bogey, score)
     return GBE_score
 
-def get_strokes_received(course_handicap : int, hole_hdc : int):
+def get_strokes_received(course_handicap : float, hole_hdc : int):
     """
     calculates the handicap strokes received at a hole
 
