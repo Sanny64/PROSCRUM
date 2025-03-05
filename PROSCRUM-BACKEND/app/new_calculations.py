@@ -1,4 +1,4 @@
-from app.models import CourseWithID
+from app.models import CourseWithID, HoleConfig
 
 def calculate_score_differential(score, course_rating, slope_rating):
     """
@@ -22,7 +22,7 @@ def calculate_CH(hcpi : float, slope_rating : int, course_rating : float, par : 
     """
     return round(((hcpi * slope_rating) / 113) + (course_rating - par))
 
-def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: float, par: int, old_SDs: list[float], course : CourseWithID, old_HCPI: float = 54, nine_holes : bool = False):
+def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: float, par: int, old_SDs: list[float], holes_played: list[HoleConfig], old_HCPI: float = 54, nine_holes : bool = False):
     """
     Berechnet das Handicap nach dem World Handicap System (WHS).
 
@@ -41,9 +41,9 @@ def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: 
     course_handicap = calculate_CH(old_HCPI, slope_rating, course_rating, par)
 
     if len(score_differentials) == 0:
-        round_score = convert_to_GBE_score_first_round(scores, course)
+        round_score = convert_to_GBE_score_first_round(scores, holes_played)
     else:
-        round_score = convert_to_GBE_score(scores, course, course_handicap)
+        round_score = convert_to_GBE_score(scores, holes_played, course_handicap)
 
     round_SD = calculate_score_differential(round_score, course_rating, slope_rating)
     
@@ -113,16 +113,15 @@ def get_HDC_for_SDs(score_differentials : list[float]):
     return (sum(best_scores) / len(best_scores)) + adjustment
 
 
-def convert_to_GBE_score(netto_scores : list[int], course: CourseWithID, course_hc : float):
+def convert_to_GBE_score(netto_scores : list[int], holes : list[HoleConfig], course_hc : float):
     """
     Berechnet den tatsächlich gespielten Score einer Runde
 
     :param netto_scores: Die gespielten Scores des Spielers.
-    :param course: Der gespielte Kurs.
+    :param holes: Die gespielten Löcher der Runde
     :param course_hc: Das Course Handicap des gespielten Kurses.
     :return: Das berechnete GesamtBruttoErgebnis.
     """
-    holes = course.holes
 
     GBE_score = 0
 
@@ -148,17 +147,16 @@ def get_strokes_received(course_handicap : float, hole_hdc : int):
         base_strokes += 1
     return base_strokes
 
-def convert_to_GBE_score_first_round(netto_scores : list[int], course : CourseWithID):
+def convert_to_GBE_score_first_round(netto_scores : list[int], holes : list[Holeconfig):
     """
     Berechnet den tastächlichen Score eines Spielers in seiner ersten Runde.
 
 
     :param netto_scores: Die gespielten Scores.
-    :param course: Der bespielte Kurs.
+    :param holes: Die gespielten Löcher der Runde
     :return: Das berechnete GesamtBruttoErgebnis.
     """
-    holes = course.holes
-
+    
     GBE_score = 0
 
     for i, score in enumerate(netto_scores):
