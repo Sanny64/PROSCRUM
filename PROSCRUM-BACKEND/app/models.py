@@ -27,7 +27,8 @@ class RoundBase(BaseModel):
     # user_id: int
     round_number: int
     course: CourseWithID 
-    scores: list[int]
+    scores: list[int] # Wenn nur 9 Einträge, muss der Rest mit "0" aufgefüllt werden. Welche 9 Löcher aufgefüllt werden müssen, wird vom FE übermittelt.
+    date: date
 
 class RoundIn(RoundBase):
     pass
