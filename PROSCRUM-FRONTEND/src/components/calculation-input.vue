@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 let length = ref(18)
+let lengthStart = ref(0)
 let isChecked = ref(true)
 
 const props = defineProps<{
@@ -17,9 +18,9 @@ console.log('CourseList: ', props.courseList)
 // Ausgewählte Option
 const selectedCourseName = ref<string | null>('')
 const selectedCourse = ref<Course>()
-
-// Sichtbarkeit des Dropdown-Menüs steuern
 const isDropdownOpen = ref(false)
+const selectedDate = ref<string>('') // Reaktiver Wert für das Datum
+const selectedRatingOption = ref<'all' | '1to9' | '10to18'>('all')
 
 // Funktion zum Umschalten des Dropdown-Menüs
 const toggleDropdown = () => {
@@ -34,6 +35,7 @@ const selectCourse = (course: Course) => {
 }
 const formData = reactive<FormData>({
   round_number: undefined,
+  date: undefined,
   course: undefined,
   scores: [], // Initialisiertes Array
 })
@@ -45,43 +47,72 @@ watchEffect(() => {
 // WatchEffect, um die Länge und Zufallswerte dynamisch zu setzen
 watchEffect(() => {
   formData.scores = Array.from(
-    { length: length.value },
-    () => Math.floor(Math.random() * (10 - 1 + 1)) + 1, // Zufallszahlen zwischen 1 und 10
+    { length: 18 },
+    // () => Math.floor(Math.random() * (10 - 1 + 1)) + 1, // Zufallszahlen zwischen 1 und 10
   )
 })
 
-function toggleCheckbox() {
-  // Zustand explizit umschalten bei Enter-Taste
-  isChecked.value = !isChecked.value
-  handleCheckboxChange() // Aktualisiere den Zustand entsprechend
-}
-
-function handleCheckboxChange() {
-  // Länge der Löcher basierend auf dem Zustand setzen
-  if (isChecked.value) {
-    length.value = 18
-    console.log('Checkbox aktiviert. Länge: ' + length.value)
-  } else {
-    length.value = 9
-    console.log('Checkbox deaktiviert. Länge: ' + length.value)
+watchEffect(() => {
+  if (selectedDate.value) {
+    formData.date = new Date(selectedDate.value).toISOString().split('T')[0] // ISO-Format ohne Zeit
   }
-}
+})
+
+
+watchEffect(() => {
+  // Länge der Löcher basierend auf dem Zustand setzen
+  if (selectedRatingOption.value === '1to9' ) {
+    length.value = 9
+    lengthStart.value = 1
+    console.log('Checkbox aktiviert. Länge: ' + length.value)
+  }else if(selectedRatingOption.value === '10to18'){
+    length.value = 9
+    lengthStart.value = 10
+
+  }else {
+    lengthStart.value = 1
+    length.value = 18
+    console.log('Checkbox deaktiviert. Länge: ' + length.value)
+
+  }
+});
 
 const inputInfo = ref('')
 
 const emit = defineEmits(['formData'])
 
 const btnCalculation = () => {
-  if (selectedCourseName.value === '') {
-    console.log('Bitte wählen Sie einen Golfplatz')
-  } else if (formData) {
-    inputInfo.value = ''
-    console.log('Emit gesendet: ', formData)
-    emit('formData', formData)
-  } else {
-    console.log('Bitte geben Sie einen Wert ein')
-    inputInfo.value = 'Bitte geben Sie einen Wert ein'
+
+
+  let nullFormDate = JSON.parse(JSON.stringify(formData))
+
+
+
+  if (selectedRatingOption.value === '1to9' ) {
+
+    for (let i = 9; i <= 17; i++) {
+      nullFormDate.scores[i] = 0;
+    }
+  }else if(selectedRatingOption.value === '10to18'){
+
+    for (let i = 0; i <= 8; i++) {
+      nullFormDate.scores[i] = 0;
+    }
+
   }
+
+  console.log('Emit gesendet: ', nullFormDate)
+
+  // if (selectedCourseName.value === '') {
+  //   console.log('Bitte wählen Sie einen Golfplatz')
+  // } else if (formData) {
+  //   inputInfo.value = ''
+  //   console.log('Emit gesendet: ', formData)
+  //   emit('formData', formData)
+  // } else {
+  //   console.log('Bitte geben Sie einen Wert ein')
+  //   inputInfo.value = 'Bitte geben Sie einen Wert ein'
+  // }
 }
 </script>
 
@@ -103,6 +134,15 @@ const btnCalculation = () => {
           v-model="formData.round_number"
           id="round"
           min="1"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="date">{{ t('input.date') }}</label>
+        <input
+          type="date"
+          v-model="selectedDate"
+          id="date"
           required
         />
       </div>
@@ -155,23 +195,43 @@ const btnCalculation = () => {
       </div>
 
       <!-- Switch -->
-      <div class="holesHeadline">
-        <h2>{{ t('input.holes') }}</h2>
-        <p>9</p>
-        <label class="switch" @keydown.enter.prevent="toggleCheckbox" tabindex="0">
-          <input type="checkbox" v-model="isChecked" @change="handleCheckboxChange" tabindex="-1" />
-          <span class="slider round"></span>
-        </label>
-        <p>18</p>
-      </div>
+            <div class="holesHeadline">
+              <label>{{ t('input.courseRatingSelection') }}</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" value="1to9" v-model="selectedRatingOption" />
+                  {{ t('input.courseRating_1to9') }}
+                </label>
+                <label>
+                  <input type="radio" value="10to18" v-model="selectedRatingOption" />
+                  {{ t('input.courseRating_10to18') }}
+                </label>
+                <label>
+                  <input type="radio" value="all" v-model="selectedRatingOption" />
+                  {{ t('input.courseRating_all') }}
+                </label>
+              </div>
+
+            </div>
+
+      <!-- Switch -->
+<!--      <div class="holesHeadline">-->
+<!--        <h2>{{ t('input.holes') }}</h2>-->
+<!--        <p>9</p>-->
+<!--        <label class="switch" @keydown.enter.prevent="toggleCheckbox" tabindex="0">-->
+<!--          <input type="checkbox" v-model="isChecked" @change="handleCheckboxChange" tabindex="-1" />-->
+<!--          <span class="slider round"></span>-->
+<!--        </label>-->
+<!--        <p>18</p>-->
+<!--      </div>-->
       <!-- Löcher -->
       <div class="holes-container">
-        <div class="hole" v-for="(score, index) in formData.scores" :key="index">
-          <label :for="'hole-' + (index + 1)">{{ index + 1 }}{{ t('input.hole') }}</label>
+        <div class="hole" v-for="(score, index) in length" :key="index">
+          <label :for="'hole-' + (index)">{{ index + lengthStart}}{{ t('input.hole') }}</label>
           <input
             type="number"
-            :id="'hole-' + (index + 1)"
-            v-model="formData.scores[index]"
+            :id="'hole-' + (index + lengthStart -1)"
+            v-model="formData.scores[index + lengthStart -1]"
             min="1"
             required
           />

@@ -8,6 +8,7 @@
   "input": {
     "input": "Input",
     "round": "Round: ",
+    "date": "Date: ",
     "courseRating": "Course Rating: ",
     "slopeRating": "Slope Rating: ",
     "courseSelection": "Select a course",

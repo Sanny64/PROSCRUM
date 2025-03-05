@@ -8,6 +8,7 @@
   "input": {
     "input": "Eingabe",
     "round": "Runde: ",
+    "date": "Datum: ",
     "courseRating": "Course Rating: ",
     "slopeRating": "Slope Rating: ",
     "courseSelection": "Wähle einen Golfplatz",
