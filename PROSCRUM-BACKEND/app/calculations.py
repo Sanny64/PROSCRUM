@@ -24,9 +24,8 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
         nine_hole = False
 
     # calculate the handicaps
-    handicaps = []
-    handicaps.append(calculate_ega_handicap(old_hdc_2020, current_course.holes, current_course.slope_rating,course_rating , current_course.course_par, new_round.scores, nine_hole))
-    result_new = calculate_whs_handicap(new_round=new_round, old_SDs=old_SDs, old_HCPI=old_hdc_2021, nine_holes = nine_hole)
+    handicaps = [calculate_ega_handicap(old_hdc_2020, current_course.holes, current_course.slope_rating, course_rating, current_course.course_par, new_round.scores, nine_hole)]
+    result_new = calculate_whs_handicap(new_round.scores, current_course.slope_rating, course_rating, current_course.course_par, old_SDs, current_course, old_hdc_2021, nine_hole)
     handicaps.append(result_new[0])
     handicaps.append(result_new[1])
     return handicaps
