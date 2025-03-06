@@ -21,12 +21,12 @@ export interface Course {
 
 export interface CourseWithoutID {
   course_name: string
-  course_par_1_to_9: number | undefined
-  course_par_10_to_18: number | undefined
-  course_par_all: number | undefined
-  course_rating_1_to_9: number | undefined
-  course_rating_10_to_18: number | undefined
-  course_rating_all: number | undefined
+  course_par_1_to_9: number | null
+  course_par_10_to_18: number | null
+  course_par_all: number | null
+  course_rating_1_to_9: number | null
+  course_rating_10_to_18: number | null
+  course_rating_all: number | null
   slope_rating: number
   holes: CourseHole[]
 }

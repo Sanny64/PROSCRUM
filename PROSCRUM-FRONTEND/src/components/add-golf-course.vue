@@ -14,42 +14,64 @@ const emit = defineEmits(['course-added'])
 
 let gridView = ref<boolean>(true)
 
-const sumPar: ComputedRef<number> = computed(() => {
+const sumPar_all: ComputedRef<number> = computed(() => {
   return newCourse.holes.reduce((sum, hole) => {
     return sum + (hole.par || 0)
   }, 0)
 })
 
-const newCourse = reactive<CourseWithoutID>({
-  course_name: 'Platz 3 - Windige Wiese',
-  course_par: 0,
-  course_rating_9: null,
-  course_rating_18: 74,
-  slope_rating: 128,
-  holes: [
-    { hole: 1, par: 4, hdc: 12 },
-    { hole: 2, par: 3, hdc: 18 },
-    { hole: 3, par: 5, hdc: 6 },
-    { hole: 4, par: 4, hdc: 14 },
-    { hole: 5, par: 4, hdc: 2 },
-    { hole: 6, par: 3, hdc: 16 },
-    { hole: 7, par: 5, hdc: 8 },
-    { hole: 8, par: 4, hdc: 4 },
-    { hole: 9, par: 4, hdc: 10 },
-    { hole: 10, par: 4, hdc: 11 },
-    { hole: 11, par: 3, hdc: 17 },
-    { hole: 12, par: 5, hdc: 7 },
-    { hole: 13, par: 4, hdc: 3 },
-    { hole: 14, par: 4, hdc: 1 },
-    { hole: 15, par: 3, hdc: 15 },
-    { hole: 16, par: 5, hdc: 9 },
-    { hole: 17, par: 4, hdc: 5 },
-    { hole: 18, par: 4, hdc: 13 },
-  ],
+const sumPar_1_to_9: ComputedRef<number> = computed(() => {
+  return newCourse.holes.slice(0, 9).reduce((sum, hole) => {
+    return sum + (hole.par || 0)
+  }, 0)
 })
 
+const sumPar_10_to_18: ComputedRef<number> = computed(() => {
+  return newCourse.holes.slice(9).reduce((sum, hole) => {
+    return sum + (hole.par || 0)
+  }, 0)
+})
+
+
+
+const newCourse = reactive<CourseWithoutID>({
+  course_id: 1,
+  course_name: "Windige Höhe",
+  course_par_1_to_9: null,
+  course_par_10_to_18: null,
+  course_par_all: 72,
+  course_rating_1_to_9: null,
+  course_rating_10_to_18: null,
+  course_rating_all: 72.3,
+  slope_rating: 130,
+  holes: [
+    { hole: 1, par: 3, hdc: 16 },
+    { hole: 2, par: 4, hdc: 1 },
+    { hole: 3, par: 4, hdc: 10 },
+    { hole: 4, par: 5, hdc: 7 },
+    { hole: 5, par: 4, hdc: 13 },
+    { hole: 6, par: 4, hdc: 4 },
+    { hole: 7, par: 3, hdc: 17 },
+    { hole: 8, par: 4, hdc: 2 },
+    { hole: 9, par: 4, hdc: 11 },
+    { hole: 10, par: 5, hdc: 8 },
+    { hole: 11, par: 4, hdc: 14 },
+    { hole: 12, par: 4, hdc: 5 },
+    { hole: 13, par: 3, hdc: 18 },
+    { hole: 14, par: 4, hdc: 3 },
+    { hole: 15, par: 4, hdc: 12 },
+    { hole: 16, par: 5, hdc: 9 },
+    { hole: 17, par: 4, hdc: 15 },
+    { hole: 18, par: 4, hdc: 6 }
+  ]
+})
+
+
+
 watchEffect(() => {
-  newCourse.course_par = sumPar.value
+  newCourse.course_par_all = sumPar_all.value
+  newCourse.course_par_1_to_9 = sumPar_1_to_9.value
+  newCourse.course_par_10_to_18 = sumPar_10_to_18.value
 })
 
 function handleAddCourse() {
@@ -136,7 +158,7 @@ function closeFunc() {
   <div class="inputView" v-if="!gridView">
     <div class="formView">
       <form @submit.prevent="handleAddCourse()">
-        <div class="form-group">
+        <div class="form-group course-name">
           <label for="round">{{ t('coursePage.courseName') }}</label>
           <input
             type="Text"
@@ -148,11 +170,33 @@ function closeFunc() {
           />
         </div>
         <div class="form-group">
-          <label for="courseRating">{{ t('coursePage.courseRating') }}</label>
+          <label for="courseRating">{{ t('coursePage.courseRating_1to9') }}</label>
           <input
             type="number"
             step="0.1"
-            v-model="newCourse.course_rating_18"
+            v-model="newCourse.course_rating_1_to_9"
+            id="courseRating"
+            min="0.1"
+
+          />
+        </div>
+        <div class="form-group">
+          <label for="courseRating">{{ t('coursePage.courseRating_10to18') }}</label>
+          <input
+            type="number"
+            step="0.1"
+            v-model="newCourse.course_rating_10_to_18"
+            id="courseRating"
+            min="0.1"
+
+          />
+        </div>
+        <div class="form-group">
+          <label for="courseRating">{{ t('coursePage.courseRating_all') }}</label>
+          <input
+            type="number"
+            step="0.1"
+            v-model="newCourse.course_rating_all"
             id="courseRating"
             min="0.1"
             required
@@ -164,7 +208,7 @@ function closeFunc() {
         </div>
         <div class="form-group">
           <label for="courseRating">{{ t('coursePage.par') }}</label>
-          <b>{{ newCourse.course_par }}</b>
+          <b>{{ newCourse.course_par_1_to_9 }}/{{newCourse.course_par_10_to_18}}/{{newCourse.course_par_all}}</b>
         </div>
 
         <!-- Löcher -->
