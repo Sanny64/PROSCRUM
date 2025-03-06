@@ -84,12 +84,13 @@ function updateRound() {
                   v-for="(hole) in props.rounds.course.holes"
                   :key="hole.hole"
                 >
-                  <label :for="'hole-' + hole.hole">{{ hole.hole }}. {{t('coursePage.hole')}}-> {{t('coursePage.par')}}</label>
+                  <label :for="'hole-' + hole.hole">{{ hole.hole }}. {{t('coursePage.hole')}}-> {{t('roundPage.score')}}</label>
+                  <b>{{props.rounds.scores[hole.hole - 1]}}</b>
+                  <label :for="'hole-' + hole.hole">{{t('coursePage.par')}}</label>
                   <b>{{hole.par}}</b>
                   <label :for="'hole-' + hole.hole">{{t('roundPage.hdc')}}</label>
                   <b>{{hole.hdc}}</b>
-                  <label :for="'hole-' + hole.hole">{{t('roundPage.score')}}</label>
-                  <b>{{props.rounds.scores[hole.hole - 1]}}</b>
+
                 </div>
 
               </div>

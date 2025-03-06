@@ -31,9 +31,9 @@ function filterCourses() {
   )
 
   /*Max Course Rating*/
-  if (courseRatingValue.value) {
+  if (courseRatingValue.value){
     filteredCourseList.value = filteredCourseList.value.filter(
-      (course) => course.course_rating_18 <= courseRatingValue.value,
+      (course) => course.course_rating_all <= courseRatingValue.value,
     )
   }
 

@@ -28,6 +28,7 @@ watch(apiStatus, (newValue) => {
 </script>
 
 <template>
+
   <div class="content">
     <calculation-input
       @formData="handleFormData"
