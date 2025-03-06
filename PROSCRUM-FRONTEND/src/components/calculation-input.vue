@@ -13,6 +13,98 @@ const props = defineProps<{
   courseList: Course[]
 }>()
 
+props.courseList.push( {
+  course_id: 1,
+  course_name: "Platz am See",
+  course_par_1_to_9: null,
+  course_par_10_to_18: null,
+  course_par_all: 72,
+  course_rating_1_to_9: null,
+  course_rating_10_to_18: null,
+  course_rating_all: 72.3,
+  slope_rating: 130,
+  holes: [
+    { hole: 1, par: 3, hdc: 16 },
+    { hole: 2, par: 4, hdc: 1 },
+    { hole: 3, par: 4, hdc: 10 },
+    { hole: 4, par: 5, hdc: 7 },
+    { hole: 5, par: 4, hdc: 13 },
+    { hole: 6, par: 4, hdc: 4 },
+    { hole: 7, par: 3, hdc: 17 },
+    { hole: 8, par: 4, hdc: 2 },
+    { hole: 9, par: 4, hdc: 11 },
+    { hole: 10, par: 5, hdc: 8 },
+    { hole: 11, par: 4, hdc: 14 },
+    { hole: 12, par: 4, hdc: 5 },
+    { hole: 13, par: 3, hdc: 18 },
+    { hole: 14, par: 4, hdc: 3 },
+    { hole: 15, par: 4, hdc: 12 },
+    { hole: 16, par: 5, hdc: 9 },
+    { hole: 17, par: 4, hdc: 15 },
+    { hole: 18, par: 4, hdc: 6 }
+  ]
+}, {
+  course_id: 2,
+  course_name: "Leichte Prise",
+  course_par_1_to_9: 30,
+  course_par_10_to_18: null,
+  course_par_all: 72,
+  course_rating_1_to_9: 40,
+  course_rating_10_to_18: null,
+  course_rating_all: 72.3,
+  slope_rating: 130,
+  holes: [
+    { hole: 1, par: 3, hdc: 16 },
+    { hole: 2, par: 4, hdc: 1 },
+    { hole: 3, par: 4, hdc: 10 },
+    { hole: 4, par: 5, hdc: 7 },
+    { hole: 5, par: 4, hdc: 13 },
+    { hole: 6, par: 4, hdc: 4 },
+    { hole: 7, par: 3, hdc: 17 },
+    { hole: 8, par: 4, hdc: 2 },
+    { hole: 9, par: 4, hdc: 11 },
+    { hole: 10, par: 5, hdc: 8 },
+    { hole: 11, par: 4, hdc: 14 },
+    { hole: 12, par: 4, hdc: 5 },
+    { hole: 13, par: 3, hdc: 18 },
+    { hole: 14, par: 4, hdc: 3 },
+    { hole: 15, par: 4, hdc: 12 },
+    { hole: 16, par: 5, hdc: 9 },
+    { hole: 17, par: 4, hdc: 15 },
+    { hole: 18, par: 4, hdc: 6 }
+  ]
+}, {
+  course_id: 3,
+  course_name: "Schwerer Brocken",
+  course_par_1_to_9: 10,
+  course_par_10_to_18: 15,
+  course_par_all: 72,
+  course_rating_1_to_9: 20,
+  course_rating_10_to_18: 30,
+  course_rating_all: 72.3,
+  slope_rating: 130,
+  holes: [
+    { hole: 1, par: 3, hdc: 16 },
+    { hole: 2, par: 4, hdc: 1 },
+    { hole: 3, par: 4, hdc: 10 },
+    { hole: 4, par: 5, hdc: 7 },
+    { hole: 5, par: 4, hdc: 13 },
+    { hole: 6, par: 4, hdc: 4 },
+    { hole: 7, par: 3, hdc: 17 },
+    { hole: 8, par: 4, hdc: 2 },
+    { hole: 9, par: 4, hdc: 11 },
+    { hole: 10, par: 5, hdc: 8 },
+    { hole: 11, par: 4, hdc: 14 },
+    { hole: 12, par: 4, hdc: 5 },
+    { hole: 13, par: 3, hdc: 18 },
+    { hole: 14, par: 4, hdc: 3 },
+    { hole: 15, par: 4, hdc: 12 },
+    { hole: 16, par: 5, hdc: 9 },
+    { hole: 17, par: 4, hdc: 15 },
+    { hole: 18, par: 4, hdc: 6 }
+  ]
+})
+
 console.log('CourseList: ', props.courseList)
 
 // Ausgewählte Option
@@ -137,7 +229,7 @@ const btnCalculation = () => {
           required
         />
       </div>
-      <div class="form-group">
+      <div class="datePicker ">
         <label for="date">{{ t('input.date') }}</label>
         <input
           type="date"
@@ -146,24 +238,27 @@ const btnCalculation = () => {
           required
         />
       </div>
-      <div class="form-group" v-if="isChecked">
-        <label for="courseRating">{{ t('input.courseRating') }}</label>
-        {{ selectedCourse?.course_rating_18 }}
-        <!--        <input type="number" step="0.1" v-model="formData.course_rating" id="courseRating" min="0.1" required/>-->
+      <div v-if="selectedRatingOption === '1to9'">
+      <div class="form-group">
+        <label for="courseRating">{{ t('input.courseRating_1to9') }}</label>
+
+          {{ selectedCourse?.course_par_1_to_9 }}
+        </div>
       </div>
-      <div class="form-group" v-if="!isChecked">
-        <label for="courseRating">{{ t('input.courseRating') }}</label>
-        <!--        {{ selectedCourse?.course_rating_18 }}-->
-        <input
-          v-if="formData.course"
-          type="number"
-          step="0.1"
-          id="courseRating"
-          min="0.1"
-          required
-          v-model="formData.course.course_rating_9"
-        />
+      <div v-if="selectedRatingOption === '10to18'">
+      <div class="form-group">
+        <label for="courseRating">{{ t('input.courseRating_10to18') }}</label>
+
+          {{ selectedCourse?.course_par_10_to_18 }}
+        </div>
       </div>
+      <div v-if="selectedRatingOption === 'all'">
+      <div class="form-group" >
+        <label for="courseRating">{{ t('input.courseRating_all') }}</label>
+        {{ selectedCourse?.course_par_all }}
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="slopeRating">{{ t('input.slopeRating') }}</label>
         {{ selectedCourse?.slope_rating }}
@@ -196,34 +291,24 @@ const btnCalculation = () => {
 
       <!-- Switch -->
             <div class="holesHeadline">
-              <label>{{ t('input.courseRatingSelection') }}</label>
+              <label>{{ t('input.courseSelection') }}</label>
               <div class="radio-group">
-                <label>
-                  <input type="radio" value="1to9" v-model="selectedRatingOption" />
-                  {{ t('input.courseRating_1to9') }}
+                <label v-if="selectedCourse?.course_rating_1_to_9">
+                  {{ t('input.courseSelection_1to9') }}
+                  <input  type="radio" value="1to9" v-model="selectedRatingOption" />
                 </label>
-                <label>
-                  <input type="radio" value="10to18" v-model="selectedRatingOption" />
-                  {{ t('input.courseRating_10to18') }}
+                <label v-if="selectedCourse?.course_rating_10_to_18">
+                  {{ t('input.courseSelection_10to18') }}
+                  <input  type="radio" value="10to18" v-model="selectedRatingOption" />
                 </label>
-                <label>
-                  <input type="radio" value="all" v-model="selectedRatingOption" />
-                  {{ t('input.courseRating_all') }}
+                <label v-if="selectedCourse?.course_rating_all">
+                  {{ t('input.courseSelection_all') }}
+                  <input  type="radio" value="all" v-model="selectedRatingOption" />
                 </label>
               </div>
 
             </div>
 
-      <!-- Switch -->
-<!--      <div class="holesHeadline">-->
-<!--        <h2>{{ t('input.holes') }}</h2>-->
-<!--        <p>9</p>-->
-<!--        <label class="switch" @keydown.enter.prevent="toggleCheckbox" tabindex="0">-->
-<!--          <input type="checkbox" v-model="isChecked" @change="handleCheckboxChange" tabindex="-1" />-->
-<!--          <span class="slider round"></span>-->
-<!--        </label>-->
-<!--        <p>18</p>-->
-<!--      </div>-->
       <!-- Löcher -->
       <div class="holes-container">
         <div class="hole" v-for="(score, index) in length" :key="index">
