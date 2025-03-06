@@ -1,15 +1,19 @@
 from pydantic import BaseModel
+from datetime import date
 
 class HoleConfig(BaseModel):
     hole: int
-    par: int | None = 0
-    hdc: int | None = 0
+    par: int
+    hdc: int
 
 class CourseBase(BaseModel):
     course_name: str
-    course_par: int
-    course_rating_9: float | None 
-    course_rating_18: float | None 
+    course_par_1_to_9: int | None
+    course_par_10_to_18: int | None
+    course_par_all: int | None
+    course_rating_1_to_9: float | None 
+    course_rating_10_to_18: float | None 
+    course_rating_all: float | None 
     slope_rating: int
     holes: list[HoleConfig]
 
@@ -23,7 +27,8 @@ class RoundBase(BaseModel):
     # user_id: int
     round_number: int
     course: CourseWithID 
-    scores: list[int]
+    scores: list[int] # Wenn nur 9 Einträge, muss der Rest mit "0" aufgefüllt werden. Welche 9 Löcher aufgefüllt werden müssen, wird vom FE übermittelt.
+    date: date
 
 class RoundIn(RoundBase):
     pass
