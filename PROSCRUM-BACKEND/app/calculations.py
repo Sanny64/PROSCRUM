@@ -14,7 +14,6 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     # old_SDs = []
     # for round in old_rounds:
     #     old_SDs.append(round.score_differential)
-
     # current_course = new_round.course
     # if current_course.course_rating_9 is not None:
     #     course_rating = current_course.course_rating_9
@@ -30,3 +29,4 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     # handicaps.append(result_new[0])
     # handicaps.append(result_new[1])
     return [0, 1, 2]
+
