@@ -8,11 +8,11 @@ def generate_courses():
     course_1 = CourseWithID(
     course_id=1,
     course_name="Sunny Hills Golf Course",
-    course_par_1_to_9=None,
-    course_par_10_to_18=None,
+    course_par_1_to_9=35,
+    course_par_10_to_18=37,
     course_par_all=72,
-    course_rating_1_to_9=None,
-    course_rating_10_to_18=None,
+    course_rating_1_to_9=34.1,
+    course_rating_10_to_18=35.4,
     course_rating_all=70.9,
     slope_rating=115,
     holes=[
@@ -41,11 +41,11 @@ def generate_courses():
     course_2 = CourseWithID(
     course_id=2,
     course_name="Shady Hills Golf Course",
-    course_par_1_to_9=None,
-    course_par_10_to_18=None,
+    course_par_1_to_9=35,
+    course_par_10_to_18=37,
     course_par_all=72,
-    course_rating_1_to_9=None,
-    course_rating_10_to_18=None,
+    course_rating_1_to_9=35.7,
+    course_rating_10_to_18=36.1,
     course_rating_all=72.3,
     slope_rating=130,
     holes=[
@@ -127,8 +127,6 @@ def generate_round_in(courses_list):
 
     # Runde 6 (9 Löcher von Course 1)
     course_6 = courses_list[0]
-    course_6.course_rating_1_to_9 = 34.1 
-    course_6.course_par_1_to_9 = 35
 
     round_6 = RoundIn(
     course=course_6,
@@ -167,9 +165,7 @@ def generate_round_in(courses_list):
 
     # Runde 10 irgendwie course 1
     course_10 = courses_list[1]
-    course_10.course_rating_1_to_9 = 35.7
-    course_10.course_par_1_to_9 = 35
-    
+        
     round_10 = RoundIn(
     course=course_10,
     round_number=10,
