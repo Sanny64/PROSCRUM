@@ -80,8 +80,7 @@ def create_round(round: RoundIn):
     score_differential = calc_result[2]
 
     new_round = RoundOut(
-        round_number=round.round_number, 
-        course=round.course, scores=round.scores, 
+        **round.model_dump(),
         calc_result_2020=new_calc_result_2020, 
         calc_result_2021=new_calc_result_2021, 
         score_differential=score_differential
