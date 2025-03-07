@@ -1,4 +1,4 @@
-from models import HoleConfig, CourseWithID, RoundIn, RoundOut
+from app.models import HoleConfig, CourseWithID, RoundIn, RoundOut
 def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole=True):
     """
     Calculate EGA golf handicap based on scoring results
