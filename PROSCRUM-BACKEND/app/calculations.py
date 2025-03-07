@@ -24,7 +24,8 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
 
     # get old Score Differentials for new calculation of the last 19 rounds
     old_SDs = []
-    for round in old_rounds[19:]:
+    last_19_rounds = old_rounds[-19:]
+    for round in last_19_rounds:
         old_SDs.append(round.score_differential)
 
     current_course = new_round.course
