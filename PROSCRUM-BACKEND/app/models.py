@@ -1,15 +1,19 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+from datetime import datetime, date
 
 class HoleConfig(BaseModel):
     hole: int
-    par: int | None = 0
-    hdc: int | None = 0
+    par: int
+    hdc: int
 
 class CourseBase(BaseModel):
     course_name: str
-    course_par: int
-    course_rating_9: float | None 
-    course_rating_18: float | None 
+    course_par_1_to_9: int | None
+    course_par_10_to_18: int | None
+    course_par_all: int | None
+    course_rating_1_to_9: float | None 
+    course_rating_10_to_18: float | None 
+    course_rating_all: float | None 
     slope_rating: int
     holes: list[HoleConfig]
 
@@ -24,6 +28,7 @@ class RoundBase(BaseModel):
     round_number: int
     course: CourseWithID 
     scores: list[int]
+    date: date
 
 class RoundIn(RoundBase):
     pass
@@ -32,3 +37,32 @@ class RoundOut(RoundBase):
     calc_result_2020: float
     calc_result_2021: float
     score_differential: float
+
+class UserBase(BaseModel):
+    first_name: str
+    last_name : str
+
+class UserCreate(UserBase):
+    email: EmailStr
+    password: str
+    role_id: int
+
+class UserOut(UserBase):
+    user_id: int
+    email: EmailStr
+    role_id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class UserUpdate(UserBase):
+    email: EmailStr
+    role_id: int
+
+    class Config:
+        from_attributes = True
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
