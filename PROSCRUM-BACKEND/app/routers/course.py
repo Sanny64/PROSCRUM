@@ -9,50 +9,49 @@ router = APIRouter(
     tags=['Courses']
 )
 
-@router.get("/")
+@router.get("/courses")
 def get_courses():
     return {"result": courses_list}
 
-@router.get("/{id}")
+@router.get("/courses/{id}")
 def get_one_course(id: int):
     course = find_course(id)
     if not course:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"course with course_id: {id} was not found")
     return {"result": course}
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/courses", status_code=status.HTTP_201_CREATED)
 def create_course(course: CourseCreate):
     print(course)
     new_course = CourseWithID(
         course_name=course.course_name,
-        course_par=course.course_par,
-        course_rating_9=course.course_rating_9,
-        course_rating_18=course.course_rating_18,
+        course_par_1_to_9=course.course_par_1_to_9,
+        course_par_10_to_18=course.course_par_10_to_18,
+        course_par_all=course.course_par_all,
+        course_rating_1_to_9=course.course_rating_1_to_9,
+        course_rating_10_to_18=course.course_rating_10_to_18,
+        course_rating_all=course.course_rating_all,
         slope_rating=course.slope_rating,
         holes=course.holes,
-        course_id= len(courses_list) + 1
+        course_id= courses_list[-1].course_id + 1
     )
     courses_list.append(new_course)
     
     return {"result": new_course}
 
-@router.put("/{id}")
+@router.put("/courses/{id}")
 def update_course(id: int, course: CourseWithID):
     updated_course = find_course(id)
 
     if not updated_course:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"course with course_id: {id} was not found")
     
-    updated_course.course_name = course.course_name
-    updated_course.course_par = course.course_par
-    updated_course.course_rating_9 = course.course_rating_9
-    updated_course.course_rating_18 = course.course_rating_18
-    updated_course.slope_rating = course.slope_rating
-    updated_course.holes = course.holes
+    updated_course = CourseWithID(**course.model_dump())
+    courses_list[id-1] = updated_course
 
     return {"result": updated_course}
 
-@router.delete("/{id}")
+@router.delete("/courses/{id}")
 def delete_course(id: int):
     course_index = find_index_course(id)
     print(course_index)
