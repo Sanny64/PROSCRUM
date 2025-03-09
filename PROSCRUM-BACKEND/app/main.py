@@ -16,8 +16,6 @@ schemas.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-
-
 origins = [
     "*"
 ]
