@@ -196,7 +196,7 @@ def generate_round_in(courses_list):
 
 def calculate_round_outs(round_ins: list[RoundIn]):
     round_out_list = []
-    
+    i = 1
     for round in round_ins:
         calc_result = start_calculations(round, round_out_list)
         new_calc_result_2020 = calc_result[0]
@@ -207,9 +207,12 @@ def calculate_round_outs(round_ins: list[RoundIn]):
             **round.model_dump(),
             calc_result_2020=new_calc_result_2020, 
             calc_result_2021=new_calc_result_2021, 
-            score_differential=round_score_differential
+            score_differential=round_score_differential,
+            round_id=i,
+            user_id=2
         )
         round_out_list.append(new_round)
+        i+=1
         
     return round_out_list
 

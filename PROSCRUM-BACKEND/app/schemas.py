@@ -16,7 +16,7 @@ class User(Base):
     user_id = Column(Integer, primary_key=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     role_id = Column(Integer, ForeignKey("roles.role_id", ondelete="CASCADE"), nullable=False)

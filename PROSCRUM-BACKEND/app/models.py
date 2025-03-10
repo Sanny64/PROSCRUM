@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime, date
+from typing import Optional
 
 class HoleConfig(BaseModel):
     hole: int
@@ -24,7 +25,6 @@ class CourseWithID(CourseBase):
     course_id: int
 
 class RoundBase(BaseModel):
-    # user_id: int
     round_number: int
     course: CourseWithID 
     scores: list[int]
@@ -34,6 +34,8 @@ class RoundIn(RoundBase):
     pass
 
 class RoundOut(RoundBase):
+    round_id: int
+    user_id: int
     calc_result_2020: float
     calc_result_2021: float
     score_differential: float
@@ -66,3 +68,11 @@ class UserUpdate(UserBase):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    id: Optional[int]
+    role_id: Optional[int]

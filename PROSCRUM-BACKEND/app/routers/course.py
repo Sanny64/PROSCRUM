@@ -2,10 +2,8 @@ from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from ..models import CourseCreate, CourseWithID, HoleConfig
-from ..utils import find_course, find_index_course
-from ..mockups import courses_list
 from ..database import get_db
-from .. import schemas
+from .. import schemas, oauth2
 
 router = APIRouter(
     prefix="/courses",
@@ -67,29 +65,33 @@ def get_one_course(id: int, db: Session = Depends(get_db)):
     return {"result": course_with_id}
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def create_course(course: CourseCreate, db: Session = Depends(get_db)):
-    print(course)
-    new_course = schemas.Course(
-        course_name = course.course_name,
-        course_par_1_to_9 = course.course_par_1_to_9,
-        course_par_10_to_18 = course.course_par_10_to_18,
-        course_par_all = course.course_par_all,
-        course_rating_1_to_9 = course.course_rating_1_to_9,
-        course_rating_10_to_18 = course.course_rating_10_to_18,
-        course_rating_all = course.course_rating_all,
-        slope_rating = course.slope_rating)
-    
-    db.add(new_course)
-    db.commit()
-    db.refresh(new_course)
-
-    for hole in course.holes:
-        new_hole = schemas.Hole(course_id=new_course.course_id, **hole.model_dump())
-        db.add(new_hole)
+def create_course(course: CourseCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    user_role_id = current_user.role_id
+    if user_role_id >= 2:
+        new_course = schemas.Course(
+            course_name = course.course_name,
+            course_par_1_to_9 = course.course_par_1_to_9,
+            course_par_10_to_18 = course.course_par_10_to_18,
+            course_par_all = course.course_par_all,
+            course_rating_1_to_9 = course.course_rating_1_to_9,
+            course_rating_10_to_18 = course.course_rating_10_to_18,
+            course_rating_all = course.course_rating_all,
+            slope_rating = course.slope_rating)
+        
+        db.add(new_course)
         db.commit()
+        db.refresh(new_course)
+
+        for hole in course.holes:
+            new_hole = schemas.Hole(course_id=new_course.course_id, **hole.model_dump())
+            db.add(new_hole)
+            db.commit()
+        
+        db.refresh(new_course)
+        return_course = CourseWithID(course_id=new_course.course_id, **course.model_dump())
+    else:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
     
-    db.refresh(new_course)
-    return_course = CourseWithID(course_id=new_course.course_id, **course.model_dump())
     return {"result": return_course}
 
 @router.put("/{id}")
