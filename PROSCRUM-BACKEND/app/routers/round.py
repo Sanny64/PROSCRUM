@@ -2,7 +2,7 @@ from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from ..utils import find_round, find_index_round
-from ..models import RoundIn, RoundOut
+from ..models import RoundIn, RoundOut, HoleConfig, CourseWithID
 from ..calculations import start_calculations
 from ..mockups import my_rounds
 from ..database import get_db
@@ -14,6 +14,48 @@ router = APIRouter(
     tags=['Rounds']
 )
 
+def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
+    round_course = db.query(schemas.Course).filter(schemas.Course.course_id == round.course_id).first()
+
+    round_course_holes_db = db.query(schemas.Hole).filter(schemas.Hole.course_id == round.course_id).all()
+
+    hole_config_list = []
+    for hole in round_course_holes_db:
+        hole_config = models.HoleConfig(hole=hole.hole, par=hole.par, hdc=hole.hdc)
+        hole_config_list.append(hole_config)
+
+    round_course_with_id = models.CourseWithID(
+        course_id=round_course.course_id,
+        course_name=round_course.course_name,
+        course_par_1_to_9=round_course.course_par_1_to_9,
+        course_par_10_to_18=round_course.course_par_10_to_18,
+        course_par_all=round_course.course_par_all,
+        course_rating_1_to_9=round_course.course_rating_1_to_9,
+        course_rating_10_to_18=round_course.course_rating_10_to_18,
+        course_rating_all=round_course.course_rating_all,
+        slope_rating=round_course.slope_rating,
+        holes=hole_config_list
+    )
+
+    scores = []
+    round_scores_db = db.query(schemas.Score).filter(schemas.Score.score_id == round.score_id).first()
+    for i in range(18):
+        stroke = getattr(round_scores_db, 'hole_' + str(i+1) + '_strokes')
+        scores.append(stroke)
+
+    round_out = RoundOut(
+        round_id=round.round_id,
+        user_id=round.user_id,
+        round_number=round.round_number,
+        course=round_course_with_id,
+        scores=scores,
+        date=round.date,
+        calc_result_2020=round.hdc_2020,
+        calc_result_2021=round.hdc_2021,
+        score_differential=round.score_differential
+    )
+    return round_out
+
 @router.post("/")
 def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
 
@@ -21,45 +63,7 @@ def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: sc
 
     calc_rounds = []
     for user_round in user_rounds:
-        round_course = db.query(schemas.Course).filter(schemas.Course.course_id == user_round.course_id).first()
-
-        round_course_holes_db = db.query(schemas.Hole).filter(schemas.Hole.course_id == user_round.course_id).all()
-
-        hole_config_list = []
-        for hole in round_course_holes_db:
-            hole_config = models.HoleConfig(hole=hole.hole, par=hole.par, hdc=hole.hdc)
-            hole_config_list.append(hole_config)
-
-        round_course_with_id = models.CourseWithID(
-            course_id=round_course.course_id,
-            course_name=round_course.course_name,
-            course_par_1_to_9=round_course.course_par_1_to_9,
-            course_par_10_to_18=round_course.course_par_10_to_18,
-            course_par_all=round_course.course_par_all,
-            course_rating_1_to_9=round_course.course_rating_1_to_9,
-            course_rating_10_to_18=round_course.course_rating_10_to_18,
-            course_rating_all=round_course.course_rating_all,
-            slope_rating=round_course.slope_rating,
-            holes=hole_config_list
-        )
-
-        scores = []
-        round_scores_db = db.query(schemas.Score).filter(schemas.Score.score_id == user_round.score_id).first()
-        for i in range(18):
-            stroke = getattr(round_scores_db, 'hole_' + str(i+1) + '_strokes')
-            scores.append(stroke)
-
-        round_out = RoundOut(
-            round_id=user_round.round_id,
-            user_id=current_user.user_id,
-            round_number=user_round.round_number,
-            course=round_course_with_id,
-            scores=scores,
-            date=user_round.date,
-            calc_result_2020=user_round.hdc_2020,
-            calc_result_2021=user_round.hdc_2021,
-            score_differential=user_round.score_differential
-        )
+        round_out = convert_to_round_out(user_round, db)
         calc_rounds.append(round_out)
         print(round_out)
 
@@ -112,57 +116,112 @@ def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: sc
     return Response(status_code=status.HTTP_201_CREATED)
 
 @router.get("/")
-def get_rounds():   
-    return {"result": my_rounds}
+def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    if current_user.role_id >= 2:
+        all_rounds = db.query(schemas.Round).all()
+        all_round_outs = []
+        for round in all_rounds:
+            round_out = convert_to_round_out(round, db)
+            all_round_outs.append(round_out)
+        return all_round_outs
+    elif current_user.role_id == 1:
+        user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == current_user.user_id).all()
+        all_user_round_outs = []
+        for round in user_rounds:
+            round_out = convert_to_round_out(round, db)
+            all_user_round_outs.append(round_out)
+        return all_user_round_outs
+    else:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+        
 
 @router.get("/{round_number}")
-def get_one_round(round_number: int):
-    round = find_round(round_number)
-    if not round:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} was not found")
-    return {"result": round}
+def get_one_round(round_number: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    if current_user.role_id == 1:
+        round = db.query(schemas.Round).filter(
+            schemas.Round.round_number == round_number,
+            schemas.Round.user_id == current_user.user_id
+        ).first()
+        if not round:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} was not found")
+        
+        round_out = convert_to_round_out(round, db)
+        return round_out
+    elif current_user.role_id >= 2:
+        rounds = db.query(schemas.Round).filter(schemas.Round.round_number == round_number).all()
+        round_outs = []
+        for round in rounds:
+            round_out = convert_to_round_out(round, db)
+            round_outs.append(round_out)
+        return round_outs
+    else:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
 
 @router.put("/{round_number}")
-def update_round(round_number: int, round: RoundOut):
-    updated_round = find_round(round_number)
-
-    if not updated_round:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} was not found")
-    
-    updated_round.course.course_name = round.course.course_name
- 
-    # TODO:
-    # Neuberechnung noch buggy. Eventuell liegt es an der calculation implementierung. Im Team besprechen
-    if (
-    updated_round.course.course_par_all != round.course.course_par_all or
-    updated_round.course.course_par_1_to_9 != round.course.course_par_1_to_9 or 
-    updated_round.course.course_par_10_to_18 != round.course.course_par_10_to_18 or 
-    updated_round.course.course_rating_1_to_9 != round.course.course_rating_1_to_9 or
-    updated_round.course.course_rating_10_to_18 != round.course.course_rating_10_to_18 or
-    updated_round.course.course_rating_all != round.course.course_rating_all or
-    updated_round.course.slope_rating != round.course.slope_rating or
-    updated_round.course.holes != round.course.holes or
-    updated_round.scores != round.scores):
-        updated_calc_results = start_calculations(round, my_rounds)
-        new_updated_calc_result_2020 = updated_calc_results[0]
-        new_updated_calc_result_2021 = updated_calc_results[1]
-        updated_round = RoundOut(**round.model_dump())
-        updated_round.calc_result_2020=new_updated_calc_result_2020
-        updated_round.calc_result_2021=new_updated_calc_result_2021
-        updated_round.score_differential=updated_calc_results[2]
+def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    if current_user.role_id < 2:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
     else:
-        updated_round = RoundOut(**round.model_dump())
+        updated_round = db.query(schemas.Round).filter(
+            schemas.Round.round_number == round_number,
+            schemas.Round.course_id == round.course.course_id,
+            schemas.Round.user_id == round.user_id
+        ).first()
 
-    my_rounds[round_number-1] = updated_round  
+        if not updated_round:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} was not found")
+        
+        updated_round_out = convert_to_round_out(updated_round, db)
 
-    return {"result": updated_round}
+        if (
+        updated_round_out.course.course_par_all != round.course.course_par_all or
+        updated_round_out.course.course_par_1_to_9 != round.course.course_par_1_to_9 or 
+        updated_round_out.course.course_par_10_to_18 != round.course.course_par_10_to_18 or 
+        updated_round_out.course.course_rating_1_to_9 != round.course.course_rating_1_to_9 or
+        updated_round_out.course.course_rating_10_to_18 != round.course.course_rating_10_to_18 or
+        updated_round_out.course.course_rating_all != round.course.course_rating_all or
+        updated_round_out.course.slope_rating != round.course.slope_rating or
+        updated_round_out.course.holes != round.course.holes or
+        updated_round_out.scores != round.scores):
+            user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == round.user_id).all()
+            all_user_round_outs = []
+            for round in user_rounds:
+                round_out = convert_to_round_out(round, db)
+                all_user_round_outs.append(round_out)
+            print(all_user_round_outs)
+
+            # TODO: update_calculations Funktion einbauen und alle returnten Runden in die DB einspeichern.
+
+            # updated_calc_results = start_calculations(round, my_rounds)
+            # new_updated_calc_result_2020 = updated_calc_results[0]
+            # new_updated_calc_result_2021 = updated_calc_results[1]
+            # updated_round = RoundOut(**round.model_dump())
+            # updated_round.calc_result_2020=new_updated_calc_result_2020
+            # updated_round.calc_result_2021=new_updated_calc_result_2021
+            # updated_round.score_differential=updated_calc_results[2]
+        else:
+            updated_round = RoundOut(**round.model_dump())
+
+        my_rounds[round_number-1] = updated_round  
+
+        return {"result": updated_round}
 
 @router.delete("/{round_number}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_round(round_number: int):
-    round_index = find_index_round(round_number)
-    print(round_index)
-    if round_index is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} does not exist.")
+def delete_round(round_number: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    round_query = db.query(schemas.Round).filter(
+        schemas.Round.round_number == round_number,
+        schemas.Round.user_id == current_user.user_id
+    )
+    
+    round = round_query.first()
 
-    my_rounds.pop(round_index)
+    score_query = db.query(schemas.Score).filter(schemas.Score.score_id == round.score_id)
+    
+    if round is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} for user_id: {current_user.user_id} does not exist.")
+
+    round_query.delete(synchronize_session=False)
+    db.commit()
+    score_query.delete(synchronize_session=False)
+    db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
