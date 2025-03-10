@@ -68,17 +68,21 @@ h1 {
 
 .hole {
   font-size: 15px;
-  justify-content: center;
+  justify-content: left;
   display: flex;
   align-items: center; /* Vertikale Zentrierung von Label und Input */
   gap: 10px; /* Abstand zwischen Label und Input */
 }
 .hole input {
+  justify-content: left;
+  display: flex;
   font-size: 15px;
-  width: 50px;
+  width: 30px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
+
 
 .submit-btn {
   appearance: none;

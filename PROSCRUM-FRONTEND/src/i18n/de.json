@@ -17,6 +17,9 @@
     "courseSelection_1to9": "(1-9)",
     "courseSelection_10to18": "(10-18)",
     "courseSelection_all": "(1-18)",
+    "shots": "Schläge: ",
+    "par": "Par: ",
+    "hdc": "HDC: ",
     "holes": "Löcher",
     "hole": ". Loch: ",
     "calculate": "Berechnen"
@@ -45,7 +48,7 @@
     "courseRating_all": "Course Rating(1-18): ",
     "slopeRating": "Slope Rating: ",
     "hole": "Loch: ",
-    "hdc": "HDC.: ",
+    "hdc": "HDC: ",
     "save": "Speichern",
     "delete": "Löschen",
     "close": "Schließen"
@@ -60,7 +63,7 @@
     "courseRating": "Course Rating: ",
     "slopeRating": "Slope Rating: ",
     "hole": "Loch: ",
-    "hdc": "HDC.: ",
+    "hdc": "HDC: ",
     "save": "Speichern",
     "delete": "Löschen",
     "close": "Schließen",

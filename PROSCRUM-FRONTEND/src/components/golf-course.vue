@@ -79,9 +79,8 @@ const src = computed(() => {
       <!-- Löcher -->
       <div class="holes-container">
         <div class="hole" v-for="hole in course.holes" :key="hole.hole">
-          <label :for="'hole-' + hole.hole"
-            >{{ hole.hole }}. {{ t('coursePage.hole') }}-> {{ t('coursePage.par') }}</label
-          >
+          <b :for="'hole-' + hole.hole">{{ hole.hole }}. {{ t('coursePage.hole') }} </b>
+            <label>{{ t('coursePage.par') }}</label>
           <b>{{ hole.par }}</b>
           <label :for="'hole-' + hole.hole">{{ t('coursePage.hdc') }}</label>
           <b>{{ hole.hdc }}</b>
