@@ -56,9 +56,13 @@ function updateRound() {
 
   <div class="inputView" v-if="!gridView && !editMode">
     <div class="formView">
-              <div class="form-group">
+              <div class="form-group number">
                 <label for="round">{{t('roundPage.round_number')}}</label>
                 <b>{{props.rounds.round_number}}</b>
+              </div>
+              <div class="form-group date">
+                <label for="round">{{t('roundPage.date')}}</label>
+                <b>{{props.rounds.date}}</b>
               </div>
               <div class="form-group">
                 <label for="round">{{t('roundPage.courseName')}}</label>

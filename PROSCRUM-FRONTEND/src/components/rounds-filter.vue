@@ -12,6 +12,7 @@ const props = defineProps<{
 
 const textValue = ref<string>('')
 const numberValue = ref<number>()
+const dateRange = ref<{ start: string, end: string }>({ start: '', end: '' }) //<---
 const courseRatingValue = ref<number>()
 const slopeRatingValue = ref<number>()
 
@@ -34,35 +35,12 @@ watch(numberValue, (newValue) => {
   emit('number-value', newValue)
 })
 
-watch(courseRatingValue, (newValue) => {
-  emit('course-rating-value', newValue)
-})
+watch(dateRange, (newValue) => { //<---
+  emit('date-range-value', newValue) //<---
+},
+  { deep: true },)
 
-watch(slopeRatingValue, (newValue) => {
-  emit('slope-rating-value', newValue)
-})
 
-function disableMaxSlopeRating() {
-  if (disableMaxSlopeRatingBoolean.value) {
-    disableMaxSlopeRatingBoolean.value = !disableMaxSlopeRatingBoolean.value
-    slopeRatingValue.value = tempMaxSlopeRatingValue
-  } else {
-    disableMaxSlopeRatingBoolean.value = !disableMaxSlopeRatingBoolean.value
-    tempMaxSlopeRatingValue = slopeRatingValue.value
-    slopeRatingValue.value = undefined
-  }
-}
-
-function disableMaxCourseRating() {
-  if (disableMaxCourseRatingBoolean.value) {
-    disableMaxCourseRatingBoolean.value = !disableMaxCourseRatingBoolean.value
-    courseRatingValue.value = tempMaxCourseRatingValue
-  } else {
-    disableMaxCourseRatingBoolean.value = !disableMaxCourseRatingBoolean.value
-    tempMaxCourseRatingValue = courseRatingValue.value
-    courseRatingValue.value = undefined
-  }
-}
 
 const highestSlopeRating = computed(() => {
   return 100
@@ -125,6 +103,23 @@ watch(
         type="number"
       />
     </div>
+
+    <div class="DateInputContainer">
+      <input
+        :placeholder="$t('filter.startDate')"
+        v-model="dateRange.start"
+      class="input"
+      type="date"
+      />
+      <input
+        :placeholder="$t('filter.endDate')"
+        v-model="dateRange.end"
+      class="input"
+      type="date"
+      />
+    </div>
+
+
   </div>
 </template>
 

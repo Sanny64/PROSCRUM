@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, defineEmits, reactive, watchEffect } from 'vue'
-import type { FormData, Course } from '../types/types.ts'
+import type {FormData, Course, Round} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -11,12 +11,14 @@ let isChecked = ref(true)
 
 const props = defineProps<{
   courseList: Course[]
+  lastRound: Round[]
 }>()
 
 
 
-console.log('CourseList: ', props.courseList)
 
+console.log('CourseList: ', props.courseList)
+console.log('lastRound: ', props.lastRound)
 // Ausgewählte Option
 const selectedCourseName = ref<string | null>('')
 const selectedCourse = ref<Course>()
@@ -44,13 +46,15 @@ const formData = reactive<FormData>({
 
 watchEffect(() => {
   formData.course = selectedCourse.value
+
+  formData.round_number = props.lastRound.length + 1
 })
 
 // WatchEffect, um die Länge und Zufallswerte dynamisch zu setzen
 watchEffect(() => {
   formData.scores = Array.from(
     { length: 18 },
-    // () => Math.floor(Math.random() * (10 - 1 + 1)) + 1, // Zufallszahlen zwischen 1 und 10
+    () => Math.floor(Math.random() * (10 - 1 + 1)) + 1, // Zufallszahlen zwischen 1 und 10
   )
 })
 
@@ -103,22 +107,22 @@ const btnCalculation = () => {
 
   }
 
-  console.log('Emit gesendet: ', nullFormDate)
 
-  // if (selectedCourseName.value === '') {
-  //   console.log('Bitte wählen Sie einen Golfplatz')
-  // } else if (formData) {
-  //   inputInfo.value = ''
-  //   console.log('Emit gesendet: ', formData)
-  //   emit('formData', formData)
-  // } else {
-  //   console.log('Bitte geben Sie einen Wert ein')
-  //   inputInfo.value = 'Bitte geben Sie einen Wert ein'
-  // }
+  if (selectedCourseName.value === '') {
+    console.log('Bitte wählen Sie einen Golfplatz')
+  } else if (nullFormDate) {
+    inputInfo.value = ''
+    console.log('Emit gesendet: ', nullFormDate)
+    emit('formData', nullFormDate)
+  } else {
+    console.log('Bitte geben Sie einen Wert ein')
+    inputInfo.value = 'Bitte geben Sie einen Wert ein'
+  }
 }
 </script>
 
 <template>
+
   <div class="component-left">
     <div class="headline">
       <h1>{{ t('input.input') }}</h1>
@@ -130,14 +134,7 @@ const btnCalculation = () => {
     <form @submit.prevent="btnCalculation">
       <div class="form-group">
         <label for="round">{{ t('input.round') }}</label>
-        <input
-          type="number"
-          value="1"
-          v-model="formData.round_number"
-          id="round"
-          min="1"
-          required
-        />
+        {{ formData.round_number }}
       </div>
       <div class="datePicker ">
         <label for="date">{{ t('input.date') }}</label>
