@@ -8,9 +8,15 @@
   "input": {
     "input": "Eingabe",
     "round": "Runde: ",
-    "courseRating": "Course Rating: ",
+    "date": "Datum: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
     "slopeRating": "Slope Rating: ",
-    "courseSelection": "Wähle einen Golfplatz",
+    "courseSelection": "Wie viele Löcher wurden gespielt?",
+    "courseSelection_1to9": "(1-9)",
+    "courseSelection_10to18": "(10-18)",
+    "courseSelection_all": "(1-18)",
     "holes": "Löcher",
     "hole": ". Loch: ",
     "calculate": "Berechnen"
@@ -34,7 +40,9 @@
   "coursePage": {
     "courseName": "Golfplatzname: ",
     "par": "Par: ",
-    "courseRating": "Course Rating: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
     "slopeRating": "Slope Rating: ",
     "hole": "Loch: ",
     "hdc": "HDC.: ",

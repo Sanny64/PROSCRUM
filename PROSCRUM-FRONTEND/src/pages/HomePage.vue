@@ -15,8 +15,12 @@ const handleFormData = (formdata: FormData) => {
 }
 
 onMounted(() => {
-  getCoursesAPI()
   getRoundsAPI()
+  getCoursesAPI()
+
+  console.log('apiResultRounds: ', apiResultRounds)
+  console.log('apiResultCourse: ', apiResultCourse)
+
 })
 
 watch(apiStatus, (newValue) => {
@@ -25,12 +29,16 @@ watch(apiStatus, (newValue) => {
     getRoundsAPI()
   }
 })
+
+
 </script>
 
 <template>
+
   <div class="content">
     <calculation-input
       @formData="handleFormData"
+      :last-round="apiResultRounds"
       :course-list="apiResultCourse"
     ></calculation-input>
     <calculation-output

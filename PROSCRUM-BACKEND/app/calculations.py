@@ -5,6 +5,7 @@ from app.old_calculation import calculate_ega_handicap
 def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     """
     Berechnet das neue HDC eines Spielers im EGA und WHS
+
     :param new_round: die neueste Runde des Spielers
     :param old_rounds: die bisher gespielten runden des Spielers
     :return: the new hdcs and score differential for the round ([old_calc, new_calc, score_differential])
@@ -55,3 +56,4 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     handicaps.append(result_new[0])
     handicaps.append(result_new[1])
     return handicaps
+

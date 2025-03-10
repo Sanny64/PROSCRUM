@@ -112,29 +112,26 @@ def update_round(round_number: int, round: RoundOut):
     # TODO:
     # Neuberechnung noch buggy. Eventuell liegt es an der calculation implementierung. Im Team besprechen
     if (
-    updated_round.course.course_par != round.course.course_par or 
-    updated_round.course.course_rating_9 != round.course.course_rating_9 or
-    updated_round.course.course_rating_18 != round.course.course_rating_18 or
+    updated_round.course.course_par_all != round.course.course_par_all or
+    updated_round.course.course_par_1_to_9 != round.course.course_par_1_to_9 or 
+    updated_round.course.course_par_10_to_18 != round.course.course_par_10_to_18 or 
+    updated_round.course.course_rating_1_to_9 != round.course.course_rating_1_to_9 or
+    updated_round.course.course_rating_10_to_18 != round.course.course_rating_10_to_18 or
+    updated_round.course.course_rating_all != round.course.course_rating_all or
     updated_round.course.slope_rating != round.course.slope_rating or
     updated_round.course.holes != round.course.holes or
     updated_round.scores != round.scores):
         updated_calc_results = start_calculations(round, my_rounds)
         new_updated_calc_result_2020 = updated_calc_results[0]
         new_updated_calc_result_2021 = updated_calc_results[1]
-        updated_round.calc_result_2020 = new_updated_calc_result_2020
-        updated_round.calc_result_2021 = new_updated_calc_result_2021
-        updated_round.score_differential = updated_calc_results[2]
+        updated_round = RoundOut(**round.model_dump())
+        updated_round.calc_result_2020=new_updated_calc_result_2020
+        updated_round.calc_result_2021=new_updated_calc_result_2021
+        updated_round.score_differential=updated_calc_results[2]
     else:
-        updated_round.calc_result_2020 = round.calc_result_2020
-        updated_round.calc_result_2021 = round.calc_result_2021
-        updated_round.score_differential = round.score_differential
-        
-    updated_round.course.course_par = round.course.course_par
-    updated_round.course.course_rating_9 = round.course.course_rating_9
-    updated_round.course.course_rating_18 = round.course.course_rating_18
-    updated_round.course.slope_rating = round.course.slope_rating
-    updated_round.course.holes = round.course.holes
-    updated_round.scores = round.scores
+        updated_round = RoundOut(**round.model_dump())
+
+    my_rounds[round_number-1] = updated_round  
 
     return {"result": updated_round}
 
@@ -166,12 +163,15 @@ def create_course(course: CourseCreate):
     print(course)
     new_course = CourseWithID(
         course_name=course.course_name,
-        course_par=course.course_par,
-        course_rating_9=course.course_rating_9,
-        course_rating_18=course.course_rating_18,
+        course_par_1_to_9=course.course_par_1_to_9,
+        course_par_10_to_18=course.course_par_10_to_18,
+        course_par_all=course.course_par_all,
+        course_rating_1_to_9=course.course_rating_1_to_9,
+        course_rating_10_to_18=course.course_rating_10_to_18,
+        course_rating_all=course.course_rating_all,
         slope_rating=course.slope_rating,
         holes=course.holes,
-        course_id= len(courses_list) + 1
+        course_id= courses_list[-1].course_id + 1
     )
     courses_list.append(new_course)
     
@@ -184,12 +184,8 @@ def update_course(id: int, course: CourseWithID):
     if not updated_course:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"course with course_id: {id} was not found")
     
-    updated_course.course_name = course.course_name
-    updated_course.course_par = course.course_par
-    updated_course.course_rating_9 = course.course_rating_9
-    updated_course.course_rating_18 = course.course_rating_18
-    updated_course.slope_rating = course.slope_rating
-    updated_course.holes = course.holes
+    updated_course = CourseWithID(**course.model_dump())
+    courses_list[id-1] = updated_course
 
     return {"result": updated_course}
 
