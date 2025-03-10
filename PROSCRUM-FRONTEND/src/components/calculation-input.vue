@@ -219,7 +219,8 @@ const btnCalculation = () => {
       <!-- Löcher -->
       <div class="holes-container">
         <div class="hole" v-for="(score, index) in length" :key="index">
-          <label :for="'hole-' + (index)">{{ index + lengthStart}}{{ t('input.hole') }}</label>
+          <b :for="'hole-' + (index)">{{ index + lengthStart}}{{ t('input.hole') }}</b>
+          <label >{{ t('input.shots') }}</label>
           <input
             type="number"
             :id="'hole-' + (index + lengthStart -1)"
@@ -227,6 +228,10 @@ const btnCalculation = () => {
             min="1"
             required
           />
+          <label>{{ t('input.par') }}</label>
+          <b>{{formData.course?.holes[index + lengthStart -1].par }}</b>
+          <label >{{ t('input.hdc') }}</label>
+          <b>{{ formData.course?.holes[index + lengthStart -1].hdc }}</b>
         </div>
       </div>
 
