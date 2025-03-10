@@ -49,8 +49,6 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
         nine_hole = False
         course_rating = current_course.course_rating_all
         course_par = current_course.course_par_all
-    
-    
 
     # calculate the handicaps
     handicaps = [calculate_ega_handicap(old_hdc_2020, holes_played, slope_rating, course_rating, course_par, scores, nine_hole)]
@@ -58,3 +56,4 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     handicaps.append(result_new[0])
     handicaps.append(result_new[1])
     return handicaps
+

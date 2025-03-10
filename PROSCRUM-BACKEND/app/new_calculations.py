@@ -148,6 +148,7 @@ def get_strokes_received(course_handicap : float, hole_hdc : int):
     return base_strokes
 
 def convert_to_GBE_score_first_round(netto_scores : list[int], holes : list[HoleConfig]):
+
     """
     Berechnet den tastächlichen Score eines Spielers in seiner ersten Runde.models
 
