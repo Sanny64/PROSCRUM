@@ -118,6 +118,7 @@
   align-items: center; /* Zentriert die Elemente vertikal */
   gap: 10px;
   justify-content: center;
+  padding: 0px 10px 10px 10px;
 }
 
 .holes-container {
@@ -185,4 +186,8 @@
   background-color: #f3f4f6;
   text-decoration: none;
   transition-duration: 0.1s;
+}
+
+.radio-button{
+  padding: 10px
 }

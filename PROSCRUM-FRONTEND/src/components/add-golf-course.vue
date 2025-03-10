@@ -208,15 +208,16 @@ function closeFunc() {
         </div>
         <div class="form-group">
           <label for="courseRating">{{ t('coursePage.par') }}</label>
-          <b>{{ newCourse.course_par_1_to_9 }}/{{newCourse.course_par_10_to_18}}/{{newCourse.course_par_all}}</b>
+          {{ t('coursePage.courseSelection_1to9')}}:<b>{{ newCourse.course_par_1_to_9 }}</b> / {{ t('coursePage.courseSelection_10to18')}}:<b>{{ newCourse.course_par_10_to_18 }}</b> / {{ t('coursePage.courseSelection_all')}}:<b>{{newCourse.course_par_all}}</b>
         </div>
 
         <!-- Löcher -->
         <div class="holes-container">
           <div class="hole" v-for="hole in newCourse.holes" :key="hole.hole">
-            <label :for="'hole-' + hole.hole"
-              >{{ hole.hole }}. {{ t('coursePage.hole') }}-> {{ t('coursePage.par') }}</label
-            >
+            <b :for="'hole-' + hole.hole"
+              >{{ hole.hole }}. {{ t('coursePage.hole') }}</b>
+              <label>{{ t('coursePage.par') }}</label>
+
             <input type="number" :id="'hole-' + hole.hole" v-model="hole.par" min="1" required />
             <label :for="'hole-' + hole.hole">{{ t('coursePage.hdc') }}</label>
             <input type="number" :id="'hole-' + hole.hole" v-model="hole.hdc" min="1" required />
