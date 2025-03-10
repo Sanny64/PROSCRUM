@@ -89,10 +89,7 @@ const emit = defineEmits(['formData'])
 
 const btnCalculation = () => {
 
-
   let nullFormDate = JSON.parse(JSON.stringify(formData))
-
-
 
   if (selectedRatingOption.value === '1to9' ) {
 
@@ -134,7 +131,7 @@ const btnCalculation = () => {
     <form @submit.prevent="btnCalculation">
       <div class="form-group">
         <label for="round">{{ t('input.round') }}</label>
-        {{ formData.round_number }}
+        <b>{{ formData.round_number }}</b>
       </div>
       <div class="datePicker ">
         <label for="date">{{ t('input.date') }}</label>
@@ -149,27 +146,47 @@ const btnCalculation = () => {
       <div class="form-group">
         <label for="courseRating">{{ t('input.courseRating_1to9') }}</label>
 
-          {{ selectedCourse?.course_par_1_to_9 }}
+        <b>{{ selectedCourse?.course_rating_1_to_9 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '10to18'">
       <div class="form-group">
         <label for="courseRating">{{ t('input.courseRating_10to18') }}</label>
 
-          {{ selectedCourse?.course_par_10_to_18 }}
+        <b>{{ selectedCourse?.course_rating_10_to_18 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === 'all'">
       <div class="form-group" >
         <label for="courseRating">{{ t('input.courseRating_all') }}</label>
-        {{ selectedCourse?.course_par_all }}
+        <b>{{ selectedCourse?.course_rating_1_to_9 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === '1to9'">
+        <div class="form-group">
+          <label for="courseRating">{{ t('input.course_par_1to9') }}</label>
+
+          <b>{{selectedCourse?.course_par_1_to_9 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === '10to18'">
+        <div class="form-group">
+          <label for="courseRating">{{ t('input.course_par_10to18') }}</label>
+
+          <b>{{ selectedCourse?.course_par_10_to_18 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === 'all'">
+        <div class="form-group" >
+          <label for="courseRating">{{ t('input.course_par_all') }}</label>
+          <b>{{ selectedCourse?.course_par_all }}</b>
         </div>
       </div>
 
+
       <div class="form-group">
         <label for="slopeRating">{{ t('input.slopeRating') }}</label>
-        {{ selectedCourse?.slope_rating }}
-        <!--        <input type="number" v-model="formData.slope_rating" id="slopeRating" min="1" required/>-->
+        <b>{{ selectedCourse?.slope_rating }}</b>
       </div>
 
       <!-- Dropdown -->
@@ -197,20 +214,17 @@ const btnCalculation = () => {
       </div>
 
       <!-- Switch -->
-            <div class="holesHeadline">
+      <div class="holesHeadline">
               <label>{{ t('input.courseSelection') }}</label>
               <div class="radio-group">
-                <label v-if="selectedCourse?.course_rating_1_to_9">
-                  {{ t('input.courseSelection_1to9') }}
-                  <input  type="radio" value="1to9" v-model="selectedRatingOption" />
+                <label v-if="selectedCourse?.course_rating_1_to_9" class="radio-button">
+                  <input  type="radio" value="1to9" v-model="selectedRatingOption" />{{t('input.courseSelection_1to9')}}
                 </label>
-                <label v-if="selectedCourse?.course_rating_10_to_18">
-                  {{ t('input.courseSelection_10to18') }}
-                  <input  type="radio" value="10to18" v-model="selectedRatingOption" />
+                <label v-if="selectedCourse?.course_rating_10_to_18" class="radio-button" >
+                  <input  type="radio" value="10to18" v-model="selectedRatingOption" />{{t('input.courseSelection_10to18')}}
                 </label>
-                <label v-if="selectedCourse?.course_rating_all">
-                  {{ t('input.courseSelection_all') }}
-                  <input  type="radio" value="all" v-model="selectedRatingOption" />
+                <label v-if="selectedCourse?.course_rating_all" class="radio-button">
+                  <input  type="radio" value="all" v-model="selectedRatingOption"  />{{t('input.courseSelection_all')}}
                 </label>
               </div>
 
