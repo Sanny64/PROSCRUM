@@ -38,9 +38,9 @@ class Hole(Base):
     __tablename__= "holes"
 
     hole_id = Column(Integer, primary_key=True, nullable=False)
-    hole_number = Column(Integer, nullable=False)
-    handicap = Column(Integer, nullable=False)
-    hole_par = Column(Integer, nullable=False)
+    hole = Column(Integer, nullable=False)
+    hdc = Column(Integer, nullable=False)
+    par = Column(Integer, nullable=False)
     course_id = Column(Integer, ForeignKey("courses.course_id", ondelete="CASCADE"), nullable=False)
 
 class Score(Base):
