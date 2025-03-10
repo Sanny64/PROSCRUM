@@ -1,176 +1,172 @@
-.infoBox{
-    color: red;
+.infoBox {
+  color: red;
 }
 
 .component-left {
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    padding: 10px;
-    text-align: center;/* Abstand zwischen den Elementen */
-    box-sizing: border-box;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  text-align: center; /* Abstand zwischen den Elementen */
+  box-sizing: border-box;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .headline {
-    text-align: center;
-    margin: 10px;
+  text-align: center;
+  margin: 10px;
 }
 
-h1{
-    font-size: 40px;
-    margin: 10px;
-
+h1 {
+  font-size: 40px;
+  margin: 10px;
 }
 
 .form-group {
-    margin: 10px;
-
+  margin: 10px;
 }
 
 /* Styling für die CourseInput */
 .form-group input {
-    font-size: 15px;
-    width: 50px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  font-size: 15px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.holesHeadline{
-    display: flex;
-    align-items: center; /* Zentriert die Elemente vertikal */
-    gap: 10px;
-    justify-content: center
+.holesHeadline {
+  display: flex;
+  align-items: center; /* Zentriert die Elemente vertikal */
+  gap: 10px;
+  justify-content: center;
 }
 
 .holes-container {
-    font-size: 15px;
-    display: grid;
-    grid-template-rows: repeat(9, auto); /* 6 Reihen pro Spalte */
-    grid-auto-flow: column; /* Elemente zuerst spaltenweise anordnen */
-    gap: 10px;
-    column-gap: 50px; /* Abstand zwischen den Elementen */
-    justify-content: center; /* Zentriert das Grid horizontal */
-    align-items: start; /* Elemente oben ausrichten */
+  font-size: 15px;
+  display: grid;
+  grid-template-rows: repeat(9, auto); /* 6 Reihen pro Spalte */
+  grid-auto-flow: column; /* Elemente zuerst spaltenweise anordnen */
+  gap: 10px;
+  column-gap: 50px; /* Abstand zwischen den Elementen */
+  justify-content: center; /* Zentriert das Grid horizontal */
+  align-items: start; /* Elemente oben ausrichten */
 }
 
 .hole {
-    font-size: 15px;
-    justify-content: center;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung von Label und Input */
-    gap: 10px; /* Abstand zwischen Label und Input */
+  font-size: 15px;
+  justify-content: center;
+  display: flex;
+  align-items: center; /* Vertikale Zentrierung von Label und Input */
+  gap: 10px; /* Abstand zwischen Label und Input */
 }
-.hole input{
-    font-size: 15px;
-    width: 50px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.hole input {
+  font-size: 15px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.submit-btn{
-    appearance: none;
-    background-color: #FAFBFC;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    box-sizing: border-box;
-    color: #24292E;
-    cursor: pointer;
-    display: inline-block;
-    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    padding: 6px 16px;
-    position: relative;
-    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
-    word-wrap: break-word;
-    margin-top: 20px;
+.submit-btn {
+  appearance: none;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow:
+    rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-family:
+    -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin-top: 20px;
 
-    padding-left: 50px;
-    padding-right: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 .submit-btn:hover {
-    background-color: #F3F4F6;
-    text-decoration: none;
-    transition-duration: 0.1s;
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
 }
-
-
 
 /* Allgemeine Switch-Styling */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    transform: scale(0.7);
-    transform-origin: center;
-    position: absolute;
-    cursor: url('../assets/golfSchlaeger.png') 45 45, auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #049384;
-    background-size: cover;
-    background-position: center;
-    border-radius: 34px;
-    transition: 0.4s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scale(0.7);
+  transform-origin: center;
+  position: absolute;
+  cursor:
+    url('../assets/golfSchlaeger.png') 45 45,
+    auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #049384;
+  background-size: cover;
+  background-position: center;
+  border-radius: 34px;
+  transition: 0.4s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-
-
-
 .slider::before {
-    content: "";
-    position: absolute;
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-image: url('../assets/logo.png'); /* Bild des Sliders */
-    background-size: cover;
-    background-position: center;
-    transition: 0.4s;
-    border-radius: 50%;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);*/
+  content: '';
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-image: url('../assets/logo.png'); /* Bild des Sliders */
+  background-size: cover;
+  background-position: center;
+  transition: 0.4s;
+  border-radius: 50%;
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);*/
 }
 
 /* Checkbox aktiviert */
 input:checked + .slider {
-
-    background-color: #049384; /* Aktiviertes Hintergrundbild */
+  background-color: #049384; /* Aktiviertes Hintergrundbild */
 }
 
 input:checked + .slider::before {
-    transform: translateX(26px);
-    background-image: url('http://localhost:5173/src/assets/logo.png'); /* Aktiviertes Bild des Sliders */
+  transform: translateX(26px);
+  background-image: url('http://localhost:5173/src/assets/logo.png'); /* Aktiviertes Bild des Sliders */
 }
 
 /* Dropdown-Stile */
 /*.dropdown {*/
 /*    position: relative;*/
 /*    display: inline-block;*/
-
 
 /*}*/
 
@@ -217,48 +213,46 @@ input:checked + .slider::before {
 /* Mehrspaltige Darstellung für mehr als 10 Einträge */
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-button {
-    padding: 10px 30px;
-    background-color: #049384;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 30px;
+  background-color: #049384;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .dropdown-button:hover {
-    background-color: #036a5d;
+  background-color: #036a5d;
 }
 
 .dropdown-menu {
-
-    position: absolute;
-    width: 100%;
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    background: white;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    z-index: 1000;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
+  position: absolute;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: white;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 1000;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .dropdown-item:hover {
-    background-color: rgba(227, 227, 227, 0.53);
+  background-color: rgba(227, 227, 227, 0.53);
 }
 
 /* Mehrspaltige Darstellung für mehr als 10 Einträge */

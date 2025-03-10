@@ -1,23 +1,22 @@
 .content {
-    /*display: flex; !* Flexbox für nebeneinanderliegende Komponenten *!*/
-    /*flex: 1; !* Nimmt den restlichen Platz unter der Navbar ein *!*/
-    /*margin: 20px; !* Abstand zu den Rändern *!*/
-    /*gap: 20px; !* Abstand zwischen den Komponenten *!*/
-    /*flex-wrap: wrap; !* Allows wrapping on smaller screens *!*/
-    display: grid;
-    padding: 20px 20px 20px 20px;
-    height: calc(100vh - 100px); /* Full height minus navbar and margins */ /* Use CSS Grid */
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 20px; /* Space between components */
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    overflow-y: auto;
+  /*display: flex; !* Flexbox für nebeneinanderliegende Komponenten *!*/
+  /*flex: 1; !* Nimmt den restlichen Platz unter der Navbar ein *!*/
+  /*margin: 20px; !* Abstand zu den Rändern *!*/
+  /*gap: 20px; !* Abstand zwischen den Komponenten *!*/
+  /*flex-wrap: wrap; !* Allows wrapping on smaller screens *!*/
+  display: grid;
+  padding: 20px 20px 20px 20px;
+  height: calc(100vh - 100px); /* Full height minus navbar and margins */ /* Use CSS Grid */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px; /* Space between components */
+  width: 100%; /* Full width */
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Include padding and border in the element's total width and height */
 }
 
-
 @media (max-width: 768px) {
-    .content {
-        grid-template-columns: minmax(0, 1fr);
-
-    }
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

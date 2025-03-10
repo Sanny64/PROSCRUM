@@ -1,19 +1,30 @@
 .content {
+  display: grid;
+  padding: 20px 20px 20px 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px; /* Space between components */
+  width: 100%; /* Full width */
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Include padding and border in the element's total width and height */
+}
+
+calculation-output {
+  height: calc(100vh - 100px); /* Full height minus navbar and margins */ /* Use CSS Grid */
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns */
   /*grid-template-rows: minmax(65px, 65px);*/
-  grid-auto-rows: 130px;
+  height: calc(100vh - 205px); /* Full height minus navbar and margins */
+  grid-auto-rows: 80px;
   gap: 20px;
   width: 100%;
-  height: calc(100vh - 185px); /* Full height minus navbar and margins */
   background-color: #f5f5f5;
   box-sizing: border-box;
-  padding: 20px 20px 20px 20px;
   grid-auto-flow: row;
-  overflow-y: auto;
+  padding-top: 20px;
 }
 
 .filterGrid {
@@ -22,9 +33,7 @@
   grid-auto-rows: 65px;
   gap: 20px;
   width: 100%;
-  height: 100%; /* Full height minus navbar and margins */
   background-color: transparent;
-  padding: 20px 20px 0px 20px;
   box-sizing: border-box;
   grid-auto-flow: row;
 }
