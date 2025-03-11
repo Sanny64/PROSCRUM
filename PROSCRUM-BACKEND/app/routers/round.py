@@ -1,10 +1,9 @@
 from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ..utils import find_round, find_index_round
 from ..models import RoundIn, RoundOut, HoleConfig, CourseWithID
 from ..calculations import start_calculations
-from ..mockups import my_rounds
+
 from ..database import get_db
 from .. import schemas, oauth2, models
 
@@ -58,7 +57,9 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
 
 @router.post("/")
 def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-
+    if current_user.role_id > 1:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+    
     user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == current_user.user_id).all()
 
     calc_rounds = []
@@ -202,7 +203,6 @@ def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_d
         else:
             updated_round = RoundOut(**round.model_dump())
 
-        my_rounds[round_number-1] = updated_round  
 
         return {"result": updated_round}
 

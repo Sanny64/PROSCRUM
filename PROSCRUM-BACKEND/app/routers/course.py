@@ -21,6 +21,9 @@ def get_courses(db: Session = Depends(get_db)):
             hole_config = HoleConfig(hole=hole.hole, par=hole.par, hdc=hole.hdc)
             hole_config_list.append(hole_config)
 
+        leaders = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.course_id == course.course_id).all()
+        leaders_secretaries = [user_id.user_id for user_id in leaders]
+
         course_with_id = CourseWithID(
             course_id=course.course_id,
             course_name=course.course_name,
@@ -31,7 +34,8 @@ def get_courses(db: Session = Depends(get_db)):
             course_rating_10_to_18=course.course_par_10_to_18,
             course_rating_all=course.course_rating_all,
             slope_rating=course.slope_rating,
-            holes=hole_config_list
+            holes=hole_config_list,
+            leaders_secretaries=leaders_secretaries
         )
         return_courses_list.append(course_with_id)
 
@@ -49,6 +53,9 @@ def get_one_course(id: int, db: Session = Depends(get_db)):
         hole_config = HoleConfig(hole=hole.hole, par=hole.par, hdc=hole.hdc)
         hole_config_list.append(hole_config)
 
+    leaders = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.course_id == course.course_id).all()
+    leaders_secretaries = [user_id.user_id for user_id in leaders]
+
     course_with_id = CourseWithID(
         course_id=course.course_id,
         course_name=course.course_name,
@@ -59,15 +66,15 @@ def get_one_course(id: int, db: Session = Depends(get_db)):
         course_rating_10_to_18=course.course_par_10_to_18,
         course_rating_all=course.course_rating_all,
         slope_rating=course.slope_rating,
-        holes=hole_config_list
+        holes=hole_config_list,
+        leaders_secretaries=leaders_secretaries
     )
 
     return {"result": course_with_id}
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_course(course: CourseCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    user_role_id = current_user.role_id
-    if user_role_id >= 2:
+    if current_user.role_id > 2:
         new_course = schemas.Course(
             course_name = course.course_name,
             course_par_1_to_9 = course.course_par_1_to_9,
@@ -88,6 +95,18 @@ def create_course(course: CourseCreate, db: Session = Depends(get_db), current_u
             db.commit()
         
         db.refresh(new_course)
+
+        for user in course.leaders_secretaries:
+            user_db = db.query(schemas.User).filter(schemas.User.user_id == user).first()
+            if user_db.role_id > 1:
+                new_leaders_secretaries = schemas.Course_Leader_Secretary(
+                    course_id=new_course.course_id,
+                    user_id= user
+                )
+                db.add(new_leaders_secretaries)
+                db.commit()
+
+        db.refresh(new_course)
         return_course = CourseWithID(course_id=new_course.course_id, **course.model_dump())
     else:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
@@ -105,6 +124,7 @@ def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(g
     
     update_dict = updated_course.model_dump()
     update_dict.pop("holes", None)
+    update_dict.pop("leaders_secretaries", None)
 
     course_query.update(update_dict,
         synchronize_session=False)
@@ -124,6 +144,20 @@ def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(g
 
     course = course_query.first()
 
+    leaders_query = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.course_id == course.course_id)
+    leaders_query.delete(synchronize_session=False)
+    db.commit()
+
+    for user in updated_course.leaders_secretaries:
+            user_db = db.query(schemas.User).filter(schemas.User.user_id == user).first()
+            if user_db.role_id > 1:
+                new_leaders_secretaries = schemas.Course_Leader_Secretary(
+                    course_id=id,
+                    user_id= user
+                )
+                db.add(new_leaders_secretaries)
+                db.commit()
+
     return_course_with_id = CourseWithID(
         course_id=course.course_id,
         course_name=course.course_name,
@@ -134,13 +168,17 @@ def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(g
         course_rating_10_to_18=course.course_par_10_to_18,
         course_rating_all=course.course_rating_all,
         slope_rating=course.slope_rating,
-        holes=hole_config_list
+        holes=hole_config_list,
+        leaders_secretaries= updated_course.leaders_secretaries
     )
 
     return {"result": return_course_with_id}
 
 @router.delete("/{id}")
-def delete_course(id: int, db: Session = Depends(get_db)):
+def delete_course(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    if current_user.role_id <= 2:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+
     course_query = db.query(schemas.Course).filter(schemas.Course.course_id == id)
 
     course = course_query.first()

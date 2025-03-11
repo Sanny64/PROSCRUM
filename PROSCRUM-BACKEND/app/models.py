@@ -17,6 +17,7 @@ class CourseBase(BaseModel):
     course_rating_all: float | None 
     slope_rating: int
     holes: list[HoleConfig]
+    leaders_secretaries: list[int] | None
 
 class CourseCreate(CourseBase):
     pass

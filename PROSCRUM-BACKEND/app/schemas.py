@@ -78,3 +78,9 @@ class Round(Base):
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False)
     course_id = Column(Integer, ForeignKey("courses.course_id", ondelete="CASCADE"), nullable=False)
     score_id = Column(Integer, ForeignKey("scores.score_id", ondelete="CASCADE"), nullable=False)
+
+class Course_Leader_Secretary(Base):
+    __tablename__ = "courses_leaders_secretaries"
+
+    course_id = Column(Integer, ForeignKey("courses.course_id", ondelete="CASCADE"), primary_key=True, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True, nullable=False)
