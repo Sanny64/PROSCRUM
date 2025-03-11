@@ -82,3 +82,11 @@ For the Python code to build up a connection the package `psycopg2` needs to be 
 ```
 pip install psycopg2
 ```
+
+if `psycopg2`cannot be installed try:
+
+```
+sudo apt-get install git gcc g++ pkg-config libssl-dev libdbus-1-dev \
+     libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev \
+     python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
+```

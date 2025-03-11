@@ -37,7 +37,7 @@ while True:
     except Exception as error:
         print("Connecting to database failed.")
         print("Error: ", error)
-        time.sleep(2)
+        break
 
 @app.get("/")
 def home():
