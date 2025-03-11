@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { ref, defineEmits, reactive, watchEffect } from 'vue'
-import type {FormData, Course, Round} from '../types/types.ts'
+import {ref, defineEmits, reactive, watchEffect, onMounted} from 'vue'
+import type {FormData, Course, Round, User} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
+import {apiCallUser} from "@/composables/api-call-user.ts";
+import {
+  a
+} from "../../../../../../../../Program Files/WPy64-31230/python-3.12.3.amd64/Lib/site-packages/bokeh/server/static/js/lib/core/dom";
+
+
+const activeUser = ref<User | "INVALID">("INVALID")
+const { getActiveUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
@@ -15,6 +23,9 @@ const props = defineProps<{
 }>()
 
 
+onMounted(async () => {
+  activeUser.value = await getActiveUserAPI();
+});
 
 
 console.log('CourseList: ', props.courseList)
@@ -122,7 +133,7 @@ const btnCalculation = () => {
 
   <div class="component-left">
     <div class="headline">
-      <h1>{{ t('input.input') }}</h1>
+      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }} Hallo {{activeUser.first_name}}</h1>
     </div>
 
     <div class="infoBox" v-if="inputInfo">
