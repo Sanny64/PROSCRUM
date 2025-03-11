@@ -1,6 +1,7 @@
 from app.models import RoundIn, RoundOut
 from app.new_calculations import calculate_whs_handicap
 from app.old_calculation import calculate_ega_handicap
+from send_EMail import send_email
 
 def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     """
@@ -67,6 +68,7 @@ def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
     :param rounds: die Liste der Runden des Spielers
     :return: die neue Liste an Runden (aktualisiert, provisorisch bis Datenbankanschluss)
     """
+
     updated_round_out = RoundOut(
         **updated_round.model_dump(),
         calc_result_2020=0.0,
@@ -75,11 +77,18 @@ def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
     )
 
     updated_round_out.calc_result_2020, updated_round_out.calc_result_2021, updated_round_out.score_differential = start_calculations(updated_round, rounds[:updated_round.round_number])
-    
+
     for i in range(len(rounds)):
         if rounds[i].round_number == updated_round.round_number:
             rounds[i] = updated_round_out
         elif rounds[i].round_number > updated_round.round_number:
             rounds[i].calc_result_2020, rounds[i].calc_result_2021, rounds[i].score_differential = start_calculations(rounds[i], rounds[:rounds[i].round_number])
+
+    # test values
+    EMAIL_RECEIVER = "robin.messer@stud-provadis-hochschule.de"
+    RECEIVER_NAME = "Robin Messer"
+    ROUND_DATE = "2020-05-21"
+
+    send_email(EMAIL_RECEIVER,RECEIVER_NAME, ROUND_DATE)
      
     return rounds
