@@ -57,7 +57,7 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
 
 @router.post("/")
 def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id > 1:
+    if current_user.role_id > 1 and current_user.role_id < 4:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
     
     user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == current_user.user_id).all()
