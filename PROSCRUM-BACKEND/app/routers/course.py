@@ -74,47 +74,50 @@ def get_one_course(id: int, db: Session = Depends(get_db)):
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_course(course: CourseCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id > 2:
-        new_course = schemas.Course(
-            course_name = course.course_name,
-            course_par_1_to_9 = course.course_par_1_to_9,
-            course_par_10_to_18 = course.course_par_10_to_18,
-            course_par_all = course.course_par_all,
-            course_rating_1_to_9 = course.course_rating_1_to_9,
-            course_rating_10_to_18 = course.course_rating_10_to_18,
-            course_rating_all = course.course_rating_all,
-            slope_rating = course.slope_rating)
-        
-        db.add(new_course)
-        db.commit()
-        db.refresh(new_course)
-
-        for hole in course.holes:
-            new_hole = schemas.Hole(course_id=new_course.course_id, **hole.model_dump())
-            db.add(new_hole)
-            db.commit()
-        
-        db.refresh(new_course)
-
-        for user in course.leaders_secretaries:
-            user_db = db.query(schemas.User).filter(schemas.User.user_id == user).first()
-            if user_db.role_id > 1:
-                new_leaders_secretaries = schemas.Course_Leader_Secretary(
-                    course_id=new_course.course_id,
-                    user_id= user
-                )
-                db.add(new_leaders_secretaries)
-                db.commit()
-
-        db.refresh(new_course)
-        return_course = CourseWithID(course_id=new_course.course_id, **course.model_dump())
-    else:
+    if current_user.role_id < 3:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+
+    new_course = schemas.Course(
+        course_name = course.course_name,
+        course_par_1_to_9 = course.course_par_1_to_9,
+        course_par_10_to_18 = course.course_par_10_to_18,
+        course_par_all = course.course_par_all,
+        course_rating_1_to_9 = course.course_rating_1_to_9,
+        course_rating_10_to_18 = course.course_rating_10_to_18,
+        course_rating_all = course.course_rating_all,
+        slope_rating = course.slope_rating)
     
+    db.add(new_course)
+    db.commit()
+    db.refresh(new_course)
+
+    for hole in course.holes:
+        new_hole = schemas.Hole(course_id=new_course.course_id, **hole.model_dump())
+        db.add(new_hole)
+        db.commit()
+    
+    db.refresh(new_course)
+
+    for user in course.leaders_secretaries:
+        user_db = db.query(schemas.User).filter(schemas.User.user_id == user).first()
+        if user_db.role_id > 1:
+            new_leaders_secretaries = schemas.Course_Leader_Secretary(
+                course_id=new_course.course_id,
+                user_id= user
+            )
+            db.add(new_leaders_secretaries)
+            db.commit()
+
+    db.refresh(new_course)
+    return_course = CourseWithID(course_id=new_course.course_id, **course.model_dump())
+
     return {"result": return_course}
 
 @router.put("/{id}")
-def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(get_db)):
+def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+    if current_user.role_id < 3:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+    
     course_query = db.query(schemas.Course).filter(schemas.Course.course_id == id)
 
     course = course_query.first()
@@ -153,7 +156,7 @@ def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(g
             if user_db.role_id > 1:
                 new_leaders_secretaries = schemas.Course_Leader_Secretary(
                     course_id=id,
-                    user_id= user
+                    user_id=user
                 )
                 db.add(new_leaders_secretaries)
                 db.commit()
@@ -176,7 +179,7 @@ def update_course(id: int, updated_course: CourseCreate, db: Session = Depends(g
 
 @router.delete("/{id}")
 def delete_course(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id <= 2:
+    if current_user.role_id < 3:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
 
     course_query = db.query(schemas.Course).filter(schemas.Course.course_id == id)

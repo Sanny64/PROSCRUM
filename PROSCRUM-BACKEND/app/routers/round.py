@@ -124,12 +124,22 @@ def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: sc
 
 @router.get("/", response_model=list[models.RoundOut])
 def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id >= 2:
+    if current_user.role_id == 4:
         all_rounds = db.query(schemas.Round).all()
         all_round_outs = []
         for round in all_rounds:
             round_out = convert_to_round_out(round, db)
             all_round_outs.append(round_out)
+        return all_round_outs
+    elif current_user.role_id >= 2:
+        leader_secretaries = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.user_id == current_user.user_id).all()
+        course_id_list = [ls.course_id for ls in leader_secretaries]
+        all_rounds = db.query(schemas.Round).all()
+        all_round_outs = []
+        for round in all_rounds:
+            round_out = convert_to_round_out(round, db)
+            if round_out.course.course_id in course_id_list:
+                all_round_outs.append(round_out)
         return all_round_outs
     elif current_user.role_id == 1:
         user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == current_user.user_id).all()
@@ -144,7 +154,14 @@ def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depen
 
 @router.get("/{round_number}", response_model=list[models.RoundOut])
 def get_one_round(round_number: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id == 1:
+    if current_user.role_id == 4:
+        all_rounds = db.query(schemas.Round).all()
+        all_round_outs = []
+        for round in all_rounds:
+            round_out = convert_to_round_out(round, db)
+            all_round_outs.append(round_out)
+        return all_round_outs
+    elif current_user.role_id == 1:
         round = db.query(schemas.Round).filter(
             schemas.Round.round_number == round_number,
             schemas.Round.user_id == current_user.user_id
@@ -155,12 +172,15 @@ def get_one_round(round_number: int, db: Session = Depends(get_db), current_user
         round_out = convert_to_round_out(round, db)
         return round_out
     elif current_user.role_id >= 2:
-        rounds = db.query(schemas.Round).filter(schemas.Round.round_number == round_number).all()
-        round_outs = []
-        for round in rounds:
+        leader_secretaries = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.user_id == current_user.user_id).all()
+        course_id_list = [ls.course_id for ls in leader_secretaries]
+        all_rounds = db.query(schemas.Round).all()
+        all_round_outs = []
+        for round in all_rounds:
             round_out = convert_to_round_out(round, db)
-            round_outs.append(round_out)
-        return round_outs
+            if round_out.course.course_id in course_id_list:
+                all_round_outs.append(round_out)
+        return all_round_outs
     else:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
 
