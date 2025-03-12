@@ -4,28 +4,39 @@ import type { LoginData } from '../types/types.ts'
 
 
 
-export function apiCallLogin(loginData: LoginData) {
 
-    try {
-      // const rawResponse = await fetch('http://localhost:8000/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json', // Setzt den Content-Type-Header
-      //   },
-      //   body: JSON.stringify(loginData),
-      // })
-      //
-      // if (!rawResponse.ok) {
-      //   throw new Error('Fehler beim Hinzufügen des Kurses')
-      // }
+export async function apiCallLogin() {
 
-      // const response = await rawResponse.json()
-      const response = {
-        token_type:"Bearer",}
-      console.log('2: Token erhalten:', response)
-      setToken(response.access_token);
+  const loginData: LoginData = {
+    username: 'robin@test.de',
+    password: '1234'
+  }
 
-    } catch (error) {
-      console.error('Fehler beim Hinzufügen des Kurses:', error)
+  const formData = new FormData();
+  formData.append("username", loginData.username)
+  formData.append("password", loginData.password)
+
+
+  console.log("SendFormat data:" + formData.)
+  try {
+    const rawResponse = await fetch('http://localhost:8000/login', {
+      method: 'POST',
+      headers: {
+        'content-type':'application/x-www-form-urlencoded', // Setzt den Content-Type-Header
+      },
+      body: formData,
+    })
+
+    if (!rawResponse.ok) {
+      throw new Error('Fehler beim Login')
     }
+
+    const response = await rawResponse.json()
+
+    console.log('2: Token erhalten:', response)
+    setToken(response.access_token);
+
+  } catch (error) {
+    console.error('Fehler beim Login:', error)
+  }
 }

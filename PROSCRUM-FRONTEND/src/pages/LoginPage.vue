@@ -12,7 +12,7 @@ const activeUser = ref<User | "INVALID">("INVALID")
 
 
 const loginData: LoginData = {
-  email: 'jakobfischer@gmail.com',
+  username: 'robin@test.de',
   password: '1234'
 }
 
@@ -42,7 +42,7 @@ function logout() {
 
 
 
-  <input type="text" v-model="loginData.email" placeholder="Email">
+  <input type="text" v-model="loginData.username" placeholder="Email">
   <input type="password" v-model="loginData.password" placeholder="Password">
   <button @click="login(loginData)">Login</button>
 

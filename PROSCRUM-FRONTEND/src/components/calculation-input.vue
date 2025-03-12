@@ -3,9 +3,7 @@ import {ref, defineEmits, reactive, watchEffect, onMounted} from 'vue'
 import type {FormData, Course, Round, User} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
 import {apiCallUser} from "@/composables/api-call-user.ts";
-import {
-  a
-} from "../../../../../../../../Program Files/WPy64-31230/python-3.12.3.amd64/Lib/site-packages/bokeh/server/static/js/lib/core/dom";
+
 
 
 const activeUser = ref<User | "INVALID">("INVALID")
