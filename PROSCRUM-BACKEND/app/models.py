@@ -25,22 +25,6 @@ class CourseCreate(CourseBase):
 class CourseWithID(CourseBase):
     course_id: int
 
-class RoundBase(BaseModel):
-    round_number: int
-    course: CourseWithID 
-    scores: list[int]
-    date: date
-
-class RoundIn(RoundBase):
-    pass
-
-class RoundOut(RoundBase):
-    round_id: int
-    user_id: int
-    calc_result_2020: float
-    calc_result_2021: float
-    score_differential: float
-
 class UserBase(BaseModel):
     first_name: str
     last_name : str
@@ -69,6 +53,23 @@ class UserUpdate(UserBase):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class RoundBase(BaseModel):
+    round_number: int
+    course: CourseWithID 
+    scores: list[int]
+    date: date
+
+class RoundIn(RoundBase):
+    pass
+
+class RoundOut(RoundBase):
+    round_id: int
+    user_id: int
+    calc_result_2020: float
+    calc_result_2021: float
+    score_differential: float
+    user: UserOut
 
 class Token(BaseModel):
     access_token: str

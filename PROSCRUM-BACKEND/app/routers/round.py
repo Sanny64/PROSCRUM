@@ -23,6 +23,9 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
         hole_config = models.HoleConfig(hole=hole.hole, par=hole.par, hdc=hole.hdc)
         hole_config_list.append(hole_config)
 
+    leaders = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.course_id == round_course.course_id).all()
+    leaders_secretaries = [user_id.user_id for user_id in leaders]
+
     round_course_with_id = models.CourseWithID(
         course_id=round_course.course_id,
         course_name=round_course.course_name,
@@ -33,7 +36,8 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
         course_rating_10_to_18=round_course.course_rating_10_to_18,
         course_rating_all=round_course.course_rating_all,
         slope_rating=round_course.slope_rating,
-        holes=hole_config_list
+        holes=hole_config_list,
+        leaders_secretaries=leaders_secretaries
     )
 
     scores = []
@@ -42,6 +46,7 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
         stroke = getattr(round_scores_db, 'hole_' + str(i+1) + '_strokes')
         scores.append(stroke)
 
+    user = db.query(schemas.User).filter(schemas.User.user_id == round.user_id).first()
     round_out = RoundOut(
         round_id=round.round_id,
         user_id=round.user_id,
@@ -51,7 +56,8 @@ def convert_to_round_out(round: schemas.Round, db: Session) -> RoundOut:
         date=round.date,
         calc_result_2020=round.hdc_2020,
         calc_result_2021=round.hdc_2021,
-        score_differential=round.score_differential
+        score_differential=round.score_differential,
+        user=user
     )
     return round_out
 
@@ -116,7 +122,7 @@ def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: sc
 
     return Response(status_code=status.HTTP_201_CREATED)
 
-@router.get("/")
+@router.get("/", response_model=list[models.RoundOut])
 def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     if current_user.role_id >= 2:
         all_rounds = db.query(schemas.Round).all()
@@ -136,7 +142,7 @@ def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depen
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
         
 
-@router.get("/{round_number}")
+@router.get("/{round_number}", response_model=list[models.RoundOut])
 def get_one_round(round_number: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     if current_user.role_id == 1:
         round = db.query(schemas.Round).filter(

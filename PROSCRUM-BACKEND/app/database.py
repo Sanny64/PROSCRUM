@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:Golf123@localhost:5433/proscrum-golf"
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:1234@localhost/proscrum-golf"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 

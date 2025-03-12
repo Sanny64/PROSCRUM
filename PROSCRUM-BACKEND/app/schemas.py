@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float, Date
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.sql.expression import text
 
@@ -78,6 +79,8 @@ class Round(Base):
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False)
     course_id = Column(Integer, ForeignKey("courses.course_id", ondelete="CASCADE"), nullable=False)
     score_id = Column(Integer, ForeignKey("scores.score_id", ondelete="CASCADE"), nullable=False)
+
+    user = relationship("User")
 
 class Course_Leader_Secretary(Base):
     __tablename__ = "courses_leaders_secretaries"
