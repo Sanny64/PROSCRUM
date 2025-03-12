@@ -61,7 +61,6 @@ const src = computed(() => {
     <div class="gridViewText">
       <div class="gridViewHeadline">
         {{ props.course.course_name }}
-        {{ props.course.course_id }}
       </div>
       <div class="gridViewDetails">
         <div>{{ t('coursePage.par') }}{{ props.course.course_par_all }}</div>
@@ -97,7 +96,7 @@ const src = computed(() => {
       <div v-if="selectedRatingOption === 'all'">
         <div class="form-group" >
           <label for="courseRating">{{ t('coursePage.courseRating_all') }}</label>
-          <b>{{ props.course?.course_rating_1_to_9 }}</b>
+          <b>{{ props.course?.course_rating_all}}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '1to9'">

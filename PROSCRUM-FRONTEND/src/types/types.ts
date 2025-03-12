@@ -70,6 +70,7 @@ export interface LoginData {
 export interface DecodedToken {
   role_id: number;
   expires: number;
+  user_id: number;
 }
 
 export interface UserCreate{

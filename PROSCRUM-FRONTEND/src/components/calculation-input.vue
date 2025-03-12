@@ -50,6 +50,8 @@ const formData = reactive<FormData>({
   round_number: undefined,
   date: undefined,
   course: undefined,
+  user_id: activeUser.value.user_id || 0,
+  user: activeUser.value,
   scores: [], // Initialisiertes Array
 })
 
@@ -168,7 +170,7 @@ const btnCalculation = () => {
       <div v-if="selectedRatingOption === 'all'">
       <div class="form-group" >
         <label for="courseRating">{{ t('input.courseRating_all') }}</label>
-        <b>{{ selectedCourse?.course_rating_1_to_9 }}</b>
+        <b>{{ selectedCourse?.course_rating_all }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '1to9'">

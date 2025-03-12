@@ -8,35 +8,20 @@ export function apiCallUser() {
   async function getActiveUserAPI() {
     try {
       const decodedToken: DecodedToken = jwtDecode<DecodedToken>(getToken());
-      // const rawResponse = await fetch(`http://localhost:8000/user/${decodedToken.role_id}`, {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     authorization: "Bearer " + getToken(),
-      //   },
-      // });
-      //
-      // if (!rawResponse.ok) {
-      //   throw new Error('Fehler beim Laden der Kurse')
-      // }
-      //
-      // const response = await rawResponse.json()
-      console.log('4: Kurse geladen:', {
-        first_name: "Jakob",
-        last_name: "Kraus",
-        user_id: decodedToken.role_id,
-        email: "jakobfischer@gmail.com",
-        role_id: 1,
-        created_at: "2021-05-12T12:00:00Z",
-      })
-      return {
-        first_name: "Jakob",
-        last_name: "Kraus",
-        user_id: decodedToken.role_id,
-        email: "jakobfischer@gmail.com",
-        role_id: 1,
-        created_at: "2021-05-12T12:00:00Z",
+      console.log('3: Token dekodiert:', decodedToken)
+      const rawResponse = await fetch(`http://localhost:8000/users/${decodedToken.user_id}`, {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + getToken(),
+        },
+      });
+      if (!rawResponse.ok) {
+        throw new Error('Fehler beim Laden der Kurse')
       }
+
+      const response = await rawResponse.json()
+      console.log('4: Kurse geladen:', response)
+      return response
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
       return "INVALID"
@@ -46,7 +31,7 @@ export function apiCallUser() {
 
   async function getUserAPI(user_id: number) {
     try {
-      const rawResponse = await fetch(`http://localhost:8000/user/${user_id}`, {
+      const rawResponse = await fetch(`http://localhost:8000/users/${user_id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +56,7 @@ export function apiCallUser() {
     console.log('sendFormdata', JSON.stringify(user))
 
     try {
-      const rawResponse = await fetch('http://localhost:8000/user', {
+      const rawResponse = await fetch('http://localhost:8000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
