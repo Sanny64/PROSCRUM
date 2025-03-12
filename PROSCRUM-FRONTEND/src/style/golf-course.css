@@ -1,190 +1,193 @@
 .gridView {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.gridViewText{
-    flex: 1;
-    font-size:  clamp(14px, 1.2vw, 16px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.gridViewText {
+  flex: 1;
+  font-size: clamp(14px, 1.2vw, 16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+  max-height: 100%; /* Begrenzt die Höhe, damit das Bild nicht verschoben wird */
 }
 
 .gridViewImage {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px 20px 20px 0px;
-    color: #3d4545;
-    justify-content: center;
-
-
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 20px 20px 0px;
+  color: #3d4545;
+  justify-content: center;
 }
 
 @media (max-width: 1036px) {
-    .gridViewImage {
-        display: none;
-        flex: 0;
-    }
+  .gridViewImage {
+    display: none;
+    flex: 0;
+  }
 
-    .gridViewText{
-        font-size: clamp(14px, 1.2vw, 16px);
-        align-content: center;
-        flex-wrap: wrap;
-    }
-
-
+  .gridViewText {
+    font-size: clamp(14px, 1.2vw, 16px);
+    flex-wrap: wrap;
+  }
 }
 
-.gridViewImage img{
-    border-radius: 10px 10px 0px 0px;
-    width: clamp(50px, 5vw, 100px);
-    height: auto; /* Automatische Höhe für Proportionen */
-    object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar bleibt */
-;
+.gridViewImage img {
+  border-radius: 10px 10px 0px 0px;
+  width: clamp(50px, 5vw, 100px);
+  height: auto; /* Automatische Höhe für Proportionen */
+  object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar bleibt */
 }
-
-
 
 .gridViewHeadline {
-    font-weight: bold;
-    display: flex;
-    padding: 20px 0px 0px 20px;
-
+  font-weight: bold;
+  display: flex;
+  padding: 20px 0px 0px 20px;
 }
 .gridViewDetails {
-    display: flex;
-    flex-direction: column;
-    margin: 0px 20px 20px 20px;
-    color: #3d4545;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px 20px 20px;
+  color: #3d4545;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-y: auto; /* Ermöglicht das Scrollen bei zu viel Text */
+  max-height: 100px; /* Setzt eine maximale Höhe, damit der Text scrollbar wird */
+  white-space: normal; /* Erlaubt Zeilenumbrüche */
 }
 
 .gridView:hover {
-    background-color: rgba(112, 112, 112, 0.12);
+  background-color: rgba(112, 112, 112, 0.12);
 }
 
 .inputView {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .formView {
-    /*width: 50%;*/
-    /*height: 50%;*/
-    /*background-color: white;*/
-    /*border-radius: 10px;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
+  /*width: 50%;*/
+  /*height: 50%;*/
+  /*background-color: white;*/
+  /*border-radius: 10px;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
 
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    padding: 10px;
-    text-align: center; /* Abstand zwischen den Elementen */
-    box-sizing: border-box;
-    /* Include padding and border in the element's total width and height */
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  text-align: center; /* Abstand zwischen den Elementen */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
 }
 
 .form-group {
-    margin: 10px;}
+  margin: 10px;
+}
 
 /* Styling für die CourseInput */
 .form-group input {
-    font-size: 15px;
-    width: 50px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  font-size: 15px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .holesHeadline {
-    display: flex;
-    align-items: center; /* Zentriert die Elemente vertikal */
-    gap: 10px;
-    justify-content: center
+  display: flex;
+  align-items: center; /* Zentriert die Elemente vertikal */
+  gap: 10px;
+  justify-content: center;
+  padding: 0px 10px 10px 10px;
 }
 
 .holes-container {
-    font-size: 15px;
-    display: grid;
-    grid-template-rows: repeat(9, auto); /* 6 Reihen pro Spalte */
-    grid-auto-flow: column; /* Elemente zuerst spaltenweise anordnen */
-    gap: 10px;
-    column-gap: 50px; /* Abstand zwischen den Elementen */
-    justify-content: center; /* Zentriert das Grid horizontal */
-    align-items: start;
-    padding: 0 50px 0 50px;
-    justify-items: start;/* Elemente oben ausrichten */
+  font-size: 15px;
+  display: grid;
+  grid-template-rows: repeat(9, auto); /* 6 Reihen pro Spalte */
+  grid-auto-flow: column; /* Elemente zuerst spaltenweise anordnen */
+  gap: 10px;
+  column-gap: 50px; /* Abstand zwischen den Elementen */
+  justify-content: center; /* Zentriert das Grid horizontal */
+  align-items: start;
+  padding: 0 50px 0 50px;
+  justify-items: start; /* Elemente oben ausrichten */
 }
 
 .hole {
-    font-size: 15px;
-    justify-content: center;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung von Label und Input */
-    gap: 10px; /* Abstand zwischen Label und Input */
+  font-size: 15px;
+  justify-content: center;
+  display: flex;
+  align-items: center; /* Vertikale Zentrierung von Label und Input */
+  gap: 10px; /* Abstand zwischen Label und Input */
 }
 
 .hole b {
-    font-size: 15px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+  font-size: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .submit-btn {
-    appearance: none;
-    background-color: #FAFBFC;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    box-sizing: border-box;
-    color: #24292E;
-    cursor: pointer;
-    display: inline-block;
-    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    padding: 6px 16px;
-    position: relative;
-    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
-    word-wrap: break-word;
-    margin: 20px 20px 20px 20px;
+  appearance: none;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow:
+    rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-family:
+    -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin: 20px 20px 20px 20px;
 
-    padding-left: 50px;
-    padding-right: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .submit-btn:hover {
-    background-color: #F3F4F6;
-    text-decoration: none;
-    transition-duration: 0.1s;
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.radio-button{
+  padding: 10px
 }

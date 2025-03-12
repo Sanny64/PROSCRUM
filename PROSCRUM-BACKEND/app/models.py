@@ -6,9 +6,17 @@ class HoleConfig(BaseModel):
     hole: int
     par: int
     hdc: int
+    par: int
+    hdc: int
 
 class CourseBase(BaseModel):
     course_name: str
+    course_par_1_to_9: int | None
+    course_par_10_to_18: int | None
+    course_par_all: int | None
+    course_rating_1_to_9: float | None 
+    course_rating_10_to_18: float | None 
+    course_rating_all: float | None 
     course_par_1_to_9: int | None
     course_par_10_to_18: int | None
     course_par_all: int | None

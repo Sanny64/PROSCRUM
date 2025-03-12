@@ -1,4 +1,5 @@
 from app.models import HoleConfig, CourseWithID, RoundIn, RoundOut
+from app.models import HoleConfig, CourseWithID, RoundIn, RoundOut
 def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole=True):
     """
     Calculate EGA golf handicap based on scoring results
@@ -65,6 +66,7 @@ def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole
             if new_hcp > -26.5:
                 new_hcp -= 0.1
        
+       
                 
         return round(new_hcp, 1)
     
@@ -72,6 +74,8 @@ def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole
     over_pars = {}
     for i,  (shot, hole) in enumerate(zip(shots, holes)):
         over_pars[i+1] = (max(shot-(hole.par), 0))
+        
+  
         
   
     

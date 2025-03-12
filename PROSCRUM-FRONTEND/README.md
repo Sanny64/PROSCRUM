@@ -1,45 +1,74 @@
-# PROSCRUM-FRONTEND
+# FRONTEND PROSCRUM
 
-This template should help get you started developing with Vue 3 in Vite.
+## Aufbau der Webseite
 
-## Recommended IDE Setup
+Die Webseite ist Grundlegend auf zwei Teile aufgebaut. Die Navigationsleiste und den Inhalt
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Navigationsleiste
 
-## Type Support for `.vue` Imports in TS
+Links befindet sich das Logo und der Name der Website. Rechts kann zwischen Home und Login gewechselt werden. Je nach Auswahl ändert sich der Inhalt, die Navigation bleibt jedoch gleich.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Inhalt:
 
-## Customize configuration
+## Home
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Hier gibt es zwei Felder: Input und Output. Im Input werden die Daten für die Berechnung des Handicaps eingegeben. Im Output wird der Status der Berechnung angezeigt und das Ergebnis ausgegeben.
 
-## Project Setup
+## Golfplätze
+
+Hier werden alle Golfplätze angezeigt.
+- Man kann mit filtern den richtigen Golfplatz finden.
+- Man kann sich de Golfplatz genauer anschauen.
+- Man kann einen Golfplatz hinzufügen
+
+## Runden
+
+Hier werden alle Runden angezeigt.
+- Man kann die Runden Filtern
+- Man kann sch Details der Runden anschauen.
+- Man kann die Runden Updaten.
+- Man kann sich Rechts den Vergeich seines Handicaps anschauen.
+
+## Code Aufbau
+
+Die Ordner struckur ist wie folgt:
+
+```bash
+src/
+├── assets/          # Statische Dateien wie Bilder, Fonts oder Icons
+├── components/      # Vue-Komponenten
+├── composables/     # Logik(API Aufruf)
+├── pages/           # Seitenkomponenten(Home, Courses, Rounds)
+├── router/          # Routing-Konfiguration (z. B. index.js)
+├── style/           # CSS-Dateien für das Styling
+├── views/           # Ganze Webseite(Navbar, Inhalt)
+
+```
+## Pages
+
+Pages sind die Schnittstellen der einzelnen Komponenten. Jeder API-Aufruf an das Backend wird von der entsprechenden Page ausgeführt. Zum Beispiel braucht die Ausgabe der Brechung alle Runden Wird in der HomePage eine Funktion aufgerufen und eine API-Anfrage an das Backend gestellt. Diese Anfrage gibt eine Liste von Runden zurück.
+So wird es bei alle andern Komponenten auch gemacht
+
+
+## Projekt Setup
 
 ```sh
-npm install
+--> package-lock.json Löschen
+--> .npmrc im Fronend Ordner erstellen
+--> mit: registry=https://registry.npmjs.org
+--> npm i
 ```
 
-### Compile and Hot-Reload for Development
-
+### Starten mit
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
+### Build mit
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Lizenz
 
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+[Jakob Fischer](https://github.com/JakobFischer2574)
