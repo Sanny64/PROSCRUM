@@ -2,7 +2,7 @@ from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from ..models import RoundIn, RoundOut, HoleConfig, CourseWithID
-from ..calculations import start_calculations
+from ..calculations import start_calculations, update_calculations
 
 from ..database import get_db
 from .. import schemas, oauth2, models
@@ -181,6 +181,7 @@ def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_d
         updated_round_out = convert_to_round_out(updated_round, db)
 
         if (
+        updated_round_out.scores != round.scores or
         updated_round_out.course.course_par_all != round.course.course_par_all or
         updated_round_out.course.course_par_1_to_9 != round.course.course_par_1_to_9 or 
         updated_round_out.course.course_par_10_to_18 != round.course.course_par_10_to_18 or 
@@ -188,29 +189,48 @@ def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_d
         updated_round_out.course.course_rating_10_to_18 != round.course.course_rating_10_to_18 or
         updated_round_out.course.course_rating_all != round.course.course_rating_all or
         updated_round_out.course.slope_rating != round.course.slope_rating or
-        updated_round_out.course.holes != round.course.holes or
-        updated_round_out.scores != round.scores):
+        updated_round_out.course.holes != round.course.holes):
             user_rounds = db.query(schemas.Round).filter(schemas.Round.user_id == round.user_id).all()
             all_user_round_outs = []
-            for round in user_rounds:
-                round_out = convert_to_round_out(round, db)
+            for r in user_rounds:
+                round_out = convert_to_round_out(r, db)
                 all_user_round_outs.append(round_out)
-            print(all_user_round_outs)
 
-            # TODO: update_calculations Funktion einbauen und alle returnten Runden in die DB einspeichern.
+            score_query = db.query(schemas.Score).filter(schemas.Score.score_id == updated_round.score_id)
+            updated_scores = []
+            updated_scores.append(updated_round.score_id)
+            for score in round.scores:
+                updated_scores.append(score)
+            score_query.update(updated_scores, synchronize_session=False)
+            db.commit()
 
-            # updated_calc_results = start_calculations(round, my_rounds)
-            # new_updated_calc_result_2020 = updated_calc_results[0]
-            # new_updated_calc_result_2021 = updated_calc_results[1]
-            # updated_round = RoundOut(**round.model_dump())
-            # updated_round.calc_result_2020=new_updated_calc_result_2020
-            # updated_round.calc_result_2021=new_updated_calc_result_2021
-            # updated_round.score_differential=updated_calc_results[2]
+            updated_rounds = update_calculations(round, all_user_round_outs)
+
+            for r in updated_rounds:                
+                round_query = db.query(schemas.Round).filter(schemas.Round.round_id == round.round_id)
+                round_db = round_query.first()
+                r_dict = r.model_dump()
+                r_dict["course_id"] = r.course.course_id
+                r_dict["score_id"] = round_db.score_id
+                r_dict["hdc_2020"] = r.calc_result_2020
+                r_dict["hdc_2021"] = r.calc_result_2021
+                r_dict.pop("calc_result_2021", None)
+                r_dict.pop("calc_result_2020", None)
+                r_dict.pop("user", None)
+                r_dict.pop("course", None)
+                r_dict.pop("scores", None)
+                print(r_dict)
+                round_query.update(r_dict, synchronize_session=False)
+                db.commit()
+            
+            db.refresh(updated_round)
+            updated_round_out = convert_to_round_out(updated_round, db)
+
         else:
-            updated_round = RoundOut(**round.model_dump())
+            updated_round_out = RoundOut(**round.model_dump())
 
 
-        return {"result": updated_round}
+        return {"result": updated_round_out}
 
 @router.delete("/{round_number}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_round(round_number: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):

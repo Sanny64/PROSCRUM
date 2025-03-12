@@ -1,7 +1,7 @@
 from app.models import RoundIn, RoundOut
 from app.new_calculations import calculate_whs_handicap
 from app.old_calculation import calculate_ega_handicap
-from send_EMail import send_email
+from app.send_EMail import send_email
 
 def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     """
@@ -59,7 +59,7 @@ def start_calculations(new_round: RoundIn, old_rounds: list[RoundOut]):
     return handicaps
 
 
-def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
+def update_calculations(updated_round: RoundOut, rounds: list[RoundOut]):
     """
     Aktualisiert das Handicap nach einer Änderung in einer Runde für alle Runden
 
@@ -67,26 +67,36 @@ def update_calculations(updated_round: RoundIn, rounds: list[RoundOut]):
     :param rounds: die Liste der Runden des Spielers
     :return: die neue Liste an Runden (aktualisiert, provisorisch bis Datenbankanschluss)
     """
+    updated_round_dict = updated_round.model_dump()
+    updated_round_dict.pop("user", None)
+    updated_round_dict.pop("round_id", None)
+    updated_round_dict.pop("user_id", None)
+    updated_round_dict.pop("calc_result_2020", None)
+    updated_round_dict.pop("calc_result_2021", None)
+    updated_round_dict.pop("score_differential", None)
 
-    updated_round_out = RoundOut(
-        **updated_round.model_dump(),
-        calc_result_2020=0.0,
-        calc_result_2021=0.0,
-        score_differential=0.0
-    )
 
-    updated_round_out.calc_result_2020, updated_round_out.calc_result_2021, updated_round_out.score_differential = start_calculations(updated_round, rounds[:updated_round.round_number])
+    updated_round_in = RoundIn(**updated_round_dict)
+    updated_round.calc_result_2020, updated_round.calc_result_2021, updated_round.score_differential = start_calculations(updated_round_in, rounds[:updated_round.round_number])
 
     for i in range(len(rounds)):
         if rounds[i].round_number == updated_round.round_number:
-            rounds[i] = updated_round_out
+            rounds[i] = updated_round
         elif rounds[i].round_number > updated_round.round_number:
-            rounds[i].calc_result_2020, rounds[i].calc_result_2021, rounds[i].score_differential = start_calculations(rounds[i], rounds[:rounds[i].round_number])
+            updated_round_dict = rounds[i].model_dump()
+            updated_round_dict.pop("user", None)
+            updated_round_dict.pop("round_id", None)
+            updated_round_dict.pop("user_id", None)
+            updated_round_dict.pop("calc_result_2020", None)
+            updated_round_dict.pop("calc_result_2021", None)
+            updated_round_dict.pop("score_differential", None)
+            updated_round_in = RoundIn(**updated_round_dict)
+            rounds[i].calc_result_2020, rounds[i].calc_result_2021, rounds[i].score_differential = start_calculations(updated_round_in, rounds[:rounds[i].round_number])
 
     # test values
-    EMAIL_RECEIVER = "robin.messer@stud-provadis-hochschule.de"
-    RECEIVER_NAME = "Robin Messer"
-    ROUND_DATE = "2020-05-21"
+    EMAIL_RECEIVER = updated_round.user.email
+    RECEIVER_NAME = f"{updated_round.user.first_name} {updated_round.user.last_name}"
+    ROUND_DATE = f"{updated_round.date.day}.{updated_round.date.month}.{updated_round.date.year}"
 
     send_email(EMAIL_RECEIVER,RECEIVER_NAME, ROUND_DATE)
      

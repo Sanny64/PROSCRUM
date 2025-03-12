@@ -78,7 +78,7 @@ class Round(Base):
     date = Column(Date, nullable=False)
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False)
     course_id = Column(Integer, ForeignKey("courses.course_id", ondelete="CASCADE"), nullable=False)
-    score_id = Column(Integer, ForeignKey("scores.score_id", ondelete="CASCADE"), nullable=False)
+    score_id = Column(Integer, ForeignKey("scores.score_id", ondelete="CASCADE", onupdate="CASCADE"), nullable=False)
 
     user = relationship("User")
 

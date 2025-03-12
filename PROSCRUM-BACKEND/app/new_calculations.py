@@ -25,7 +25,6 @@ def calculate_CH(hcpi : float, slope_rating : int, course_rating : float, par : 
     return round(((hcpi * slope_rating) / 113) + (course_rating - par))
 
 def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: float, par: int, old_SDs: list[float], holes_played: list[HoleConfig], old_HCPI: float = 54, nine_holes : bool = False):
-def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: float, par: int, old_SDs: list[float], holes_played: list[HoleConfig], old_HCPI: float = 54, nine_holes : bool = False):
     """
     Berechnet das Handicap nach dem World Handicap System (WHS).
 
@@ -60,7 +59,6 @@ def calculate_whs_handicap(scores: list[int], slope_rating: int, course_rating: 
     round_SD = calculate_score_differential(round_score, course_rating, slope_rating)
     round_SD = calculate_score_differential(round_score, course_rating, slope_rating)
     
-    if nine_holes:
     if nine_holes:
         round_SD += get_SD_9_holes_for_HCPI(old_HCPI)
     round_SD = round(round_SD,1)
@@ -134,7 +132,6 @@ def get_HDC_for_SDs(score_differentials : list[float]):
 
 
 def convert_to_GBE_score(netto_scores : list[int], holes : list[HoleConfig], course_hc : float):
-def convert_to_GBE_score(netto_scores : list[int], holes : list[HoleConfig], course_hc : float):
     """
     Berechnet den tatsächlich gespielten Score einer Runde
 
@@ -155,7 +152,6 @@ def convert_to_GBE_score(netto_scores : list[int], holes : list[HoleConfig], cou
         GBE_score += min(netto_double_bogey, score)
     return GBE_score
 
-def get_strokes_received(course_handicap : float, hole_hdc : int):
 def get_strokes_received(course_handicap : float, hole_hdc : int):
     """
     calculates the handicap strokes received at a hole
