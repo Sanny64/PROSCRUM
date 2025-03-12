@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { ref, defineEmits, reactive, watchEffect } from 'vue'
-import type {FormData, Course, Round} from '../types/types.ts'
+import {ref, defineEmits, reactive, watchEffect, onMounted} from 'vue'
+import type {FormData, Course, Round, User} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
+import {apiCallUser} from "@/composables/api-call-user.ts";
+
+
+
+const activeUser = ref<User | "INVALID">("INVALID")
+const { getActiveUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
@@ -15,6 +21,9 @@ const props = defineProps<{
 }>()
 
 
+onMounted(async () => {
+  activeUser.value = await getActiveUserAPI();
+});
 
 
 console.log('CourseList: ', props.courseList)
@@ -41,6 +50,8 @@ const formData = reactive<FormData>({
   round_number: undefined,
   date: undefined,
   course: undefined,
+  user_id: activeUser.value.user_id || 0,
+  user: activeUser.value,
   scores: [], // Initialisiertes Array
 })
 
@@ -122,7 +133,7 @@ const btnCalculation = () => {
 
   <div class="component-left">
     <div class="headline">
-      <h1>{{ t('input.input') }}</h1>
+      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }} Hallo {{activeUser.first_name}}</h1>
     </div>
 
     <div class="infoBox" v-if="inputInfo">
@@ -159,7 +170,7 @@ const btnCalculation = () => {
       <div v-if="selectedRatingOption === 'all'">
       <div class="form-group" >
         <label for="courseRating">{{ t('input.courseRating_all') }}</label>
-        <b>{{ selectedCourse?.course_rating_1_to_9 }}</b>
+        <b>{{ selectedCourse?.course_rating_all }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '1to9'">

@@ -35,7 +35,6 @@ const sumPar_10_to_18: ComputedRef<number> = computed(() => {
 
 
 const newCourse = reactive<CourseWithoutID>({
-  course_id: 1,
   course_name: "Windige Höhe",
   course_par_1_to_9: null,
   course_par_10_to_18: null,
@@ -63,7 +62,8 @@ const newCourse = reactive<CourseWithoutID>({
     { hole: 16, par: 5, hdc: 9 },
     { hole: 17, par: 4, hdc: 15 },
     { hole: 18, par: 4, hdc: 6 }
-  ]
+  ],
+  leaders_secretaries: [2,4]
 })
 
 

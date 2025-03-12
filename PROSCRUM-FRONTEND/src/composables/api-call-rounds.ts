@@ -1,6 +1,9 @@
 import { ref } from 'vue'
 import type { Round } from '../types/types.ts'
 import { result } from '../mockResultsData.json'
+import {getToken} from "@/composables/token-administration.ts";
+
+
 
 export function apiCallRounds() {
   const RoundsResult = ref<Round[]>([])
@@ -11,6 +14,8 @@ export function apiCallRounds() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
+
         },
       })
 
@@ -20,7 +25,7 @@ export function apiCallRounds() {
 
       const response = await rawResponse.json()
 
-      RoundsResult.value = response.result
+      RoundsResult.value = response
       console.log('1 Runden geladen:', RoundsResult.value)
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
@@ -33,6 +38,7 @@ export function apiCallRounds() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
         },
         body: JSON.stringify(round),
       })
@@ -56,6 +62,7 @@ export function apiCallRounds() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
         },
         body: JSON.stringify(round),
       })
@@ -80,6 +87,7 @@ export function apiCallRounds() {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
         },
       })
 

@@ -1,5 +1,7 @@
 import { ref } from 'vue'
 import type { FormData, CalculationResult } from '../types/types.ts'
+import {getToken} from './token-administration.ts'
+
 
 export function apiCallInlineResponse() {
   const inlineStatus = ref<number>()
@@ -12,6 +14,7 @@ export function apiCallInlineResponse() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: 'Bearer ' + getToken(),
         },
         body: JSON.stringify(input),
       })

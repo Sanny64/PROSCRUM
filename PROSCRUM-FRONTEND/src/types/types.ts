@@ -52,3 +52,33 @@ export interface CalculationResult {
   user_id: number | null
   calc_result: number[]
 }
+
+export interface User {
+  first_name: string;
+  last_name: string;
+  user_id: number;
+  email: string;
+  role_id: number;
+  created_at: string;
+}
+
+export interface LoginData {
+  username : string;
+  password: string;
+}
+
+export interface DecodedToken {
+  role_id: number;
+  expires: number;
+  user_id: number;
+}
+
+export interface UserCreate{
+  email: string
+  password: string
+  role_id: number
+  first_name: string
+  last_name: string
+}
+
+

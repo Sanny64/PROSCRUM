@@ -7,7 +7,7 @@ EMAIL_PASSWORD = "dpchtqbcnxyqxyva"
 EMAIL_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-SEND_EMAILS = True
+SEND_EMAILS = False
 
 def send_email(receiver, name, round_date):
 

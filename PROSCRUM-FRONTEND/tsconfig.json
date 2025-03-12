@@ -1,4 +1,10 @@
+
 {
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ESNext",
+    "moduleResolution": "Node"
+  },
   "files": [],
   "references": [
     {

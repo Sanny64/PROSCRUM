@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import type { Course, CourseWithoutID } from '../types/types.ts'
+import {getToken} from "@/composables/token-administration.ts";
 
 export function apiCallCourses() {
   const CourseResult = ref<Course[]>([])
@@ -10,6 +11,8 @@ export function apiCallCourses() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
+
         },
       })
 
@@ -34,6 +37,7 @@ export function apiCallCourses() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
         },
         body: JSON.stringify(course),
       })
@@ -57,6 +61,8 @@ export function apiCallCourses() {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
+          authorization: "Bearer " + getToken(),
+
         },
       })
 
