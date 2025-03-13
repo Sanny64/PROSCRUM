@@ -115,8 +115,15 @@
     "update": "Updaten",
     "back": "Zurück"
   },
+  "usersPage": {
+    "full_name": "Vollständiger Name: ",
+    "email": "Email: ",
+    "role_id": "Rolle: ",
+    "close": "Schließen",
+    "created_at": "Erstellt am: "
+  },
 
-  "filter": {
+    "filter": {
     "search": "Suchen...",
     "last_name_search": "Nachnamen suchen...",
 

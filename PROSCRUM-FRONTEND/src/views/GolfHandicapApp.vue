@@ -22,6 +22,8 @@ onMounted(async () => {
   await getActiveUserAPI();
   if(activeUserAPI.value === 'INVALID') {
     await router.push("/login");
+  }else {
+    await router.push("/course");
   }
 })
 </script>

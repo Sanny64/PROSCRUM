@@ -6,6 +6,7 @@ import {ref} from "vue";
 export function apiCallUser() {
 
   const activeUserAPI= ref<User|'INVALID'>('INVALID')
+  const allUserList= ref<User[]>([])
 
 
   async function getActiveUserAPI() {
@@ -56,7 +57,7 @@ export function apiCallUser() {
     }
   }
 
-  async function getUserAll() {
+  async function getUserAllAPI() {
     try {
       const rawResponse = await fetch(`http://localhost:8000/users`, {
         method: "GET",
@@ -70,10 +71,10 @@ export function apiCallUser() {
         throw new Error('Fehler beim Laden der Kurse')
       }
 
-      const response = await rawResponse.json()
-      console.log('Kurse geladen:', response)
+      allUserList.value = await rawResponse.json()
+      console.log('All User:', allUserList.value)
 
-      return response
+
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
     }
@@ -125,8 +126,10 @@ export function apiCallUser() {
   }
 
   return {
+    allUserList,
     activeUserAPI,
     getActiveUserAPI,
+    getUserAllAPI,
     getUserAPI,
     addUserAPI,
     deleteUserAPI

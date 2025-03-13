@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onMounted, reactive, ref, watch } from 'vue'
-import type { Round} from '../types/types.ts'
+import type {Round, User} from '../types/types.ts'
 import CalculationOutput from '@/components/calculation-output.vue'
 import { apiCallInlineResponse } from '@/composables/api-call-inline-response.ts'
 import { apiCallRounds } from '@/composables/api-call-rounds.ts'
@@ -10,17 +10,20 @@ import GolfUser from '@/components/golf-user.vue'
 import RoundsFilter from '@/components/rounds-filter.vue'
 import ScoreCard from "@/components/score-card.vue";
 
-const { apiStatus, sendFormdata } = apiCallInlineResponse()
-const { apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
+const {apiStatus, sendFormdata } = apiCallInlineResponse()
+const {apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
+const {getUserAllAPI, allUserList} = apiCallUser()
+
 
 const dataTree = reactive(apiResultRounds)
 const roundsList = apiResultRounds
+const userList = allUserList
 
 const inputValue = ref<string>('')
 const numberValue = ref<number>()
 const dateRange = ref<{ start: string, end: string }>({ start: '', end: '' }) //<---
 
-const filteredRoundsList = ref<Round[]>([])
+const filteredUsersList = ref<User[]>([])
 
 
 
@@ -33,21 +36,22 @@ async function updateRound(round: Round) {
 
 function filterCourses() {
 
-  filteredRoundsList.value = roundsList.value.filter((round: Round) =>
-    round.course.course_name.toLowerCase().includes(inputValue.value.toLowerCase()),
+  filteredUsersList.value = userList.value.filter((user: User) =>
+    user.first_name.toLowerCase().includes(inputValue.value.toLowerCase())||
+    user.last_name.toLowerCase().includes(inputValue.value.toLowerCase())
   )
 
 
   if (numberValue.value) {
-    filteredRoundsList.value = filteredRoundsList.value.filter(
-      (round) => round.round_number == numberValue.value,
+    filteredUsersList.value = userList.value.filter(
+      (user:User) => user.user_id == numberValue.value,
     )
   }
 
   if (dateRange.value.start && dateRange.value.end) { //<---
 
-    filteredRoundsList.value = filteredRoundsList.value.filter((round) => {
-      const roundDate = new Date(round.date).toISOString().split('T')[0]
+    filteredUsersList.value = userList.value.filter((user: User) => {
+      const roundDate = new Date(user.created_at).toISOString().split('T')[0]
       return roundDate >= dateRange.value.start && roundDate <= dateRange.value.end //<---
     })
   }
@@ -72,10 +76,10 @@ function dateRangeFunc(range: { start: string, end: string }) { //<---
 
 onMounted(() => {
   getRoundsAPI()
+  getUserAllAPI()
 })
 </script>
 <template>
-
   <div class="content">
     <div>
 
@@ -89,8 +93,8 @@ onMounted(() => {
       </div>
 
       <div class="grid">
-        <div v-for="(rounds, index) in filteredRoundsList" :key="rounds.round_number">
-          <golf-user :rounds="rounds" @updated-round="updateRound"></golf-user>
+        <div v-for="(users, index) in filteredUsersList" :key="users.user_id">
+          <golf-user :user="users" @updated-round="updateRound"></golf-user>
         </div>
       </div>
     </div>
@@ -98,7 +102,6 @@ onMounted(() => {
       :polling-status="apiStatus"
       :rounds-result="apiResultRounds"
     ></score-card>
-
   </div>
 </template>
 
