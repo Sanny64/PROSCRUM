@@ -133,7 +133,7 @@ const btnCalculation = () => {
 
   <div class="component-left">
     <div class="headline">
-      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }} Hallo {{activeUser.first_name}}</h1>
+      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }}</h1>
     </div>
 
     <div class="infoBox" v-if="inputInfo">
@@ -153,6 +153,7 @@ const btnCalculation = () => {
           required
         />
       </div>
+      <div  v-if="selectedCourse">
       <div v-if="selectedRatingOption === '1to9'">
       <div class="form-group">
         <label for="courseRating">{{ t('input.courseRating_1to9') }}</label>
@@ -199,7 +200,7 @@ const btnCalculation = () => {
         <label for="slopeRating">{{ t('input.slopeRating') }}</label>
         <b>{{ selectedCourse?.slope_rating }}</b>
       </div>
-
+      </div>
       <!-- Dropdown -->
       <div class="dropdown">
         <button type="button" class="dropdown-button" @click="toggleDropdown">
@@ -225,8 +226,8 @@ const btnCalculation = () => {
       </div>
 
       <!-- Switch -->
-      <div class="holesHeadline">
-              <label>{{ t('input.courseSelection') }}</label>
+      <div v-if="selectedCourse" class="holesHeadline">
+              <label>{{ t('input.courseHoleSelection') }}</label>
               <div class="radio-group">
                 <label v-if="selectedCourse?.course_rating_1_to_9" class="radio-button">
                   <input  type="radio" value="1to9" v-model="selectedRatingOption" />{{t('input.courseSelection_1to9')}}
@@ -242,7 +243,7 @@ const btnCalculation = () => {
             </div>
 
       <!-- Löcher -->
-      <div class="holes-container">
+      <div v-if="selectedCourse" class="holes-container">
         <div class="hole" v-for="(score, index) in length" :key="index">
           <b :for="'hole-' + (index)">{{ index + lengthStart}}{{ t('input.hole') }}</b>
           <label >{{ t('input.shots') }}</label>
@@ -261,7 +262,7 @@ const btnCalculation = () => {
       </div>
 
       <!-- Absenden -->
-      <button type="submit" class="submit-btn">{{ t('input.calculate') }}</button>
+      <button v-if="selectedCourse" type="submit" class="submit-btn">{{ t('input.calculate') }}</button>
     </form>
   </div>
 </template>

@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { onMounted, ref, watch, watchEffect } from 'vue'
 import RoundsChart from '@/components/rounds-chart.vue'
-import type { FormData, Round, CalculationResult } from '../types/types.ts'
+import type { FormData, Round, CalculationResult, User } from '../types/types.ts'
 import RoundsTable from '@/components/rounds-table.vue'
 
 import { useI18n } from 'vue-i18n'
+
+import {apiCallUser} from "@/composables/api-call-user.ts";
+
+
+
+const { getActiveUserAPI, activeUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
@@ -15,6 +21,12 @@ const props = defineProps<{
 
 let calc_result_2020 = ref<number | undefined>()
 let calc_result_2021 = ref<number | undefined>()
+
+onMounted(async () => {
+  await getActiveUserAPI();
+});
+
+
 
 watchEffect(() => {
   if (props.roundsResult.length > 0) {
@@ -30,10 +42,10 @@ watchEffect(() => {
       <div v-if="props.pollingStatus === 199" class="loadingGif">
         <img src="../assets/loading-gif.gif" alt="loading-gif" />
       </div>
-      <h1>{{ t('output.output') }}</h1>
+      <h1 >{{ t('output.output') }}</h1>
     </div>
     <div class="hdcInfo">
-      <h2>{{ t('output.yourCurrentHandicap') }}</h2>
+      <h2 v-if="activeUserAPI != 'INVALID'">{{ t('output.yourCurrentHandicap') }} {{activeUserAPI.first_name}} {{activeUserAPI.last_name}}:</h2>
 
       <div class="calcOutput">
         <i>{{ t('output.until2021') }}</i>

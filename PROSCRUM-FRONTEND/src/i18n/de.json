@@ -16,7 +16,8 @@
     "course_par_10to18": "Par(10-18): ",
     "course_par_all": "Par(1-18): ",
     "slopeRating": "Slope Rating: ",
-    "courseSelection": "Wie viele Löcher wurden gespielt?",
+    "courseSelection": "Auf welchem Platz wurde gespielt?",
+    "courseHoleSelection": "Wie viele Löcher wurden gespielt?",
     "courseSelection_1to9":"(1-9)",
     "courseSelection_10to18":"(10-18)",
     "courseSelection_all":"(1-18)",
@@ -29,7 +30,7 @@
   },
   "output": {
     "output": "Ergebnis",
-    "yourCurrentHandicap": "Ihr aktuelles Handicap:",
+    "yourCurrentHandicap": "Ihr aktuelles Handicap",
     "until2021": "bis 2020: ",
     "from2021": "ab 2021: ",
     "results": "Ergebnisse",

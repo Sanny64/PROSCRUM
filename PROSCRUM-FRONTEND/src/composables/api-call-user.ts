@@ -1,8 +1,11 @@
-import type {DecodedToken, User, UserCreate} from '../types/types.ts';
+import type {Course, DecodedToken, User, UserCreate} from '../types/types.ts';
 import {getToken} from './token-administration.ts'
 import {jwtDecode} from "jwt-decode";
+import {ref} from "vue";
 
 export function apiCallUser() {
+
+  const activeUserAPI= ref<User|'INVALID'>('INVALID')
 
 
   async function getActiveUserAPI() {
@@ -21,7 +24,7 @@ export function apiCallUser() {
 
       const response = await rawResponse.json()
       console.log('4: Kurse geladen:', response)
-      return response
+      activeUserAPI.value = response
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
       return "INVALID"
@@ -98,6 +101,7 @@ export function apiCallUser() {
   }
 
   return {
+    activeUserAPI,
     getActiveUserAPI,
     getUserAPI,
     addUserAPI,

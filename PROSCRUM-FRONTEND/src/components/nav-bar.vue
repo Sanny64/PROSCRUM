@@ -3,8 +3,15 @@
 import { playSound, playGolfMusic, stopGolfMusic } from '../composables/playSound.ts'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons'
+import type {User } from '../types/types.ts'
 
-import { ref } from 'vue'
+
+
+import {apiCallUser} from "@/composables/api-call-user.ts";
+
+const { getActiveUserAPI, activeUserAPI } = apiCallUser()
+
+import {onMounted, ref, watch, watchEffect} from 'vue'
 
 import { useI18n } from 'vue-i18n'
 
@@ -28,9 +35,23 @@ function handleMusic() {
     playGolfMusic()
   }
 }
+
+onMounted(async () => {
+ await getActiveUserAPI();
+});
+
+function updateActiveUser() {
+  getActiveUserAPI()
+}
+
+
+
+
+
 </script>
 
 <template>
+  {{ activeUserAPI }}
   <nav class="menu-container">
     <!-- burger menu -->
     <input type="checkbox" aria-label="Toggle menu" />
@@ -49,7 +70,8 @@ function handleMusic() {
         <li class="golf-flagg">
           <img src="../assets/golfFlagg.png" alt="Golf Handicap Rechner" @click="playSound" />
         </li>
-        <li>
+<!--        v-if="activeUser != 'INVALID' && activeUser.role_id != 2 && activeUser.role_id != 3"-->
+        <li  >
           <router-link to="/">{{ t('home') }}</router-link>
         </li>
         <li>
@@ -60,7 +82,7 @@ function handleMusic() {
         </li>
       </ul>
       <ul>
-                <li>
+                <li  v-if="activeUserAPI === 'INVALID'">
                   <router-link to="/signup">{{t('signup')}}</router-link>
                 </li>
                 <li>
