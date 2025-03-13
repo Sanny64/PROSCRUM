@@ -6,7 +6,7 @@ import time
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-from .routers import round, course, user, auth
+from .routers import round, course, user, auth, scorecard
 from . import schemas
 from .database import engine
 
@@ -47,3 +47,4 @@ app.include_router(user.router)
 app.include_router(course.router)
 app.include_router(round.router)
 app.include_router(auth.router)
+app.include_router(scorecard.router)

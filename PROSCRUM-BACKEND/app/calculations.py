@@ -1,5 +1,5 @@
-from app.models import RoundIn, RoundOut
-from app.new_calculations import calculate_whs_handicap
+from app.models import RoundIn, RoundOut, CourseWithID
+from app.new_calculations import calculate_whs_handicap, calculate_CH, get_strokes_received
 from app.old_calculation import calculate_ega_handicap
 from app.send_EMail import send_email
 
@@ -101,3 +101,6 @@ def update_calculations(updated_round: RoundOut, rounds: list[RoundOut]):
     send_email(EMAIL_RECEIVER,RECEIVER_NAME, ROUND_DATE)
      
     return rounds
+
+def get_hits_ahead(course: CourseWithID, course_HDC: float):
+    return [get_strokes_received(course_HDC, hole.hdc) for hole in course.holes]

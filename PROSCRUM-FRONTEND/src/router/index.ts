@@ -4,6 +4,8 @@ import SignupPage from '../pages/SignupPage.vue';
 import CoursePage from '@/pages/CoursePage.vue'
 import RoundsPage from '@/pages/RoundsPage.vue'
 import LoginPage from "@/pages/LoginPage.vue";
+import RoundsMasterPage from "@/pages/RoundsMasterPage.vue";
+import UsersPage from "@/pages/UsersPage.vue";
 
 const routes = [
   {
@@ -20,6 +22,16 @@ const routes = [
     path: '/rounds',
     name: 'Rounds',
     component: RoundsPage,
+  },
+  {
+    path: '/rounds-master',
+    name: 'RoundsMaster',
+    component: RoundsMasterPage,
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: UsersPage,
   },
   {
     path: '/signup',

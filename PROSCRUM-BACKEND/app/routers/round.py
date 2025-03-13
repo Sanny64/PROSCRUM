@@ -124,7 +124,7 @@ def create_round(round: RoundIn, db: Session = Depends(get_db), current_user: sc
 
 @router.get("/", response_model=list[models.RoundOut])
 def get_rounds(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id == 4:
+    if current_user.role_id >= 3:
         all_rounds = db.query(schemas.Round).all()
         all_round_outs = []
         for round in all_rounds:

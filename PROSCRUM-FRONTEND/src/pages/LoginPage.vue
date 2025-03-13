@@ -1,37 +1,38 @@
 <script setup lang="ts">
-import {apiCallUser} from "@/composables/api-call-user.ts";
-const { getActiveUserAPI } = apiCallUser()
+import {inject, type Ref} from "vue";
+
+const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
+const refreshActiveUser = inject<() => Promise<void>>("refreshActiveUser");
 
 import {apiCallLogin} from '@/composables/api-call-login.ts'
 
 import type {LoginData, User} from '@/types/types.ts'
 import {nextTick, onMounted, ref, watch} from "vue";
+import {useRouter} from "vue-router";
 
 
-const activeUser = ref<User | "INVALID">("INVALID")
-
+const router = useRouter();
 
 const loginData: LoginData = {
-  username: 'robin@test.de',
+  username: 'jan@test.de',
   password: '1234'
 }
 
-onMounted(async () => {
-  activeUser.value = await getActiveUserAPI();
-});
+
 
 
 async function login(loginData: LoginData) {
   console.log("1: Login", loginData);
-  await apiCallLogin(loginData); // API-Call abwarten
-  activeUser.value = await getActiveUserAPI(); // Danach den Benutzer abrufen
-  console.log("5 activeUser", activeUser.value);
+  await apiCallLogin(loginData);
+  await refreshActiveUser?.();
+  console.log("5 activeUser", activeUserAPI.value);
+  await router.push("/course");
 }
 
 
 function logout() {
   localStorage.setItem("activeToken", "")
-    activeUser.value = 'INVALID'
+  activeUserAPI.value = 'INVALID'
 }
 
 
@@ -39,21 +40,16 @@ function logout() {
 </script>
 
 <template>
-
-
-
   <input type="text" v-model="loginData.username" placeholder="Email">
   <input type="password" v-model="loginData.password" placeholder="Password">
   <button @click="login(loginData)">Login</button>
 
-<div v-if="activeUser != 'INVALID'">
-  <h1>User: {{activeUser?.first_name}} {{activeUser?.last_name}}</h1>
+<div v-if="activeUserAPI != 'INVALID'">
+  <h1>User: {{activeUserAPI?.first_name}} {{activeUserAPI?.last_name}}</h1>
 </div>
 <div v-else>
   <h1>User: Not logged in</h1>
 </div>
-
-
 
   <button @click="logout()">Logout</button>
 

@@ -1,8 +1,12 @@
-import type {DecodedToken, User, UserCreate} from '../types/types.ts';
+import type {Course, DecodedToken, User, UserCreate} from '../types/types.ts';
 import {getToken} from './token-administration.ts'
 import {jwtDecode} from "jwt-decode";
+import {ref} from "vue";
 
 export function apiCallUser() {
+
+  const activeUserAPI= ref<User|'INVALID'>('INVALID')
+  const allUserList= ref<User[]>([])
 
 
   async function getActiveUserAPI() {
@@ -21,10 +25,11 @@ export function apiCallUser() {
 
       const response = await rawResponse.json()
       console.log('4: Kurse geladen:', response)
-      return response
+      activeUserAPI.value = response
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
-      return "INVALID"
+      activeUserAPI.value = 'INVALID';
+      return;
     }
   }
 
@@ -47,6 +52,29 @@ export function apiCallUser() {
       console.log('Kurse geladen:', response)
 
       return response
+    } catch (error) {
+      console.error('Fehler beim Starten der Berechnung:', error)
+    }
+  }
+
+  async function getUserAllAPI() {
+    try {
+      const rawResponse = await fetch(`http://localhost:8000/users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + getToken(),
+        },
+      });
+
+      if (!rawResponse.ok) {
+        throw new Error('Fehler beim Laden der Kurse')
+      }
+
+      allUserList.value = await rawResponse.json()
+      console.log('All User:', allUserList.value)
+
+
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
     }
@@ -98,7 +126,10 @@ export function apiCallUser() {
   }
 
   return {
+    allUserList,
+    activeUserAPI,
     getActiveUserAPI,
+    getUserAllAPI,
     getUserAPI,
     addUserAPI,
     deleteUserAPI
