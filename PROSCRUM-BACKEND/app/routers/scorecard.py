@@ -6,7 +6,7 @@ from ..calculations import get_hits_ahead
 from ..new_calculations import calculate_CH
 
 from ..database import get_db
-from .. import schemas, oauth2, models
+from .. import schemas, oauth2
 
 
 router = APIRouter(
@@ -14,7 +14,7 @@ router = APIRouter(
     tags=['Scorecard']
 )
 
-@router.get("/", response_model=list[models.RoundOut])
+@router.post("/")
 def get_Scorecard(HDC: float, course_id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     if current_user.role_id < 3:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
@@ -55,4 +55,4 @@ def get_Scorecard(HDC: float, course_id: int, db: Session = Depends(get_db), cur
             "course_HDC": course_HDC,
             "hits_ahead": hits_ahead
         }
-    }
+    } 
