@@ -2,3 +2,4 @@
 .venv/*
 
 database.py
+app/.env

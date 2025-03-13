@@ -1,9 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-import psycopg2
-from psycopg2.extras import RealDictCursor
-
 from .routers import round, course, user, auth, scorecard
 from . import schemas
 from .database import engine
@@ -23,19 +20,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
-# Connection to database
-
-while True:
-    try:
-        connection = psycopg2.connect(host='localhost', database='proscrum-golf', user='postgres', password='1234', cursor_factory=RealDictCursor)
-        cursor = connection.cursor()
-        print("Database connection was successfull!")
-        break
-    except Exception as error:
-        print("Connecting to database failed.")
-        print("Error: ", error)
-        break
 
 @app.get("/")
 def home():
