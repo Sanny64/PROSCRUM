@@ -1,7 +1,7 @@
 from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ..models import RoundIn, RoundOut, HoleConfig, CourseWithID
+from ..models import RoundIn, RoundOut
 from ..calculations import start_calculations, update_calculations
 
 from ..database import get_db
