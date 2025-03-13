@@ -3,8 +3,12 @@
   "home": "Zuhause",
   "course": "Golfplatz",
   "rounds": "Runden",
+  "logout": "Ausloggen",
+  "users": "Benutzer",
+  "rounds-master": "Runden-Master",
   "login": "Anmeldung",
   "signup": "Registrierung",
+
   "input": {
     "input": "Eingabe",
     "round": "Runde: ",
@@ -87,9 +91,35 @@
     "update": "Updaten",
     "back": "Zurück"
   },
+  "roundMasterPage": {
+    "player_name": "Spielername: ",
+    "round_number": "Runden Nummer: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
+    "course_par_1to9": "Par(1-9): ",
+    "course_par_10to18": "Par(10-18): ",
+    "course_par_all": "Par(1-18): ",
+    "shots": "Schläge: ",
+    "date": "Datum: ",
+    "score_differential": "Score Differential: ",
+    "courseName": "Golfplatzname: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Loch: ",
+    "hdc": "HDC: ",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "close": "Schließen",
+    "update": "Updaten",
+    "back": "Zurück"
+  },
 
   "filter": {
     "search": "Suchen...",
+    "last_name_search": "Nachnamen suchen...",
+
     "number": "Nummer",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "

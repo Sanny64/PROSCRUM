@@ -27,7 +27,8 @@ export function apiCallUser() {
       activeUserAPI.value = response
     } catch (error) {
       console.error('Fehler beim Starten der Berechnung:', error)
-      return "INVALID"
+      activeUserAPI.value = 'INVALID';
+      return;
     }
   }
 
@@ -35,6 +36,29 @@ export function apiCallUser() {
   async function getUserAPI(user_id: number) {
     try {
       const rawResponse = await fetch(`http://localhost:8000/users/${user_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + getToken(),
+        },
+      });
+
+      if (!rawResponse.ok) {
+        throw new Error('Fehler beim Laden der Kurse')
+      }
+
+      const response = await rawResponse.json()
+      console.log('Kurse geladen:', response)
+
+      return response
+    } catch (error) {
+      console.error('Fehler beim Starten der Berechnung:', error)
+    }
+  }
+
+  async function getUserAll() {
+    try {
+      const rawResponse = await fetch(`http://localhost:8000/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

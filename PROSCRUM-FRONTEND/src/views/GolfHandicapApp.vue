@@ -2,25 +2,27 @@
   <div id="app">
     <nav-bar></nav-bar>
     <router-view></router-view>
-    <!--    <golf-intro v-if="onMountedBoolean"></golf-intro>-->
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import NavBar from '@/components/nav-bar.vue'
-// import GolfIntro from "@/components/golf-intro.vue";
-import { onMounted, ref } from 'vue'
-// import HomePage from "@/pages/HomePage.vue";
-
+import { apiCallUser } from "@/composables/api-call-user.ts";
+import {provide, onMounted, ref, type Ref} from "vue";
+import type { User } from '../types/types.ts'
+const { getActiveUserAPI, activeUserAPI } = apiCallUser();
 let onMountedBoolean = ref(false)
 
-onMounted(() => {
-  onMountedBoolean.value = true
-  console.log('onMountedBoolean: ', onMountedBoolean)
-  setTimeout(() => {
-    console.log('onMountedBoolean im Time:  ', onMountedBoolean)
-    onMountedBoolean.value = false
-  }, 6000)
+const router = useRouter();
+provide<Ref<User | 'INVALID'>>("activeUser", activeUserAPI);
+provide<() => Promise<void>>("refreshActiveUser", getActiveUserAPI);
+
+onMounted(async () => {
+  await getActiveUserAPI();
+  if(activeUserAPI.value === 'INVALID') {
+    await router.push("/login");
+  }
 })
 </script>
 

@@ -1,33 +1,32 @@
 <script setup lang="ts">
-import {apiCallUser} from "@/composables/api-call-user.ts";
-const { getActiveUserAPI, activeUserAPI } = apiCallUser()
-import NavBar from '@/components/nav-bar.vue'
+import {inject, type Ref} from "vue";
+
+const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
+const refreshActiveUser = inject<() => Promise<void>>("refreshActiveUser");
 
 import {apiCallLogin} from '@/composables/api-call-login.ts'
 
 import type {LoginData, User} from '@/types/types.ts'
 import {nextTick, onMounted, ref, watch} from "vue";
+import {useRouter} from "vue-router";
 
 
-
-
-
+const router = useRouter();
 
 const loginData: LoginData = {
-  username: 'robin@test.de',
+  username: 'jan@test.de',
   password: '1234'
 }
 
-onMounted(async () => {
-  await getActiveUserAPI();
-});
+
 
 
 async function login(loginData: LoginData) {
   console.log("1: Login", loginData);
-  await apiCallLogin(loginData); // API-Call abwarten
-  await getActiveUserAPI();
+  await apiCallLogin(loginData);
+  await refreshActiveUser?.();
   console.log("5 activeUser", activeUserAPI.value);
+  await router.push("/course");
 }
 
 
@@ -41,9 +40,6 @@ function logout() {
 </script>
 
 <template>
-
-
-
   <input type="text" v-model="loginData.username" placeholder="Email">
   <input type="password" v-model="loginData.password" placeholder="Password">
   <button @click="login(loginData)">Login</button>
@@ -54,8 +50,6 @@ function logout() {
 <div v-else>
   <h1>User: Not logged in</h1>
 </div>
-
-
 
   <button @click="logout()">Logout</button>
 
