@@ -12,14 +12,15 @@
   align-items: center;
   border-radius: 10px;
   border: 1px solid gray;
-  width: 600px;
+  width: 700px;
   height: 600px;
   padding: 40px;
   box-sizing: border-box;
-  background-image: url('../golfCourse.png');
-  background-size: 140%; 
+  background-image: url('../loginCourse.png');
+  background-size: 150%; 
   background-repeat: no-repeat;
-  background-position: center;
+  background-position-x: -60px;
+  background-position-y: -60px;
 }
 
 .inputs {
@@ -52,14 +53,14 @@ input::placeholder {
 
 #title {
   color: white;
-  display: inline-block; /* Helps with padding */
+  display: inline-block; 
   font-size: 38px;
   text-align: center;
   margin-bottom: 15px;
-  background-color: rgba(48, 48, 48, 0.3); /* Subtle contrast */
+  background-color: rgba(0, 0, 0, 0.3); 
   padding: 5px 15px;
-  border-radius: 8px;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5); /* Adds a thin text stroke */
+  border-radius: 30px;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5); 
 }
 
 
