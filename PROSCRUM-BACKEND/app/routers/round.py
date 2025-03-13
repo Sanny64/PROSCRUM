@@ -170,7 +170,7 @@ def get_one_round(round_number: int, db: Session = Depends(get_db), current_user
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"round with round_number: {round_number} was not found")
         
         round_out = convert_to_round_out(round, db)
-        return round_out
+        return [round_out]
     elif current_user.role_id >= 2:
         leader_secretaries = db.query(schemas.Course_Leader_Secretary).filter(schemas.Course_Leader_Secretary.user_id == current_user.user_id).all()
         course_id_list = [ls.course_id for ls in leader_secretaries]
@@ -186,7 +186,7 @@ def get_one_round(round_number: int, db: Session = Depends(get_db), current_user
 
 @router.put("/{round_number}")
 def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.role_id < 2:
+    if current_user.role_id < 2 or current_user.role_id == 3:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
     else:
         updated_round = db.query(schemas.Round).filter(
