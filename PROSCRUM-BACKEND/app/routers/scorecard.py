@@ -55,4 +55,4 @@ def get_Scorecard(HDC: float, course_id: int, db: Session = Depends(get_db), cur
             "course_HDC": course_HDC,
             "hits_ahead": hits_ahead
         }
-    } localhost/scorecard?HDC=54&course_id=2
+    }
