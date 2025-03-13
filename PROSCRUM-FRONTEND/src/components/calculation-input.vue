@@ -1,25 +1,39 @@
 <script setup lang="ts">
-import { ref, defineEmits, reactive, watchEffect } from 'vue'
-import type { FormData, Course } from '../types/types.ts'
+import {ref, defineEmits, reactive, watchEffect, onMounted} from 'vue'
+import type {FormData, Course, Round, User} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
+import {apiCallUser} from "@/composables/api-call-user.ts";
+
+
+
+const activeUser = ref<User | "INVALID">("INVALID")
+const { getActiveUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
 let length = ref(18)
+let lengthStart = ref(0)
 let isChecked = ref(true)
 
 const props = defineProps<{
   courseList: Course[]
+  lastRound: Round[]
 }>()
 
-console.log('CourseList: ', props.courseList)
 
+onMounted(async () => {
+  activeUser.value = await getActiveUserAPI();
+});
+
+
+console.log('CourseList: ', props.courseList)
+console.log('lastRound: ', props.lastRound)
 // Ausgewählte Option
 const selectedCourseName = ref<string | null>('')
 const selectedCourse = ref<Course>()
-
-// Sichtbarkeit des Dropdown-Menüs steuern
 const isDropdownOpen = ref(false)
+const selectedDate = ref<string>('') // Reaktiver Wert für das Datum
+const selectedRatingOption = ref<'all' | '1to9' | '10to18'>('all')
 
 // Funktion zum Umschalten des Dropdown-Menüs
 const toggleDropdown = () => {
@@ -34,50 +48,80 @@ const selectCourse = (course: Course) => {
 }
 const formData = reactive<FormData>({
   round_number: undefined,
+  date: undefined,
   course: undefined,
+  user_id: activeUser.value.user_id || 0,
+  user: activeUser.value,
   scores: [], // Initialisiertes Array
 })
 
 watchEffect(() => {
   formData.course = selectedCourse.value
+
+  formData.round_number = props.lastRound.length + 1
 })
 
 // WatchEffect, um die Länge und Zufallswerte dynamisch zu setzen
 watchEffect(() => {
   formData.scores = Array.from(
-    { length: length.value },
+    { length: 18 },
     () => Math.floor(Math.random() * (10 - 1 + 1)) + 1, // Zufallszahlen zwischen 1 und 10
   )
 })
 
-function toggleCheckbox() {
-  // Zustand explizit umschalten bei Enter-Taste
-  isChecked.value = !isChecked.value
-  handleCheckboxChange() // Aktualisiere den Zustand entsprechend
-}
-
-function handleCheckboxChange() {
-  // Länge der Löcher basierend auf dem Zustand setzen
-  if (isChecked.value) {
-    length.value = 18
-    console.log('Checkbox aktiviert. Länge: ' + length.value)
-  } else {
-    length.value = 9
-    console.log('Checkbox deaktiviert. Länge: ' + length.value)
+watchEffect(() => {
+  if (selectedDate.value) {
+    formData.date = new Date(selectedDate.value).toISOString().split('T')[0] // ISO-Format ohne Zeit
   }
-}
+})
+
+
+watchEffect(() => {
+  // Länge der Löcher basierend auf dem Zustand setzen
+  if (selectedRatingOption.value === '1to9' ) {
+    length.value = 9
+    lengthStart.value = 1
+    console.log('Checkbox aktiviert. Länge: ' + length.value)
+  }else if(selectedRatingOption.value === '10to18'){
+    length.value = 9
+    lengthStart.value = 10
+
+  }else {
+    lengthStart.value = 1
+    length.value = 18
+    console.log('Checkbox deaktiviert. Länge: ' + length.value)
+
+  }
+});
 
 const inputInfo = ref('')
 
 const emit = defineEmits(['formData'])
 
 const btnCalculation = () => {
+
+  let nullFormDate = JSON.parse(JSON.stringify(formData))
+
+  if (selectedRatingOption.value === '1to9' ) {
+
+    for (let i = 9; i <= 17; i++) {
+      nullFormDate.scores[i] = 0;
+    }
+  }else if(selectedRatingOption.value === '10to18'){
+
+    for (let i = 0; i <= 8; i++) {
+      nullFormDate.scores[i] = 0;
+    }
+
+  }
+
+
   if (selectedCourseName.value === '') {
     console.log('Bitte wählen Sie einen Golfplatz')
-  } else if (formData) {
+  } else if (nullFormDate) {
     inputInfo.value = ''
-    console.log('Emit gesendet: ', formData)
-    emit('formData', formData)
+    console.log('Emit gesendet: ', nullFormDate)
+    emit('formData', nullFormDate)
   } else {
     console.log('Bitte geben Sie einen Wert ein')
     inputInfo.value = 'Bitte geben Sie einen Wert ein'
@@ -86,9 +130,10 @@ const btnCalculation = () => {
 </script>
 
 <template>
+
   <div class="component-left">
     <div class="headline">
-      <h1>{{ t('input.input') }}</h1>
+      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }}</h1>
     </div>
 
     <div class="infoBox" v-if="inputInfo">
@@ -97,39 +142,65 @@ const btnCalculation = () => {
     <form @submit.prevent="btnCalculation">
       <div class="form-group">
         <label for="round">{{ t('input.round') }}</label>
+        <b>{{ formData.round_number }}</b>
+      </div>
+      <div class="datePicker ">
+        <label for="date">{{ t('input.date') }}</label>
         <input
-          type="number"
-          value="1"
-          v-model="formData.round_number"
-          id="round"
-          min="1"
+          type="date"
+          v-model="selectedDate"
+          id="date"
           required
         />
       </div>
-      <div class="form-group" v-if="isChecked">
-        <label for="courseRating">{{ t('input.courseRating') }}</label>
-        {{ selectedCourse?.course_rating_18 }}
-        <!--        <input type="number" step="0.1" v-model="formData.course_rating" id="courseRating" min="0.1" required/>-->
-      </div>
-      <div class="form-group" v-if="!isChecked">
-        <label for="courseRating">{{ t('input.courseRating') }}</label>
-        <!--        {{ selectedCourse?.course_rating_18 }}-->
-        <input
-          v-if="formData.course"
-          type="number"
-          step="0.1"
-          id="courseRating"
-          min="0.1"
-          required
-          v-model="formData.course.course_rating_9"
-        />
-      </div>
+      <div  v-if="selectedCourse">
+      <div v-if="selectedRatingOption === '1to9'">
       <div class="form-group">
-        <label for="slopeRating">{{ t('input.slopeRating') }}</label>
-        {{ selectedCourse?.slope_rating }}
-        <!--        <input type="number" v-model="formData.slope_rating" id="slopeRating" min="1" required/>-->
+        <label for="courseRating">{{ t('input.courseRating_1to9') }}</label>
+
+        <b>{{ selectedCourse?.course_rating_1_to_9 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === '10to18'">
+      <div class="form-group">
+        <label for="courseRating">{{ t('input.courseRating_10to18') }}</label>
+
+        <b>{{ selectedCourse?.course_rating_10_to_18 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === 'all'">
+      <div class="form-group" >
+        <label for="courseRating">{{ t('input.courseRating_all') }}</label>
+        <b>{{ selectedCourse?.course_rating_all }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === '1to9'">
+        <div class="form-group">
+          <label for="courseRating">{{ t('input.course_par_1to9') }}</label>
+
+          <b>{{selectedCourse?.course_par_1_to_9 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === '10to18'">
+        <div class="form-group">
+          <label for="courseRating">{{ t('input.course_par_10to18') }}</label>
+
+          <b>{{ selectedCourse?.course_par_10_to_18 }}</b>
+        </div>
+      </div>
+      <div v-if="selectedRatingOption === 'all'">
+        <div class="form-group" >
+          <label for="courseRating">{{ t('input.course_par_all') }}</label>
+          <b>{{ selectedCourse?.course_par_all }}</b>
+        </div>
       </div>
 
+
+      <div class="form-group">
+        <label for="slopeRating">{{ t('input.slopeRating') }}</label>
+        <b>{{ selectedCourse?.slope_rating }}</b>
+      </div>
+      </div>
       <!-- Dropdown -->
       <div class="dropdown">
         <button type="button" class="dropdown-button" @click="toggleDropdown">
@@ -155,31 +226,43 @@ const btnCalculation = () => {
       </div>
 
       <!-- Switch -->
-      <div class="holesHeadline">
-        <h2>{{ t('input.holes') }}</h2>
-        <p>9</p>
-        <label class="switch" @keydown.enter.prevent="toggleCheckbox" tabindex="0">
-          <input type="checkbox" v-model="isChecked" @change="handleCheckboxChange" tabindex="-1" />
-          <span class="slider round"></span>
-        </label>
-        <p>18</p>
-      </div>
+      <div v-if="selectedCourse" class="holesHeadline">
+              <label>{{ t('input.courseHoleSelection') }}</label>
+              <div class="radio-group">
+                <label v-if="selectedCourse?.course_rating_1_to_9" class="radio-button">
+                  <input  type="radio" value="1to9" v-model="selectedRatingOption" />{{t('input.courseSelection_1to9')}}
+                </label>
+                <label v-if="selectedCourse?.course_rating_10_to_18" class="radio-button" >
+                  <input  type="radio" value="10to18" v-model="selectedRatingOption" />{{t('input.courseSelection_10to18')}}
+                </label>
+                <label v-if="selectedCourse?.course_rating_all" class="radio-button">
+                  <input  type="radio" value="all" v-model="selectedRatingOption"  />{{t('input.courseSelection_all')}}
+                </label>
+              </div>
+
+            </div>
+
       <!-- Löcher -->
-      <div class="holes-container">
-        <div class="hole" v-for="(score, index) in formData.scores" :key="index">
-          <label :for="'hole-' + (index + 1)">{{ index + 1 }}{{ t('input.hole') }}</label>
+      <div v-if="selectedCourse" class="holes-container">
+        <div class="hole" v-for="(score, index) in length" :key="index">
+          <b :for="'hole-' + (index)">{{ index + lengthStart}}{{ t('input.hole') }}</b>
+          <label >{{ t('input.shots') }}</label>
           <input
             type="number"
-            :id="'hole-' + (index + 1)"
-            v-model="formData.scores[index]"
+            :id="'hole-' + (index + lengthStart -1)"
+            v-model="formData.scores[index + lengthStart -1]"
             min="1"
             required
           />
+          <label>{{ t('input.par') }}</label>
+          <b>{{formData.course?.holes[index + lengthStart -1].par }}</b>
+          <label >{{ t('input.hdc') }}</label>
+          <b>{{ formData.course?.holes[index + lengthStart -1].hdc }}</b>
         </div>
       </div>
 
       <!-- Absenden -->
-      <button type="submit" class="submit-btn">{{ t('input.calculate') }}</button>
+      <button v-if="selectedCourse" type="submit" class="submit-btn">{{ t('input.calculate') }}</button>
     </form>
   </div>
 </template>

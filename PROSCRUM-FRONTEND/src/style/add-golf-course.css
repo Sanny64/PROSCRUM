@@ -53,6 +53,10 @@
   border: 1px solid #ccc;
 }
 
+.course-name input {
+  width: auto;
+}
+
 .holesHeadline {
   display: flex;
   align-items: center; /* Zentriert die Elemente vertikal */
@@ -82,7 +86,7 @@
 
 .hole input {
   font-size: 15px;
-  width: 50px;
+  width: 35px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }

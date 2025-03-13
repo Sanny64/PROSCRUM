@@ -1,4 +1,5 @@
-from models import HoleConfig, CourseWithID, RoundIn, RoundOut
+from app.models import HoleConfig, CourseWithID, RoundIn, RoundOut
+from app.models import HoleConfig, CourseWithID, RoundIn, RoundOut
 def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole=True):
     """
     Calculate EGA golf handicap based on scoring results
@@ -65,6 +66,7 @@ def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole
             if new_hcp > -26.5:
                 new_hcp -= 0.1
        
+       
                 
         return round(new_hcp, 1)
     
@@ -72,6 +74,8 @@ def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole
     over_pars = {}
     for i,  (shot, hole) in enumerate(zip(shots, holes)):
         over_pars[i+1] = (max(shot-(hole.par), 0))
+        
+  
         
   
     
@@ -128,26 +132,26 @@ def calculate_ega_handicap(stammvorgabe, holes, slope, cr, par, shots, nine_hole
 
 # 3. + 4. Runde
 
-holes=[
-    HoleConfig(hole=1, par=3, hdc=16),
-    HoleConfig(hole=2, par=4, hdc=1),
-    HoleConfig(hole=3, par=4, hdc=10),
-    HoleConfig(hole=4, par=5, hdc=7),
-    HoleConfig(hole=5, par=4, hdc=13),
-    HoleConfig(hole=6, par=4, hdc=4),
-    HoleConfig(hole=7, par=3, hdc=17),
-    HoleConfig(hole=8, par=4, hdc=2),
-    HoleConfig(hole=9, par=4, hdc=11),
-    HoleConfig(hole=10, par=5, hdc=8),
-    HoleConfig(hole=11, par=4, hdc=14),
-    HoleConfig(hole=12, par=4, hdc=5),
-    HoleConfig(hole=13, par=3, hdc=18),
-    HoleConfig(hole=14, par=4, hdc=3),
-    HoleConfig(hole=15, par=4, hdc=12),
-    HoleConfig(hole=16, par=5, hdc=9),
-    HoleConfig(hole=17, par=4, hdc=15),
-    HoleConfig(hole=18, par=4, hdc=6)
-]
+# holes=[
+#     HoleConfig(hole=1, par=3, hdc=16),
+#     HoleConfig(hole=2, par=4, hdc=1),
+#     HoleConfig(hole=3, par=4, hdc=10),
+#     HoleConfig(hole=4, par=5, hdc=7),
+#     HoleConfig(hole=5, par=4, hdc=13),
+#     HoleConfig(hole=6, par=4, hdc=4),
+#     HoleConfig(hole=7, par=3, hdc=17),
+#     HoleConfig(hole=8, par=4, hdc=2),
+#     HoleConfig(hole=9, par=4, hdc=11),
+#     HoleConfig(hole=10, par=5, hdc=8),
+#     HoleConfig(hole=11, par=4, hdc=14),
+#     HoleConfig(hole=12, par=4, hdc=5),
+#     HoleConfig(hole=13, par=3, hdc=18),
+#     HoleConfig(hole=14, par=4, hdc=3),
+#     HoleConfig(hole=15, par=4, hdc=12),
+#     HoleConfig(hole=16, par=5, hdc=9),
+#     HoleConfig(hole=17, par=4, hdc=15),
+#     HoleConfig(hole=18, par=4, hdc=6)
+# ]
 
 
 # 1. Runde 
@@ -178,7 +182,7 @@ holes=[
 #scores = [4,5,5,6,6,7,4,8,4,5,6,6,5,6,6,6,5,6]
 
 # 4. Runde
-scores = [5,6,6,7,6,6,4,7,6,7,6,6,5,5,6,6,5,6]
+# scores = [5,6,6,7,6,6,4,7,6,7,6,6,5,5,6,6,5,6]
 
 # 5. Runde
 # scores =[4,5,5,6,5,5,4,5,5,6,5,5,4,5,5,6,5,5]
@@ -218,26 +222,26 @@ scores = [5,6,6,7,6,6,4,7,6,7,6,6,5,5,6,6,5,6]
 # ]
 
 #7. Runde
-scores = [5,7,9,7,6,6,6,6,6]
-holes=[
-    HoleConfig(hole=1, par=3, hdc=4),
-    HoleConfig(hole=2, par=4, hdc=16),
-    HoleConfig(hole=3, par=4, hdc=1),
-    HoleConfig(hole=4, par=5, hdc=10),
-    HoleConfig(hole=5, par=4, hdc=7),
-    HoleConfig(hole=6, par=4, hdc=13),
-    HoleConfig(hole=7, par=4, hdc=5),
-    HoleConfig(hole=8, par=3, hdc=17),
-    HoleConfig(hole=9, par=4, hdc=2)
-]
-result = calculate_ega_handicap(
-    stammvorgabe=-23.7,
-    holes=holes,
-    slope=115,
-    cr=34.5,
-    par=35,
-    shots=scores,
-    nine_hole=True,
+# scores = [5,7,9,7,6,6,6,6,6]
+# holes=[
+#     HoleConfig(hole=1, par=3, hdc=4),
+#     HoleConfig(hole=2, par=4, hdc=16),
+#     HoleConfig(hole=3, par=4, hdc=1),
+#     HoleConfig(hole=4, par=5, hdc=10),
+#     HoleConfig(hole=5, par=4, hdc=7),
+#     HoleConfig(hole=6, par=4, hdc=13),
+#     HoleConfig(hole=7, par=4, hdc=5),
+#     HoleConfig(hole=8, par=3, hdc=17),
+#     HoleConfig(hole=9, par=4, hdc=2)
+# ]
+# result = calculate_ega_handicap(
+#     stammvorgabe=-23.7,
+#     holes=holes,
+#     slope=115,
+#     cr=34.5,
+#     par=35,
+#     shots=scores,
+#     nine_hole=True,
 
-)
-print(result)
+# )
+# print(result)

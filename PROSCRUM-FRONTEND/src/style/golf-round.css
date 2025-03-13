@@ -115,12 +115,17 @@
   border: 1px solid #ccc;
 }
 
-.form-group:first-child {
+.number {
   /* Deine Styles */
   font-size: 30px;
   color: black;
 }
 
+.date {
+  /* Deine Styles */
+  font-size: 20px;
+  color: black;
+}
 
 .holesHeadline {
   display: flex;

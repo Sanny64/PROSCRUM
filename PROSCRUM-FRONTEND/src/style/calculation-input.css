@@ -34,7 +34,21 @@ h1 {
   border: 1px solid #ccc;
 }
 
+.datePicker {
+  margin: 10px;
+}
+
+/* Styling für die CourseInput */
+.datePicker input {
+  font-size: 15px;
+  width: 110px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
 .holesHeadline {
+  padding: 20px;
   display: flex;
   align-items: center; /* Zentriert die Elemente vertikal */
   gap: 10px;
@@ -54,17 +68,21 @@ h1 {
 
 .hole {
   font-size: 15px;
-  justify-content: center;
+  justify-content: left;
   display: flex;
   align-items: center; /* Vertikale Zentrierung von Label und Input */
   gap: 10px; /* Abstand zwischen Label und Input */
 }
 .hole input {
+  justify-content: left;
+  display: flex;
   font-size: 15px;
-  width: 50px;
+  width: 30px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
+
 
 .submit-btn {
   appearance: none;
@@ -255,4 +273,6 @@ input:checked + .slider::before {
   background-color: rgba(227, 227, 227, 0.53);
 }
 
-/* Mehrspaltige Darstellung für mehr als 10 Einträge */
+.radio-button{
+  padding: 10px
+}

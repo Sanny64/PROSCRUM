@@ -3,8 +3,15 @@
 import { playSound, playGolfMusic, stopGolfMusic } from '../composables/playSound.ts'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons'
+import type {User } from '../types/types.ts'
 
-import { ref } from 'vue'
+
+
+import {apiCallUser} from "@/composables/api-call-user.ts";
+
+const { getActiveUserAPI, activeUserAPI } = apiCallUser()
+
+import {onMounted, ref, watch, watchEffect} from 'vue'
 
 import { useI18n } from 'vue-i18n'
 
@@ -28,9 +35,23 @@ function handleMusic() {
     playGolfMusic()
   }
 }
+
+onMounted(async () => {
+ await getActiveUserAPI();
+});
+
+function updateActiveUser() {
+  getActiveUserAPI()
+}
+
+
+
+
+
 </script>
 
 <template>
+  {{ activeUserAPI }}
   <nav class="menu-container">
     <!-- burger menu -->
     <input type="checkbox" aria-label="Toggle menu" />
@@ -49,7 +70,8 @@ function handleMusic() {
         <li class="golf-flagg">
           <img src="../assets/golfFlagg.png" alt="Golf Handicap Rechner" @click="playSound" />
         </li>
-        <li>
+<!--        v-if="activeUser != 'INVALID' && activeUser.role_id != 2 && activeUser.role_id != 3"-->
+        <li  >
           <router-link to="/">{{ t('home') }}</router-link>
         </li>
         <li>
@@ -60,12 +82,12 @@ function handleMusic() {
         </li>
       </ul>
       <ul>
-        <!--        <li>-->
-        <!--          <router-link to="/signup">{{t('signup')}}</router-link>-->
-        <!--        </li>-->
-        <!--        <li>-->
-        <!--          <router-link to="/login">{{t('login')}}</router-link>-->
-        <!--        </li>-->
+                <li  v-if="activeUserAPI === 'INVALID'">
+                  <router-link to="/signup">{{t('signup')}}</router-link>
+                </li>
+                <li>
+                  <router-link to="/login">{{t('login')}}</router-link>
+                </li>
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg"   @click="toggleSettings"  width="48"  height="48"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" :class="{ 'active': settingsOpen }" class="gear-icon icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
                   <div v-if="settingsOpen" class="settings" >
