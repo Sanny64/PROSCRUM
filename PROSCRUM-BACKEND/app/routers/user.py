@@ -36,6 +36,11 @@ def create_user(user: models.UserCreate, db: Session = Depends(get_db)):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="A user with this e-mail is already registered."
             )
+        elif "doppelter Schlüsselwert verletzt Unique-Constraint" in str(e.orig):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="A user with this e-mail is already registered."
+            )
         else:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
