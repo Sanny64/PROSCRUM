@@ -7,7 +7,7 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-load_dotenv()
+load_dotenv(dotenv_path="app/.env")
 
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
