@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type {Course, Round, User} from '../types/types.ts'
+import type {Round, User} from '../types/types.ts'
 import {computed, defineEmits, onMounted, ref, watchEffect} from 'vue'
-import { useI18n } from 'vue-i18n'
-import Info from "@/components/info.vue";
-import { apiCallRounds } from '@/composables/api-call-rounds.ts'
+import {useI18n} from 'vue-i18n'
+import {apiCallRounds} from '@/composables/api-call-rounds.ts'
+
 const {} = apiCallRounds()
 
 
 const { t } = useI18n()
-const emit = defineEmits(['updated-round'])
+const emit = defineEmits(['updated-user'])
 const editMode = ref(false);
 
 const props = defineProps<{
@@ -37,12 +37,40 @@ const userRole = computed(() => {
   }
 })
 
+const roles = computed(() => {
+  return [
+    {role_id: 1, role_name: t('usersPage.player')},
+    {role_id: 2, role_name: t('usersPage.round_master')},
+    {role_id: 3, role_name: t('usersPage.secretary')},
+    {role_id: 4, role_name: t('usersPage.admin')}
+  ]
+})
+
+const selectedRole = ref()
+
+
+
+
+
+  onMounted(() => {
+    selectedRole.value = props.user.role_id //<---
+  })
+
+
 function closeDetails() {
   gridView.value = true
 }
 
 function openDetails() {
   gridView.value = false
+}
+
+function updateRound() {
+  editMode.value = false;
+  gridView.value = true;
+  props.user.role_id = selectedRole.value
+  console.log('Send Emit', props.user)
+  emit('updated-user', props.user)
 }
 
 </script>
@@ -59,6 +87,7 @@ function openDetails() {
 
   <div class="inputView" v-if="!gridView && !editMode">
     <div class="formView">
+      <form @submit.prevent="updateRound()">
               <div class="form-group">
                 <label for="round">{{t('usersPage.email')}}</label>
                 <b>{{props.user.email}}</b>
@@ -67,6 +96,16 @@ function openDetails() {
                 <label for="round">{{t('usersPage.created_at')}}</label>
                 <b>{{props.user.created_at.split('T')[0]}}</b>
               </div>
+              <div class="form-group">
+                <label>{{ t('coursePage.secretaries') }}</label>
+                <select v-model="selectedRole" class="dropdown-menu">
+                  <option v-for="role in roles" :value="role.role_id" class="dropdown-item">
+                    {{ role.role_name }}
+                  </option>
+                </select>
+              </div>
+
+
             <div v-if="latestRound" >
               <div class="form-group">
               <label for="round">{{t('usersPage.hdc_2020')}}</label>
@@ -77,13 +116,13 @@ function openDetails() {
               <b>{{latestRound.calc_result_2021}}</b>
               </div>
             </div>
-
-
+        <button type="submit" class="submit-btn">{{ t('roundPage.update') }}</button>
       <button class="submit-btn" @click="closeDetails()">{{ t('roundPage.close') }}</button>
+      </form>
     </div>
   </div>
 
-<!--  Update Mode-->
+
 
 </template>
 

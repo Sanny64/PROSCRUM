@@ -16,9 +16,11 @@ import {getScorecard} from "@/composables/api-call-scorecard.ts";
 
 const {apiStatus, sendFormdata } = apiCallInlineResponse()
 const {apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
+
 const {getUserAllAPI, allUserList} = apiCallUser()
 const { apiResultCourse, getCoursesAPI } = apiCallCourses()
 const { apiResultScorecard, getStrokesAhead} = getScorecard()
+
 
 
 const dataTree = reactive(apiResultRounds)
@@ -33,11 +35,11 @@ const filteredUsersList = ref<User[]>([])
 
 
 
-async function updateRound(round: Round) {
+async function updateUser(user: User) {
   console.log('Update Round: ')
-  await updateRoundAPI(round) // Warten, bis der API-Aufruf abgeschlossen ist
+  await updateUserAPI(user) // Warten, bis der API-Aufruf abgeschlossen ist
   await nextTick() // Warten auf den nächsten DOM-Tick oder reaktive Updates
-  await getRoundsAPI() // Danach die Kurse erneut abrufen
+  await getUserAllAPI() // Danach die Kurse erneut abrufen
 }
 
 async function generateScorecard(input: ScorecardInput, currentCourse: Course) {
@@ -151,7 +153,7 @@ onMounted(() => {
 
       <div class="grid">
         <div v-for="(users, index) in filteredUsersList" :key="users.user_id">
-          <golf-user :user="users"  @updated-round="updateRound" :rounds-list="roundsList"></golf-user>
+          <golf-user :user="users" @updated-user="updateUser" :rounds-list="roundsList"></golf-user>
         </div>
       </div>
     </div>

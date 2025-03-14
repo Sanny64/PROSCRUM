@@ -115,6 +115,32 @@ export function apiCallUser() {
     }
   }
 
+  async function updateUserAPI(user: User) {
+    console.log('sendFormdata', JSON.stringify(user))
+
+    try {
+      const rawResponse = await fetch(`http://localhost:8000/users/${user.user_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: "Bearer " + getToken(),
+        },
+        body: JSON.stringify(user),
+      })
+
+      if (!rawResponse.ok) {
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
+      }
+
+      return await rawResponse.json()
+
+    } catch (error) {
+      console.error('updateUserAPI:', error)
+      const globalT = (i18n.global as Composer).t;
+      setError(globalT('error.users.not_authorized'));
+    }
+  }
+
   async function deleteUserAPI(user_id: number) {
     try {
       const rawResponse = await fetch(`http://localhost:8000/user/${user_id}`, {
@@ -144,6 +170,7 @@ export function apiCallUser() {
     getUserAllAPI,
     getUserAPI,
     addUserAPI,
-    deleteUserAPI
+    deleteUserAPI,
+    updateUserAPI
   }
 }
