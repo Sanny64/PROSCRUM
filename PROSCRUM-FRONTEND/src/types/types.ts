@@ -83,4 +83,9 @@ export interface UserCreate{
   last_name: string
 }
 
+export interface getScorecard{
+  HDC: number | undefined,
+  course_id: number | undefined
+}
+
 

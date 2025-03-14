@@ -9,10 +9,12 @@ import { apiCallUser } from '@/composables/api-call-user.ts'
 import GolfUser from '@/components/golf-user.vue'
 import RoundsFilter from '@/components/rounds-filter.vue'
 import ScoreCard from "@/components/score-card.vue";
+import {apiCallCourses} from "@/composables/api-call-courses.ts";
 
 const {apiStatus, sendFormdata } = apiCallInlineResponse()
 const {apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
 const {getUserAllAPI, allUserList} = apiCallUser()
+const { apiResultCourse, getCoursesAPI } = apiCallCourses()
 
 
 const dataTree = reactive(apiResultRounds)
@@ -77,6 +79,7 @@ function dateRangeFunc(range: { start: string, end: string }) {
 onMounted(() => {
   getRoundsAPI()
   getUserAllAPI()
+  getCoursesAPI()
 })
 </script>
 <template>
@@ -99,8 +102,7 @@ onMounted(() => {
       </div>
     </div>
     <score-card
-      :polling-status="apiStatus"
-      :rounds-result="apiResultRounds"
+      :course-list="apiResultCourse"
     ></score-card>
   </div>
 </template>
