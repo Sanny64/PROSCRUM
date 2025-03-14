@@ -1,7 +1,12 @@
-import type {Course, DecodedToken, User, UserCreate} from '../types/types.ts';
+import type {DecodedToken, User, UserCreate} from '../types/types.ts';
 import {getToken} from './token-administration.ts'
 import {jwtDecode} from "jwt-decode";
 import {ref} from "vue";
+import {i18n} from "@/main.ts";
+import type {Composer} from "vue-i18n";
+import {useErrorController} from "@/composables/error-controller.ts";
+
+const { setError } = useErrorController();
 
 export function apiCallUser() {
 
@@ -20,14 +25,16 @@ export function apiCallUser() {
         },
       });
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
       console.log('4: Kurse geladen:', response)
       activeUserAPI.value = response
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error)
+      console.error('getActiveUserAPI', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.users.permission_denied'));
       activeUserAPI.value = 'INVALID';
       return;
     }
@@ -45,7 +52,7 @@ export function apiCallUser() {
       });
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -53,7 +60,9 @@ export function apiCallUser() {
 
       return response
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error)
+      console.error('getUserAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.users.permission_denied'));
     }
   }
 
@@ -68,7 +77,7 @@ export function apiCallUser() {
       });
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       allUserList.value = await rawResponse.json()
@@ -76,7 +85,9 @@ export function apiCallUser() {
 
 
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error)
+      console.error('getUserAllAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.users.permission_denied'));
     }
   }
 
@@ -94,14 +105,13 @@ export function apiCallUser() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Hinzufügen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
-      const response = await rawResponse.json()
-      console.log('Kurs hinzugefügt:', response)
+      return await rawResponse.json()
 
     } catch (error) {
-      console.error('Fehler beim Hinzufügen des Users:', error)
+      console.error('addUserAPI:', error)
     }
   }
 
@@ -121,7 +131,9 @@ export function apiCallUser() {
       const response = rawResponse.status
       console.log('Kurs gelöscht:', response)
     } catch (error) {
-      console.error('Fehler beim Löschen des Kurses:', error)
+      console.error('deleteUserAPI:', error)
+      const globalT = (i18n.global as Composer).t;
+      setError(globalT('error.users.not_authorized'));
     }
   }
 

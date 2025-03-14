@@ -4,7 +4,11 @@ import RoundsChart from "@/components/rounds-chart.vue";
 import type {LoginData, UserCreate} from "@/types/types.ts";
 import {apiCallLogin, } from "@/composables/api-call-login.ts";
 import {apiCallUser} from "@/composables/api-call-user.ts";
+import router from "@/router";
+import {useI18n} from "vue-i18n";
+import {ref} from "vue";
 const { addUserAPI } = apiCallUser()
+const { t } = useI18n()
 const userCreate: UserCreate = {
   email: "jakobfischer@gmail.com",
   password: "1234",
@@ -13,21 +17,177 @@ const userCreate: UserCreate = {
   last_name: "Fischer"
 }
 
+const inputType = ref('password');
+
+function togglePasswordVisibility() {
+
+  if (inputType.value === 'password') {
+    inputType.value = 'text';
+  } else {
+    inputType.value = 'password';
+  }
+}
+
+
+
 async function signup(userCreate: UserCreate) {
-  await addUserAPI(userCreate); // API-Call abwarten
+  await addUserAPI(userCreate);
+  await router.push("/login");// API-Call abwarten
 }
 
 </script>
 
 <template>
+<div class="content">
 
-  <input type="text" v-model="userCreate.first_name" placeholder="Vorname">
-  <input type="text" v-model="userCreate.last_name" placeholder="Nachname">
-  <input type="number" v-model="userCreate.role_id" placeholder="Role">
-  <input type="text" v-model="userCreate.email" placeholder="Email">
-  <input type="password" v-model="userCreate.password" placeholder="Password">
+  <form class="modern-form" @submit.prevent="signup(userCreate)">
+    <div class="form-title">{{t('singupPage.signup_page')}}</div>
 
-  <button @click="signup(userCreate)">Registriren</button>
+    <div class="form-body">
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <circle
+              stroke-width="1.5"
+              stroke="currentColor"
+              r="4"
+              cy="8"
+              cx="12"
+            ></circle>
+            <path
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="currentColor"
+              d="M5 20C5 17.2386 8.13401 15 12 15C15.866 15 19 17.2386 19 20"
+            ></path>
+          </svg>
+          <input
+            required
+            :placeholder="$t('singupPage.first_name')"
+            class="form-input"
+            v-model="userCreate.first_name"
+            type="text"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <circle
+              stroke-width="1.5"
+              stroke="currentColor"
+              r="4"
+              cy="8"
+              cx="12"
+            ></circle>
+            <path
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="currentColor"
+              d="M5 20C5 17.2386 8.13401 15 12 15C15.866 15 19 17.2386 19 20"
+            ></path>
+          </svg>
+          <input
+            required
+            :placeholder="$t('singupPage.last_name')"
+            class="form-input"
+            v-model="userCreate.last_name"
+            type="text"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <circle
+              stroke-width="1.5"
+              stroke="currentColor"
+              r="4"
+              cy="8"
+              cx="12"
+            ></circle>
+            <path
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="currentColor"
+              d="M5 20C5 17.2386 8.13401 15 12 15C15.866 15 19 17.2386 19 20"
+            ></path>
+          </svg>
+          <input
+            required
+            :placeholder="$t('singupPage.role_id')"
+            class="form-input"
+            v-model="userCreate.role_id"
+            type="number"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <path
+              stroke-width="1.5"
+              stroke="currentColor"
+              d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
+            ></path>
+          </svg>
+          <input
+            required
+            :placeholder="$t('singupPage.email')"
+            class="form-input"
+            v-model="userCreate.email"
+            type="email"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <path
+              stroke-width="1.5"
+              stroke="currentColor"
+              d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+            ></path>
+          </svg>
+          <input
+            required
+            :placeholder="$t('singupPage.password')"
+            class="form-input"
+            v-model="userCreate.password"
+            :type="inputType"
+          />
+          <button class="password-toggle" @click="togglePasswordVisibility" type="button">
+            <svg fill="none" viewBox="0 0 24 24" class="eye-icon">
+              <path
+                stroke-width="1.5"
+                stroke="currentColor"
+                d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"
+              ></path>
+              <circle
+                stroke-width="1.5"
+                stroke="currentColor"
+                r="3"
+                cy="12"
+                cx="12"
+              ></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-button" type="submit">
+      <span class="button-text">{{t('singupPage.signup')}}</span>
+      <div class="button-glow"></div>
+    </button>
+
+  </form>
+
+</div>
 
 </template>
 

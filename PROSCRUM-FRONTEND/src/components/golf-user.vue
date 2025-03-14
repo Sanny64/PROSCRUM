@@ -50,7 +50,7 @@ function openDetails() {
 <template>
   <div v-if="gridView" class="gridView" @click="openDetails()">
     <div class="gridViewText">
-      <div class="gridViewHeadline">{{t('usersPage.full_name')}}{{ props.user.first_name}} {{ props.user.last_name}}</div>
+      <div class="gridViewHeadline">{{t('usersPage.user_id')}}{{ props.user.user_id}} - {{ props.user.first_name}} {{ props.user.last_name}}</div>
       <div class="gridViewDetails">
         <div>{{t('usersPage.role_id')}}{{userRole}}</div>
       </div>

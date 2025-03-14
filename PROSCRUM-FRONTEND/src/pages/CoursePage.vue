@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { nextTick, onMounted, reactive, ref, watch } from 'vue'
+import {inject, nextTick, onMounted, reactive, type Ref, ref, watch} from 'vue'
 import GolfCourse from '@/components/golf-course.vue'
 import AddGolfCourse from '@/components/add-golf-course.vue'
-import type { Course, CourseWithoutID } from '../types/types.ts'
+import type {Course, CourseWithoutID, User} from '../types/types.ts'
 import { apiCallCourses } from '@/composables/api-call-courses.ts'
 import CourseFilter from '@/components/course-filter.vue'
+import {apiCallUser} from "@/composables/api-call-user.ts";
 
 const { apiResultCourse, getCoursesAPI, addCourseAPI, deleteCourseAPI } = apiCallCourses()
 const courseList = apiResultCourse
+const {getUserAllAPI, allUserList} = apiCallUser()
+
+const userList = allUserList
+
 const filteredCourseList = ref<Course[]>([])
 const inputValue = ref<string>('')
 const courseRatingValue = ref()
 const slopeRatingValue = ref()
+const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
+
 
 async function addCourse(newCourse: CourseWithoutID) {
   await addCourseAPI(newCourse)
@@ -49,6 +56,7 @@ watch([courseList, inputValue, courseRatingValue, slopeRatingValue], filterCours
 
 onMounted(() => {
   getCoursesAPI()
+  getUserAllAPI()
 })
 
 function textValueFunc(textValue: string) {
@@ -78,7 +86,7 @@ function slopeRatingValueFunc(slopeRatingValueFunc: number) {
       <div v-for="(course, index) in filteredCourseList" :key="course.course_id">
         <golf-course :course="course" @course-deleted="deleteCourse"></golf-course>
       </div>
-      <add-golf-course @course-added="addCourse"></add-golf-course>
+      <add-golf-course v-if="activeUserAPI !='INVALID' && activeUserAPI.role_id > 2" @course-added="addCourse" :user-list="userList"></add-golf-course>
     </div>
   </div>
 </template>

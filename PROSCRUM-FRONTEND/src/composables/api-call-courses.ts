@@ -1,6 +1,11 @@
 import { ref } from 'vue'
 import type { Course, CourseWithoutID } from '../types/types.ts'
 import {getToken} from "@/composables/token-administration.ts";
+import type {Composer} from "vue-i18n";
+import {i18n} from "@/main.ts";
+import {useErrorController} from "@/composables/error-controller.ts";
+
+const { setError } = useErrorController();
 
 export function apiCallCourses() {
   const CourseResult = ref<Course[]>([])
@@ -17,7 +22,7 @@ export function apiCallCourses() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -43,7 +48,7 @@ export function apiCallCourses() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Hinzufügen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -51,7 +56,9 @@ export function apiCallCourses() {
 
       CourseResult.value = response.result
     } catch (error) {
-      console.error('Fehler beim Hinzufügen des Kurses:', error)
+      console.error('addCourseAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.course.permission_denied'));
     }
   }
 
@@ -67,13 +74,15 @@ export function apiCallCourses() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Löschen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.status
       console.log('Kurs gelöscht:', response)
     } catch (error) {
-      console.error('Fehler beim Löschen des Kurses:', error)
+      console.error('deleteCourseAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.course.not_authorized'));
     }
   }
 
