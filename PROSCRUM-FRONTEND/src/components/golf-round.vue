@@ -129,7 +129,7 @@ function updateRound() {
       <div v-if="selectedRatingOption === 'all'">
         <div class="form-group" >
           <label for="courseRating">{{ t('roundPage.courseRating_all') }}</label>
-          <b>{{  props.rounds.course?.course_rating_1_to_9 }}</b>
+          <b>{{  props.rounds.course?.course_rating_all }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '1to9'">

@@ -57,7 +57,7 @@ function filterCourses() {
   }
 }
 
-watch([roundsList, inputValue, numberValue, dateRange], filterCourses, { deep: true }) //<---
+watch([roundsList,userList, inputValue, numberValue, dateRange], filterCourses, { deep: true }) //<---
 
 function textValueFunc(textValue: string) {
   inputValue.value = textValue
@@ -69,8 +69,8 @@ function numberValueFunc(number: number) {
 
 
 
-function dateRangeFunc(range: { start: string, end: string }) { //<---
-  dateRange.value = range //<---
+function dateRangeFunc(range: { start: string, end: string }) {
+  dateRange.value = range
 }
 
 
@@ -94,7 +94,7 @@ onMounted(() => {
 
       <div class="grid">
         <div v-for="(users, index) in filteredUsersList" :key="users.user_id">
-          <golf-user :user="users" @updated-round="updateRound"></golf-user>
+          <golf-user :user="users"  @updated-round="updateRound" :rounds-list="roundsList"></golf-user>
         </div>
       </div>
     </div>

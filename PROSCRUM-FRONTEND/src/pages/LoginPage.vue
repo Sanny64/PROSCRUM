@@ -26,7 +26,13 @@ async function login(loginData: LoginData) {
   await apiCallLogin(loginData);
   await refreshActiveUser?.();
   console.log("5 activeUser", activeUserAPI.value);
-  await router.push("/course");
+  if(activeUserAPI.value !== 'INVALID') {
+    {if(activeUserAPI.value.role_id === 1) {
+      await router.push("/");
+    }else
+      await router.push("/course");
+    }}
+
 }
 
 

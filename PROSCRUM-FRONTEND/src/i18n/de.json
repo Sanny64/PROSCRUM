@@ -120,7 +120,13 @@
     "email": "Email: ",
     "role_id": "Rolle: ",
     "close": "Schließen",
-    "created_at": "Erstellt am: "
+    "created_at": "Erstellt am: ",
+    "hdc_2020": "HDC bis 2020: ",
+    "hdc_2021": "HDC ab 2021: ",
+    "player": "Spieler",
+    "admin": "Admin",
+    "secretary": "Sekretär",
+    "round_master": "Runden-Master"
   },
 
     "filter": {

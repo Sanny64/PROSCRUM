@@ -21,8 +21,12 @@ provide<() => Promise<void>>("refreshActiveUser", getActiveUserAPI);
 onMounted(async () => {
   await getActiveUserAPI();
   if(activeUserAPI.value === 'INVALID') {
+
     await router.push("/login");
   }else {
+    if(activeUserAPI.value.role_id === 1) {
+      await router.push("/");
+  }else
     await router.push("/course");
   }
 })
