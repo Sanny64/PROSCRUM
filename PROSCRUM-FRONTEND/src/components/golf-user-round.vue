@@ -90,71 +90,77 @@ function updateRound() {
 <template>
   <div v-if="gridView" class="gridView" @click="openDetails()">
     <div class="gridViewText">
-      <div class="gridViewHeadline">{{t('roundPage.round_number')}}{{ props.rounds.round_number }}</div>
+      <div class="gridViewHeadline">{{t('roundMasterPage.player_name')}}{{ props.rounds.user.first_name }} {{ props.rounds.user.last_name }}</div>
       <div class="gridViewDetails">
-        <div>{{t('roundPage.courseName')}}{{ props.rounds.course.course_name }}</div>
+        <div>{{t('roundMasterPage.round_number')}}{{ props.rounds.round_number }}</div>
       </div>
+
     </div>
   </div>
 
   <div class="inputView" v-if="!gridView && !editMode">
     <div class="formView">
-              <div class="form-group number">
-                <label for="round">{{t('roundPage.round_number')}}</label>
-                <b>{{props.rounds.round_number}}</b>
+
+                <div class="form-group player">
+                <label for="round">{{t('roundMasterPage.player_name')}}</label>
+                <b>{{ props.rounds.user.first_name }} {{ props.rounds.user.last_name }}</b>
               </div>
+      <div class="form-group number">
+        <label for="round">{{t('roundMasterPage.round_number')}}</label>
+        <b>{{props.rounds.round_number}}</b>
+      </div>
               <div class="form-group date">
-                <label for="round">{{t('roundPage.date')}}</label>
+                <label for="round">{{t('roundMasterPage.date')}}</label>
                 <b>{{props.rounds.date}}</b>
               </div>
               <div class="form-group">
-                <label for="round">{{t('roundPage.courseName')}}</label>
+                <label for="round">{{t('roundMasterPage.courseName')}}</label>
                 <b>{{props.rounds.course.course_name}}</b>
               </div>
 
       <div v-if="selectedRatingOption === '1to9'">
         <div class="form-group">
-          <label for="courseRating">{{ t('roundPage.courseRating_1to9') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.courseRating_1to9') }}</label>
 
           <b>{{ props.rounds.course?.course_rating_1_to_9 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '10to18'">
         <div class="form-group">
-          <label for="courseRating">{{ t('roundPage.courseRating_10to18') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.courseRating_10to18') }}</label>
 
           <b>{{  props.rounds.course?.course_rating_10_to_18 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === 'all'">
         <div class="form-group" >
-          <label for="courseRating">{{ t('roundPage.courseRating_all') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.courseRating_all') }}</label>
           <b>{{  props.rounds.course?.course_rating_all }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '1to9'">
         <div class="form-group">
-          <label for="courseRating">{{ t('roundPage.course_par_1to9') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.course_par_1to9') }}</label>
 
           <b>{{ props.rounds.course?.course_par_1_to_9 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === '10to18'">
         <div class="form-group">
-          <label for="courseRating">{{ t('roundPage.course_par_10to18') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.course_par_10to18') }}</label>
 
           <b>{{  props.rounds.course?.course_par_10_to_18 }}</b>
         </div>
       </div>
       <div v-if="selectedRatingOption === 'all'">
         <div class="form-group" >
-          <label for="courseRating">{{ t('roundPage.course_par_all') }}</label>
+          <label for="courseRating">{{ t('roundMasterPage.course_par_all') }}</label>
           <b>{{  props.rounds.course?.course_par_all }}</b>
         </div>
       </div>
 
               <div class="form-group">
-                <label for="slopeRating">{{t('roundPage.slopeRating')}}</label>
+                <label for="slopeRating">{{t('roundMasterPage.slopeRating')}}</label>
                 <b>{{props.rounds.course.slope_rating}}</b>
               </div>
 
@@ -172,7 +178,8 @@ function updateRound() {
                 </div>
 
 
-      <button class="submit-btn" @click="closeDetails()">{{ t('roundPage.close') }}</button>
+      <button class="submit-btn" @click="openUpdate()" >{{t('roundMasterPage.update')}}</button>
+      <button class="submit-btn" @click="closeDetails()">{{ t('roundMasterPage.close') }}</button>
     </div>
   </div>
 
@@ -181,62 +188,62 @@ function updateRound() {
   <div class="inputView" v-if="!gridView && editMode">
     <div class="formView">
       <form @submit.prevent="updateRound()">
-        <div class="form-group number">
-          <label for="round">{{t('roundPage.round_number')}}</label>
-          <b>{{props.rounds.round_number}}</b>
-        </div>
         <div class="form-group date">
-          <label for="round">{{t('roundPage.date')}}</label>
+          <label for="round">{{t('roundMasterPage.date')}}</label>
           <b>{{props.rounds.date}}</b>
         </div>
+        <div class="form-group number">
+          <label for="round">{{t('roundMasterPage.round_number')}}</label>
+          <b>{{props.rounds.round_number}}</b>
+        </div>
         <div class="form-group">
-          <label for="round">{{t('roundPage.courseName')}}</label>
+          <label for="round">{{t('roundMasterPage.courseName')}}</label>
           <b>{{props.rounds.course.course_name}}</b>
         </div>
 
         <div v-if="selectedRatingOption === '1to9'">
           <div class="form-group">
-            <label for="courseRating">{{ t('roundPage.courseRating_1to9') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.courseRating_1to9') }}</label>
 
             <b>{{ props.rounds.course?.course_rating_1_to_9 }}</b>
           </div>
         </div>
         <div v-if="selectedRatingOption === '10to18'">
           <div class="form-group">
-            <label for="courseRating">{{ t('roundPage.courseRating_10to18') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.courseRating_10to18') }}</label>
 
             <b>{{  props.rounds.course?.course_rating_10_to_18 }}</b>
           </div>
         </div>
         <div v-if="selectedRatingOption === 'all'">
           <div class="form-group" >
-            <label for="courseRating">{{ t('roundPage.courseRating_all') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.courseRating_all') }}</label>
             <b>{{  props.rounds.course?.course_rating_1_to_9 }}</b>
           </div>
         </div>
         <div v-if="selectedRatingOption === '1to9'">
           <div class="form-group">
-            <label for="courseRating">{{ t('roundPage.course_par_1to9') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.course_par_1to9') }}</label>
 
             <b>{{ props.rounds.course?.course_par_1_to_9 }}</b>
           </div>
         </div>
         <div v-if="selectedRatingOption === '10to18'">
           <div class="form-group">
-            <label for="courseRating">{{ t('roundPage.course_par_10to18') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.course_par_10to18') }}</label>
 
             <b>{{  props.rounds.course?.course_par_10_to_18 }}</b>
           </div>
         </div>
         <div v-if="selectedRatingOption === 'all'">
           <div class="form-group" >
-            <label for="courseRating">{{ t('roundPage.course_par_all') }}</label>
+            <label for="courseRating">{{ t('roundMasterPage.course_par_all') }}</label>
             <b>{{  props.rounds.course?.course_par_all }}</b>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="slopeRating">{{t('roundPage.slopeRating')}}</label>
+          <label for="slopeRating">{{t('roundMasterPage.slopeRating')}}</label>
           <b>{{props.rounds.course.slope_rating}}</b>
         </div>
 
@@ -261,7 +268,7 @@ function updateRound() {
 
 
         <!-- Absenden -->
-        <button type="submit" class="submit-btn">{{ t('roundPage.update') }}</button>
+        <button type="submit" class="submit-btn">{{ t('roundMasterPage.update') }}</button>
         <button type="button" class="submit-btn" @click="backDetails()">
           {{ t('roundPage.back') }}
         </button>
@@ -273,5 +280,5 @@ function updateRound() {
 </template>
 
 <style scoped>
-@import '../style/golf-round.css';
+@import '../style/golf-user-round.css';
 </style>

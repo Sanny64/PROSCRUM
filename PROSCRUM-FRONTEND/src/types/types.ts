@@ -41,6 +41,8 @@ export interface FormData {
 export interface Round {
   round_number: number
   date: string
+  user_id: number
+  user: User
   calc_result_2020: number
   calc_result_2021: number
   course: Course
