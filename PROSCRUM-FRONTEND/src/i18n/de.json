@@ -50,6 +50,8 @@
   },
   "coursePage": {
     "courseName": "Golfplatzname: ",
+    "leaders": "Leiter: ",
+    "secretaries": "Sekretäre: ",
     "courseSelection": "Welche Löcher anzeigen?",
     "courseSelection_1to9": "(1-9)",
     "courseSelection_10to18": "(10-18)",

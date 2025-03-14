@@ -29,6 +29,7 @@ export interface CourseWithoutID {
   course_rating_all: number | null
   slope_rating: number
   holes: CourseHole[]
+  leaders_secretaries: number[]
 }
 
 export interface FormData {
