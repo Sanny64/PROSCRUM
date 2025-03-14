@@ -136,5 +136,27 @@
     "number": "Nummer",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
+  },
+  "error": {
+    "errorOccurred": "Ein Fehler ist aufgetreten",
+    "login": {
+      "user_not_found": "Benutzer nicht gefunden."
+    },
+    "users": {
+      "permission_denied": "Zugriff verweigert.",
+      "not_authorized": "Nicht berechtigt, diese Aktion auszuführen."
+    },
+    "rounds": {
+      "permission_denied_Try_with_player": "Zugriff verweigert. Melden Sie sich bei Ihrem Spielerkonto an.",
+      "permission_denied": "Zugriff verweigert.",
+      "not_authorized": "Nicht berechtigt, diese Aktion auszuführen."
+    },
+    "course": {
+      "permission_denied": "Zugriff verweigert.",
+      "not_authorized": "Nicht berechtigt, diese Aktion auszuführen."
+    },
+    "scorecard": {
+      "permission_denied": "Zugriff verweigert."
+    }
   }
 }
