@@ -45,6 +45,7 @@ onUnmounted(() => {
       <thead>
         <tr>
           <th>{{ t('output.round') }}</th>
+          <th>{{ t('output.course') }}</th>
           <th>{{ t('output.resultsFrom2021') }}</th>
           <th>{{ t('output.resultsUntil2020') }}</th>
           <th>{{ t('output.scoreDifferential') }}</th>
@@ -53,6 +54,7 @@ onUnmounted(() => {
       <tbody>
         <tr v-for="(item, index) in displayedRounds" :key="item.round_number">
           <td>{{ item.round_number }}</td>
+          <td>{{ item.course.course_name }}</td>
           <td>{{ item.calc_result_2021 }}</td>
           <td>{{ item.calc_result_2020 }}</td>
           <td>{{ item.score_differential }}</td>
