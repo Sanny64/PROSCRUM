@@ -56,7 +56,9 @@ watch([courseList, inputValue, courseRatingValue, slopeRatingValue], filterCours
 
 onMounted(() => {
   getCoursesAPI()
-  getUserAllAPI()
+  if(activeUserAPI.value != 'INVALID' && activeUserAPI.value.role_id > 2) {
+    getUserAllAPI()
+  }
 })
 
 function textValueFunc(textValue: string) {
