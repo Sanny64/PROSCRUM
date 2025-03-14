@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {inject, type Ref} from "vue";
 
+const { setError, clearError } = useErrorController(); //<---
+
 const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
 const refreshActiveUser = inject<() => Promise<void>>("refreshActiveUser");
 
@@ -9,6 +11,7 @@ import {apiCallLogin} from '@/composables/api-call-login.ts'
 import type {LoginData, User} from '@/types/types.ts'
 import {nextTick, onMounted, ref, watch} from "vue";
 import {useRouter} from "vue-router";
+import {useErrorController} from "@/composables/error-controller.ts";
 
 
 const router = useRouter();
@@ -27,6 +30,7 @@ async function login(loginData: LoginData) {
   await refreshActiveUser?.();
   console.log("5 activeUser", activeUserAPI.value);
   if(activeUserAPI.value !== 'INVALID') {
+    clearError();
     {if(activeUserAPI.value.role_id === 1) {
       await router.push("/");
     }else
