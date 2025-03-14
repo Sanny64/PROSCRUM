@@ -83,9 +83,14 @@ export interface UserCreate{
   last_name: string
 }
 
-export interface getScorecard{
+export interface ScorecardInput{
   HDC: number | undefined,
   course_id: number | undefined
+}
+
+export interface strokesAhead {
+  course_HDC: number,
+  hits_ahead: number[]
 }
 
 

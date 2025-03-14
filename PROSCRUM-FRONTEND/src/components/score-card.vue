@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {defineEmits, inject, reactive, type Ref, ref, watch, watchEffect} from 'vue'
 import RoundsChart from '@/components/rounds-chart.vue'
-import type {Course, getScorecard, Round, User} from '../types/types.ts'
+import type {Course, ScorecardInput, Round, User} from '../types/types.ts'
 import RoundsTable from '@/components/rounds-table.vue'
 
 import { useI18n } from 'vue-i18n'
@@ -21,7 +21,7 @@ const selectedCourseName = ref<string | null>('')
 const selectedCourse = ref<Course>()
 const selectedCourseID = ref<number>()
 const isDropdownOpen = ref(false)
-const HDC = ref<number | undefined>(54)
+const HDC = ref<number | undefined>()
 
 // Funktion zum Umschalten des Dropdown-Menüs
 const toggleDropdown = () => {
@@ -36,7 +36,7 @@ const selectCourse = (course: Course) => {
   isDropdownOpen.value = false // Menü schließen
 }
 
-const Scorecard = reactive<getScorecard>({
+const Scorecard = reactive<ScorecardInput>({
   HDC: undefined,
   course_id: undefined,
 })
@@ -57,10 +57,10 @@ const btnScorecard = () => {
 
   if (selectedCourseName.value === '') {
     console.log('Bitte wählen Sie einen Golfplatz')
-  } else if (nullFormDate) {
+  } else if (nullFormDate && selectedCourse) {
     inputInfo.value = ''
     console.log('Emit gesendet: ', nullFormDate)
-    emit('Scorecard', nullFormDate)
+    emit('Scorecard', nullFormDate, selectedCourse.value)
   } else {
     console.log('Bitte geben Sie einen Wert ein')
     inputInfo.value = 'Bitte geben Sie einen Wert ein'
