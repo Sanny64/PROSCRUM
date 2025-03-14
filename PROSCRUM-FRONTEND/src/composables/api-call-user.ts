@@ -1,11 +1,12 @@
-import type {Course, DecodedToken, User, UserCreate} from '../types/types.ts';
+import type {DecodedToken, User, UserCreate} from '../types/types.ts';
 import {getToken} from './token-administration.ts'
 import {jwtDecode} from "jwt-decode";
 import {ref} from "vue";
 import {i18n} from "@/main.ts";
-const { setError } = useErrorController();
 import type {Composer} from "vue-i18n";
 import {useErrorController} from "@/composables/error-controller.ts";
+
+const { setError } = useErrorController();
 
 export function apiCallUser() {
 
@@ -76,7 +77,7 @@ export function apiCallUser() {
       });
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       allUserList.value = await rawResponse.json()
@@ -104,14 +105,13 @@ export function apiCallUser() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Hinzufügen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
-      const response = await rawResponse.json()
-      console.log('Kurs hinzugefügt:', response)
+      return await rawResponse.json()
 
     } catch (error) {
-      console.error('Fehler beim Hinzufügen des Users:', error)
+      console.error('addUserAPI:', error)
     }
   }
 
