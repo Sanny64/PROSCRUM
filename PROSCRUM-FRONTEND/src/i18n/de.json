@@ -3,7 +3,7 @@
   "home": "Zuhause",
   "course": "Golfplatz",
   "rounds": "Runden",
-  "logout": "Ausloggen",
+  "logout": "Abmelden",
   "users": "Benutzer",
   "rounds-master": "Runden-Master",
   "login": "Anmeldung",
@@ -119,6 +119,7 @@
     "full_name": "Vollständiger Name: ",
     "email": "Email: ",
     "role_id": "Rolle: ",
+    "user_id": "ID: ",
     "close": "Schließen",
     "created_at": "Erstellt am: ",
     "hdc_2020": "HDC bis 2020: ",
@@ -128,15 +129,35 @@
     "secretary": "Sekretär",
     "round_master": "Runden-Master"
   },
+  "singupPage": {
+    "first_name": "Vorname: ",
+    "last_name": "Nachname: ",
+    "email": "Email: ",
+    "password": "Passwort: ",
+    "password_confirmation": "Passwort bestätigen: ",
+    "role_id": "Rolle: ",
+    "player": "Spieler",
+    "admin": "Admin",
+    "secretary": "Sekretär",
+    "round_master": "Runden-Master",
+    "signup": "Registrieren",
+    "signup_page": "Registrierung"
+  },
+    "loginPage": {
+        "email": "Email: ",
+        "password": "Passwort: ",
+        "login": "Anmeldungen",
+        "login_page": "Anmeldung"
+    },
 
-    "filter": {
+  "filter": {
     "search": "Suchen...",
     "last_name_search": "Nachnamen suchen...",
-
     "number": "Nummer",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   },
+
   "error": {
     "errorOccurred": "Ein Fehler ist aufgetreten",
     "login": {
