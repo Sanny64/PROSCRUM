@@ -67,5 +67,11 @@
     "number": "Number",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
+  },
+
+  "scorecard": {
+    "input": "Create Scorecard",
+    "inputHDC": "Handicap-Index of the Player: ",
+    "calculate": "Create Scorecard"
   }
 }

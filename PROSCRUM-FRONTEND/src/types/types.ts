@@ -29,6 +29,7 @@ export interface CourseWithoutID {
   course_rating_all: number | null
   slope_rating: number
   holes: CourseHole[]
+  leaders_secretaries: number[]
 }
 
 export interface FormData {
@@ -81,6 +82,16 @@ export interface UserCreate{
   role_id: number
   first_name: string
   last_name: string
+}
+
+export interface ScorecardInput{
+  HDC: number | undefined,
+  course_id: number | undefined
+}
+
+export interface strokesAhead {
+  course_HDC: number,
+  hits_ahead: number[]
 }
 
 
