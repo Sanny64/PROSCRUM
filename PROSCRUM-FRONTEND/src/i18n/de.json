@@ -129,7 +129,7 @@
     "player": "Spieler",
     "admin": "Admin",
     "secretary": "Sekretär",
-    "round_master": "Runden-Master"
+    "round_master": "Spielführer"
   },
   "singupPage": {
     "first_name": "Vorname: ",
@@ -159,6 +159,14 @@
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   },
+
+  "scorecard": {
+    "input": "Scorecard erstellen",
+    "inputHDC": "Handicap-Index des Spielers: ",
+    "calculate": "Scorecard erstellen"
+  }
+
+}
 
   "error": {
     "errorOccurred": "Ein Fehler ist aufgetreten",

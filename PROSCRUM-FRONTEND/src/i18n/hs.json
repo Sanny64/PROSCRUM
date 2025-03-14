@@ -46,5 +46,10 @@
     "search": "Guck ma do...",
     "maxCourseRating": "Höchschd Wiesewärtung: ",
     "maxSlopeRating": "Höchschd Hangsteigung: "
+  },
+  "scorecard": {
+    "input": "Scorekaart mache",
+    "inputHDC": "Handicap-Index vom Spillr: ",
+    "calculate": "Scorekaart mache"
   }
 }
