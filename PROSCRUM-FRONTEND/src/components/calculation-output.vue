@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref, watch, watchEffect } from 'vue'
+import {inject, type Ref, ref, watch, watchEffect} from 'vue'
 import RoundsChart from '@/components/rounds-chart.vue'
-import type { FormData, Round, CalculationResult, User } from '../types/types.ts'
+import type {Round, User } from '../types/types.ts'
 import RoundsTable from '@/components/rounds-table.vue'
 
 import { useI18n } from 'vue-i18n'
 
-import {apiCallUser} from "@/composables/api-call-user.ts";
+const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
 
 
-
-const { getActiveUserAPI, activeUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
@@ -21,10 +19,6 @@ const props = defineProps<{
 
 let calc_result_2020 = ref<number | undefined>()
 let calc_result_2021 = ref<number | undefined>()
-
-onMounted(async () => {
-  await getActiveUserAPI();
-});
 
 
 

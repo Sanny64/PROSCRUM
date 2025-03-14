@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {ref, defineEmits, reactive, watchEffect, onMounted} from 'vue'
+import {ref, defineEmits, reactive, watchEffect, onMounted, inject, type Ref} from 'vue'
 import type {FormData, Course, Round, User} from '../types/types.ts'
 import { useI18n } from 'vue-i18n'
 import {apiCallUser} from "@/composables/api-call-user.ts";
 
+const activeUserAPI = inject<Ref<User | 'INVALID'>>("activeUser", ref("INVALID"));
 
 
-const activeUser = ref<User | "INVALID">("INVALID")
-const { getActiveUserAPI } = apiCallUser()
 
 const { t } = useI18n()
 
@@ -21,9 +20,7 @@ const props = defineProps<{
 }>()
 
 
-onMounted(async () => {
-  activeUser.value = await getActiveUserAPI();
-});
+
 
 
 console.log('CourseList: ', props.courseList)
@@ -50,8 +47,8 @@ const formData = reactive<FormData>({
   round_number: undefined,
   date: undefined,
   course: undefined,
-  user_id: activeUser.value.user_id || 0,
-  user: activeUser.value,
+  user_id: activeUserAPI.value.user_id || 0,
+  user: activeUserAPI.value,
   scores: [], // Initialisiertes Array
 })
 
@@ -133,7 +130,7 @@ const btnCalculation = () => {
 
   <div class="component-left">
     <div class="headline">
-      <h1 v-if="activeUser != 'INVALID'">{{ t('input.input') }}</h1>
+      <h1 >{{ t('input.input')}}</h1>
     </div>
 
     <div class="infoBox" v-if="inputInfo">
