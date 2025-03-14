@@ -1,11 +1,36 @@
 <script setup lang="ts">
 import { computed, type ComputedRef, defineEmits, reactive, ref, watchEffect } from 'vue'
+import type {Round, User} from '../types/types.ts'
+
 import type { CourseWithoutID } from '../types/types.ts'
 import Info from '@/components/info.vue'
 
 import { useI18n } from 'vue-i18n'
 
 import { watch } from 'vue'
+import {apiCallUser} from "@/composables/api-call-user.ts";
+const props = defineProps<{
+  userList: User[]
+}>()
+
+const leaders = computed(() => props.userList.filter(user => user.role_id === 2)) //<---
+const secretaries = computed(() => props.userList.filter(user => user.role_id === 3)) //<---
+
+const selectedLeader = ref()
+const selectedSecretary = ref() //<---
+
+function addLeader() {
+  if (!newCourse.leaders_secretaries.includes(selectedLeader.value)) { //<---
+    newCourse.leaders_secretaries.push(selectedLeader.value) //<---
+  }
+}
+
+function addSecretary() {
+  if (!newCourse.leaders_secretaries.includes(selectedSecretary.value)) { //<---
+    newCourse.leaders_secretaries.push(selectedSecretary.value) //<---
+  }
+}
+
 
 const info = ref<boolean>(false)
 const infoText = ref<string>('')
@@ -132,6 +157,7 @@ function closeFunc() {
 
 <template>
   <div v-if="gridView" class="gridView" @click="createCourse()">
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="48"
@@ -169,6 +195,26 @@ function closeFunc() {
             required
           />
         </div>
+        <!-- Dropdown für Leaders -->
+        <div class="form-group">
+          <label>{{ t('coursePage.leaders')  }}</label>
+          <select v-model="selectedLeader" @change="addLeader" class="dropdown-menu">
+            <option v-for="leader in leaders" :key="leader.user_id" :value="leader.user_id" class="dropdown-item">
+              {{ leader.first_name }} {{ leader.last_name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Dropdown für Secretaries -->
+        <div class="form-group">
+          <label>{{ t('coursePage.secretaries') }}</label>
+          <select v-model="selectedSecretary" @change="addSecretary" class="dropdown-menu">
+            <option v-for="secretary in secretaries" :key="secretary.user_id" :value="secretary.user_id" class="dropdown-item">
+              {{ secretary.first_name }} {{ secretary.last_name }}
+            </option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="courseRating">{{ t('coursePage.courseRating_1to9') }}</label>
           <input
