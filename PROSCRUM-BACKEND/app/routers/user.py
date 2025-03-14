@@ -1,5 +1,6 @@
 from fastapi import Response, status, HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from ..database import get_db
 from .. import schemas, models, utils, oauth2
@@ -23,11 +24,24 @@ def create_user(user: models.UserCreate, db: Session = Depends(get_db)):
     user.password = hashed_password
 
     new_user = schemas.User(**user.model_dump())
-    
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
 
+    try:
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+    except IntegrityError as e:
+        db.rollback()
+        if "duplicate key value violates unique constraint" in str(e.orig):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="A user with this e-mail is already registered."
+            )
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Ein interner Serverfehler ist aufgetreten."
+            )
+        
     return {"result": new_user}
 
 @router.get("/{id}", response_model=models.UserOut)
