@@ -59,9 +59,13 @@ def delete_user(id: int, db: Session = Depends(get_db), current_user: schemas.Us
 
 @router.put("/{id}")
 def update_user(id: int, user: models.UserUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
-    if current_user.user_id != id and current_user.role_id < 4:
+    if current_user.role_id < 4:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
     
+
+    if current_user.user_id == id and user.role_id < 4:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action.")
+
     user_query = db.query(schemas.User).filter(schemas.User.user_id == id)
 
     updated_user = user_query.first()

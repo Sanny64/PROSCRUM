@@ -19,8 +19,8 @@ import {useI18n} from "vue-i18n";
 const router = useRouter();
 
 const loginData: LoginData = {
-  username: 'jan@test.de',
-  password: '1234'
+  username: '',
+  password: ''
 }
 
 
