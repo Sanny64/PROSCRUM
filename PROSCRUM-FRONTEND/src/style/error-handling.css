@@ -1,0 +1,73 @@
+.notifications-container {
+  width: 320px;
+  position: fixed; /* Fixed, damit es beim Scrollen bleibt */
+  bottom: 20px; /* Abstand zum unteren Rand */
+  right: 20px; /* Abstand zum rechten Rand */
+  z-index: 9999; /* Über alles legen */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Leichter Schatten für bessere Sichtbarkeit */
+  border-radius: 0.5rem;
+  border: black;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fading-Animation beim Erscheinen */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.error-alert {
+  padding: 1rem;
+  background-color: rgb(254 242 242);
+  display: flex;
+  align-items: center;
+  border-left: 4px solid #f87171;
+}
+
+.error-svg {
+  color: #f87171;
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.error-prompt-heading {
+  color: #991b1b;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+}
+
+.error-prompt-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.error-prompt-wrap {
+  margin-top: 0.5rem;
+  color: #b91c1c;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.error-prompt-list {
+  padding-left: 1.25rem;
+  margin-top: 0.25rem;
+  list-style-type: disc;
+}

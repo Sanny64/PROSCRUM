@@ -2,6 +2,11 @@ import { ref } from 'vue'
 import type { Round } from '../types/types.ts'
 import { result } from '../mockResultsData.json'
 import {getToken} from "@/composables/token-administration.ts";
+import type {Composer} from "vue-i18n";
+import {i18n} from "@/main.ts";
+import {useErrorController} from "@/composables/error-controller.ts";
+const { setError } = useErrorController();
+
 
 
 
@@ -20,7 +25,7 @@ export function apiCallRounds() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Laden der Kurse')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -28,13 +33,16 @@ export function apiCallRounds() {
       RoundsResult.value = response
       console.log('1 Runden geladen:', RoundsResult.value)
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error)
+      console.error('getRoundsAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.users.permission_denied'));
+
     }
   }
 
   async function addRoundAPI(round: Round) {
     try {
-      const rawResponse = await fetch('http://localhost:8000/courses', {
+      const rawResponse = await fetch('http://localhost:8000/rounds', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Setzt den Content-Type-Header
@@ -44,7 +52,7 @@ export function apiCallRounds() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Hinzufügen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -68,7 +76,7 @@ export function apiCallRounds() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Aktualisieren des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -76,7 +84,9 @@ export function apiCallRounds() {
 
       RoundsResult.value = response.result
     } catch (error) {
-      console.error('Fehler beim Aktualisieren des Kurses:', error)
+      console.error('updateRoundAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.rounds.permission_denied'));
     }
 
   }
@@ -92,7 +102,7 @@ export function apiCallRounds() {
       })
 
       if (!rawResponse.ok) {
-        throw new Error('Fehler beim Löschen des Kurses')
+        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
       }
 
       const response = await rawResponse.json()
@@ -100,7 +110,9 @@ export function apiCallRounds() {
 
       RoundsResult.value = response.result
     } catch (error) {
-      console.error('Fehler beim Löschen des Kurses:', error)
+      console.error('deleteRoundAPI', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.rounds.not_authorized'));
     }
   }
 

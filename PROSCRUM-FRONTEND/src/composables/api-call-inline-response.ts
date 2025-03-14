@@ -1,6 +1,10 @@
 import { ref } from 'vue'
 import type { FormData, CalculationResult } from '../types/types.ts'
 import {getToken} from './token-administration.ts'
+import {useErrorController} from "@/composables/error-controller.ts";
+import type {Composer} from "vue-i18n";
+import {i18n} from "@/main.ts";
+const { setError } = useErrorController();
 
 
 export function apiCallInlineResponse() {
@@ -28,7 +32,9 @@ export function apiCallInlineResponse() {
 
       inlineStatus.value = response
     } catch (error) {
-      console.error('Fehler beim Starten der Berechnung:', error)
+      console.error('sendFormdata', error)
+      const globalT = (i18n.global as Composer).t; //<---
+      setError(globalT('error.rounds.permission_denied_Try_with_player'));
     }
   }
 
