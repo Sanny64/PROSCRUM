@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv(dotenv_path="app/.env")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
