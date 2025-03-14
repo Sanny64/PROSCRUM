@@ -51,16 +51,18 @@ async function generatePDF(list_s_A: number[], course: Course, course_HC: number
 
   const pdf = new jsPDF()
 
-  pdf.setFontSize(20);
-  pdf.text('PROSCRUM Scorecard', 65, 15);
-  pdf.setFontSize(16);
-  pdf.text(`Course: ${course.course_name}`, 14, 35);
   pdf.setFontSize(12);
-  pdf.text(`Course HC: ${course_HC}`, 14, 45)
-  pdf.text('Platzparameter:', 14, 55)
-  pdf.text(`Par: ${course.course_par_all}`, 50, 55)
-  pdf.text(`Slope Rating: ${course.slope_rating}`, 90, 55)
-  pdf.text(`Course Rating: ${course.course_rating_all}`, 150, 55)
+  pdf.text('PROSCRUM', 14, 15);
+  pdf.setFontSize(20);
+  pdf.text('Scorecard', 90, 15);
+  pdf.setFontSize(16);
+  pdf.text(`Course: ${course.course_name}`, 14, 25);
+  pdf.setFontSize(12);
+  pdf.text(`Course HC: ${course_HC}`, 14, 35)
+  pdf.text('Platzparameter:', 14, 45)
+  pdf.text(`Par: ${course.course_par_all}`, 50, 45)
+  pdf.text(`Slope Rating: ${course.slope_rating}`, 90, 45)
+  pdf.text(`Course Rating: ${course.course_rating_all}`, 150, 45)
 
   const tableColumns = ["Loch", "Par", "HDC", "Schläge vor", "Schläge"];
   const tableRows: RowInput[] = course.holes.map((hole, index) => [
