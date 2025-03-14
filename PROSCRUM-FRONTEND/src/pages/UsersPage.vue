@@ -17,7 +17,7 @@ import {getScorecard} from "@/composables/api-call-scorecard.ts";
 const {apiStatus, sendFormdata } = apiCallInlineResponse()
 const {apiResultRounds, getRoundsAPI, updateRoundAPI } = apiCallRounds()
 
-const {getUserAllAPI, allUserList} = apiCallUser()
+const {getUserAllAPI, allUserList, updateUserAPI} = apiCallUser()
 const { apiResultCourse, getCoursesAPI } = apiCallCourses()
 const { apiResultScorecard, getStrokesAhead} = getScorecard()
 

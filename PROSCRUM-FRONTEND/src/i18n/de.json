@@ -5,7 +5,7 @@
   "rounds": "Runden",
   "logout": "Abmelden",
   "users": "Benutzer",
-  "rounds-master": "Runden-Master",
+  "rounds-master": "Spielführer",
   "login": "Anmeldung",
   "signup": "Registrierung",
 
@@ -142,7 +142,7 @@
     "player": "Spieler",
     "admin": "Admin",
     "secretary": "Sekretär",
-    "round_master": "Runden-Master",
+    "round_master": "Spielführer",
     "signup": "Registrieren",
     "signup_page": "Registrierung"
   },
@@ -165,10 +165,7 @@
     "input": "Scorecard erstellen",
     "inputHDC": "Handicap-Index des Spielers: ",
     "calculate": "Scorecard erstellen"
-  }
-
-}
-
+  },
   "error": {
     "errorOccurred": "Ein Fehler ist aufgetreten",
     "login": {
@@ -176,7 +173,8 @@
     },
     "users": {
       "permission_denied": "Zugriff verweigert.",
-      "not_authorized": "Nicht berechtigt, diese Aktion auszuführen."
+      "not_authorized": "Nicht berechtigt, diese Aktion auszuführen.",
+      "user_exist": "Benutzer existiert bereits."
     },
     "rounds": {
       "permission_denied_Try_with_player": "Zugriff verweigert. Melden Sie sich bei Ihrem Spielerkonto an.",

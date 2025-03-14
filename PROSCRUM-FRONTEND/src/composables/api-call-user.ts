@@ -99,20 +99,22 @@ export function apiCallUser() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          authorization: "Bearer " + getToken(),
         },
         body: JSON.stringify(user),
       })
 
       if (!rawResponse.ok) {
-        throw new Error(`HTTP-Fehler! Status: ${rawResponse.status}`)
+        throw new Error('' + rawResponse.status)
       }
 
       return await rawResponse.json()
 
     } catch (error) {
-      console.error('addUserAPI:', error)
+      const globalT = (i18n.global as Composer).t; //<-
+      console.error(error)
+      setError(globalT('error.users.user_exist'));
     }
+
   }
 
   async function updateUserAPI(user: User) {

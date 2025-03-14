@@ -12,7 +12,7 @@ const { t } = useI18n()
 const userCreate: UserCreate = {
   email: "jakobfischer@gmail.com",
   password: "1234",
-  role_id: 4,
+  role_id: 1,
   first_name: "Jakob",
   last_name: "Fischer"
 }
@@ -94,33 +94,6 @@ async function signup(userCreate: UserCreate) {
             class="form-input"
             v-model="userCreate.last_name"
             type="text"
-          />
-        </div>
-      </div>
-
-      <div class="input-group">
-        <div class="input-wrapper">
-          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
-            <circle
-              stroke-width="1.5"
-              stroke="currentColor"
-              r="4"
-              cy="8"
-              cx="12"
-            ></circle>
-            <path
-              stroke-linecap="round"
-              stroke-width="1.5"
-              stroke="currentColor"
-              d="M5 20C5 17.2386 8.13401 15 12 15C15.866 15 19 17.2386 19 20"
-            ></path>
-          </svg>
-          <input
-            required
-            :placeholder="$t('singupPage.role_id')"
-            class="form-input"
-            v-model="userCreate.role_id"
-            type="number"
           />
         </div>
       </div>
