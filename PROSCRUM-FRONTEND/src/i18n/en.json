@@ -3,22 +3,38 @@
   "home": "Home",
   "course": "Course",
   "rounds": "Rounds",
+  "users": "Users",
+  "rounds-master": "Game Master",
   "login": "Login",
   "signup": "Sign up",
+  "logout": "Logout",
+
   "input": {
     "input": "Input",
     "round": "Round: ",
     "date": "Date: ",
-    "courseRating": "Course Rating: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
+    "course_par_1to9": "Par(1-9): ",
+    "course_par_10to18": "Par(10-18): ",
+    "course_par_all": "Par(1-18): ",
     "slopeRating": "Slope Rating: ",
-    "courseSelection": "Select a course",
+    "courseSelection": "Which course did u play?",
+    "courseHoleSelection": "How many holes were played?",
+    "courseSelection_1to9":"(1-9)",
+    "courseSelection_10to18":"(10-18)",
+    "courseSelection_all":"(1-18)",
+    "shots": "Score: ",
+    "par": "Par: ",
+    "hdc": "HDC: ",
     "holes": "Holes",
     "hole": ". Hole: ",
     "calculate": "Calculate"
   },
   "output": {
-    "output": "Output",
-    "yourCurrentHandicap": "Your current handicap:",
+    "output": "Result",
+    "yourCurrentHandicap": "Your current handicap",
     "until2021": "until 2020: ",
     "from2021": "from 2021: ",
     "results": "Results",
@@ -26,6 +42,7 @@
     "from2021Chart": "From 2021",
     "round": "Round",
     "rounds": "Rounds",
+    "course": "Course",
     "resultsFrom2021": "Results from 2021",
     "resultsUntil2020": "Results until 2020",
     "scoreDifferential": "Score Differential",
@@ -33,19 +50,60 @@
     "fewer": "Fewer"
   },
   "coursePage": {
-    "courseName": "Course name: ",
+    "courseName": "Course Name: ",
+    "leaders": "Leader: ",
+    "secretaries": "Secretary: ",
+    "courseSelection": "Which holes?",
+    "courseSelection_1to9": "(1-9)",
+    "courseSelection_10to18": "(10-18)",
+    "courseSelection_all": "(1-18)",
     "par": "Par: ",
-    "courseRating": "Course Rating: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
+    "course_par_1to9": "Par(1-9): ",
+    "course_par_10to18": "Par(10-18): ",
+    "course_par_all": "Par(1-18): ",
     "slopeRating": "Slope Rating: ",
     "hole": "Hole: ",
-    "hdc": "HDC.: ",
+    "hdc": "HDC: ",
     "save": "Save",
     "delete": "Delete",
     "close": "Close"
   },
   "roundPage": {
     "round_number": "Round number: ",
-    "score": "Score: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
+    "course_par_1to9": "Par(1-9): ",
+    "course_par_10to18": "Par(10-18): ",
+    "course_par_all": "Par(1-18): ",
+    "shots": "Score: ",
+    "date": "Date: ",
+    "score_differential": "Score Differential: ",
+    "courseName": "Course Name: ",
+    "par": "Par: ",
+    "courseRating": "Course Rating: ",
+    "slopeRating": "Slope Rating: ",
+    "hole": "Hole: ",
+    "hdc": "HDC: ",
+    "save": "Save",
+    "delete": "Delete",
+    "close": "Close",
+    "update": "Update",
+    "back": "Back"
+  },
+  "roundMasterPage": {
+    "player_name": "Player name: ",
+    "round_number": "Round number: ",
+    "courseRating_1to9": "Course Rating(1-9): ",
+    "courseRating_10to18": "Course Rating(10-18): ",
+    "courseRating_all": "Course Rating(1-18): ",
+    "course_par_1to9": "Par(1-9): ",
+    "course_par_10to18": "Par(10-18): ",
+    "course_par_all": "Par(1-18): ",
+    "shots": "Score: ",
     "date": "Date: ",
     "score_differential": "Score Differential: ",
     "courseName": "Course name: ",
@@ -53,25 +111,80 @@
     "courseRating": "Course Rating: ",
     "slopeRating": "Slope Rating: ",
     "hole": "Hole: ",
-    "hdc": "HDC.: ",
+    "hdc": "HDC: ",
     "save": "Save",
     "delete": "Delete",
     "close": "Close",
     "update": "Update",
     "back": "Back"
   },
-
-
+  "usersPage": {
+    "full_name": "Full name: ",
+    "email": "Email: ",
+    "role_id": "Role: ",
+    "user_id": "ID: ",
+    "close": "Close",
+    "created_at": "Created at: ",
+    "hdc_2020": "HDC before 2020: ",
+    "hdc_2021": "HDC after 2021: ",
+    "player": "Player",
+    "admin": "Admin",
+    "secretary": "Secretary",
+    "round_master": "Leader"
+  },
+  "singupPage": {
+    "first_name": "First Name: ",
+    "last_name": "Last Name: ",
+    "email": "Email: ",
+    "password": "Password: ",
+    "password_confirmation": "Confirm Password: ",
+    "role_id": "Role: ",
+    "player": "Player",
+    "admin": "Admin",
+    "secretary": "Secretary",
+    "round_master": "Leader",
+    "signup": "Sign up",
+    "signup_page": "Sign up"
+  },
+  "loginPage": {
+    "email": "Email: ",
+    "password": "Password: ",
+    "login": "Login",
+    "login_page": "Login"
+    },
   "filter": {
     "search": "Search...",
     "number": "Number",
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   },
-
   "scorecard": {
     "input": "Create Scorecard",
     "inputHDC": "Handicap-Index of the Player: ",
     "calculate": "Create Scorecard"
+  },
+  "error": {
+    "errorOccurred": "An error occurred",
+    "login": {
+      "user_not_found": "User not found.",
+      "login": "Please login"
+    },
+    "users": {
+      "permission_denied": "Access denied.",
+      "not_authorized": "Not authorized to perform this action.",
+      "user_exist": "User already exists."
+    },
+    "rounds": {
+      "permission_denied_Try_with_player": "Access denied. Login with a player account.",
+      "permission_denied": "Access denied.",
+      "not_authorized": "Not authorized to perform this action."
+    },
+    "course": {
+      "permission_denied": "Access denied.",
+      "not_authorized": "Not authorized to perform this action."
+    },
+    "scorecard": {
+      "permission_denied": "Access denied."
+    }
   }
 }

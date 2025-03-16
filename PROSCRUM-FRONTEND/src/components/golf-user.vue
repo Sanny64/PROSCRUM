@@ -97,7 +97,7 @@ function updateRound() {
                 <b>{{props.user.created_at.split('T')[0]}}</b>
               </div>
               <div class="form-group">
-                <label>{{ t('coursePage.secretaries') }}</label>
+                <label>{{ t('usersPage.role_id') }}</label>
                 <select v-model="selectedRole" class="dropdown-menu">
                   <option v-for="role in roles" :value="role.role_id" class="dropdown-item">
                     {{ role.role_name }}

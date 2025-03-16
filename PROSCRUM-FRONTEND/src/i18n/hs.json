@@ -3,14 +3,31 @@
   "home": "Doheem",
   "course": "Golfwies",
   "rounds": "Rundeche",
+  "logout": "Abmelde",
+  "users": "Benutzer",
+  "rounds-master": "Spillfiehrer",
   "signup": "Sich eitrage",
   "login": "Meld dich aach",
+
   "input": {
     "input": "Rein mit de Zahle!",
     "round": "Uff die Runnd: ",
-    "courseRating": "Wiesewärtung: ",
+    "date": "Dagg: ",
+    "courseRating_1to9": "Wiesewärtung (1-9): ",
+    "courseRating_10to18": "Wiesewärtung (10-18): ",
+    "courseRating_all": "Wiesewärtung (1-18): ",
+    "course_par_1to9": "Pärchen (1-9): ",
+    "course_par_10to18": "Pärchen (10-18): ",
+    "course_par_all": "Pärchen (1-18): ",
     "slopeRating": "Hangbeschleunischung: ",
     "courseSelection": "Such dir en schicke Golfacker aus",
+    "courseHoleSelection": "Wievill Löcher hosch gspielt?",
+    "courseSelection_1to9":"(1-9)",
+    "courseSelection_10to18":"(10-18)",
+    "courseSelection_all":"(1-18)",
+    "shots": "Schläge: ",
+    "par": "Pärchen: ",
+    "hdc": "HDC: ",
     "holes": "Löchä",
     "hole": ". Baggerloch: ",
     "calculate": "Machs mol aus!"
@@ -25,6 +42,7 @@
     "from2021Chart": "Heit un jetzt",
     "round": "Noch so ne Runnd ",
     "rounds": "Runndeche",
+    "course": "Golfwies",
     "resultsFrom2021": "Wat de g’macht hosch ab 2021",
     "resultsUntil2020": "Wat de g’macht hosch bis 2020",
     "scoreDifferential": "Score Differential",
@@ -33,8 +51,19 @@
   },
   "coursePage": {
     "courseName": "Name vun de Wiese: ",
+    "leaders": "Boss: ",
+    "secretaries": "Schriftfiehrer: ",
+    "courseSelection": "Welsche Löcher wolle mer?",
+    "courseSelection_1to9": "(1-9)",
+    "courseSelection_10to18": "(10-18)",
+    "courseSelection_all": "(1-18)",
     "par": "Pärchen: ",
-    "courseRating": "Wiesewärtung: ",
+    "courseRating_1to9": "Wiesewärtung (1-9): ",
+    "courseRating_10to18": "Wiesewärtung (10-18): ",
+    "courseRating_all": "Wiesewärtung (1-18): ",
+    "course_par_1to9": "Pärchen (1-9): ",
+    "course_par_10to18": "Pärchen (10-18): ",
+    "course_par_all": "Pärchen (1-18): ",
     "slopeRating": "Hangsteigung: ",
     "hole": "Grobber: ",
     "hdc": "HDC. (Hessischer Dappigkeits-Check): ",
@@ -42,8 +71,85 @@
     "delete": "Schmeiß wech!",
     "close": "Mach de Babbe zu!"
   },
+  "roundPage": {
+    "round_number": "Runnde-Nummer: ",
+    "courseRating_1to9": "Wiesewärtung (1-9): ",
+    "courseRating_10to18": "Wiesewärtung (10-18): ",
+    "courseRating_all": "Wiesewärtung (1-18): ",
+    "course_par_1to9": "Pärchen (1-9): ",
+    "course_par_10to18": "Pärchen (10-18): ",
+    "course_par_all": "Pärchen (1-18): ",
+    "shots": "Schlääg: ",
+    "date": "Daddum: ",
+    "score_differential": "Score Differential: ",
+    "courseName": "Wiesename: ",
+    "par": "Pärchen: ",
+    "courseRating": "Wiesewärtung: ",
+    "slopeRating": "Hangsteigung: ",
+    "hole": "Grobber: ",
+    "hdc": "HDC: ",
+    "save": "Heb’s uff!",
+    "delete": "Schmeiß wech!",
+    "close": "Mach de Babbe zu!",
+    "update": "Aktualisier’s!",
+    "back": "Geh widder zurick!"
+  },
+  "roundMasterPage": {
+    "player_name": "Spielername: ",
+    "round_number": "Rundennummer: ",
+    "courseRating": "Wiesewärtung: ",
+    "slopeRating": "Hangbeschleunischung: ",
+    "shots": "Schlääg: ",
+    "date": "Dattum: ",
+    "score_differential": "Score Differenzial: ",
+    "courseName": "Golfwies: ",
+    "par": "Pärchen: ",
+    "hole": "Grobber: ",
+    "hdc": "HDC: ",
+    "save": "Heb's uff!",
+    "delete": "Schmeiß wech!",
+    "close": "Mach de Babbe zu!",
+    "update": "Nei machn!",
+    "back": "Geh widder z'rick!"
+  },
+  "usersPage": {
+    "full_name": "Vollständischer Name: ",
+    "email": "Email: ",
+    "role_id": "Rolle: ",
+    "user_id": "ID: ",
+    "close": "Mach de Babbe zu!",
+    "created_at": "G’macht am: ",
+    "hdc_2020": "HDC bis 2020: ",
+    "hdc_2021": "HDC ab 2021: ",
+    "player": "Spillr",
+    "admin": "Chef",
+    "secretary": "Sekretäär",
+    "round_master": "Spillfiehrer"
+  },
+  "signupPage": {
+    "first_name": "Vornome: ",
+    "last_name": "Nachnome: ",
+    "email": "Email: ",
+    "password": "Kennwort: ",
+    "password_confirmation": "Kennwort nochemal: ",
+    "role_id": "Rolle: ",
+    "player": "Spillr",
+    "admin": "Obermotz",
+    "secretary": "Schriebknecht",
+    "round_master": "Spillfiehrer",
+    "signup": "Sich eitrage",
+    "signup_page": "Eintrachseite"
+  },
+  "loginPage": {
+    "email": "Email: ",
+    "password": "Kennwort: ",
+    "login": "Aanmelde",
+    "login_page": "Aanmeldung"
+  },
   "filter": {
     "search": "Guck ma do...",
+    "last_name_search": "Nachname suche...",
+    "number": "Nummer",
     "maxCourseRating": "Höchschd Wiesewärtung: ",
     "maxSlopeRating": "Höchschd Hangsteigung: "
   },
@@ -51,5 +157,29 @@
     "input": "Scorekaart mache",
     "inputHDC": "Handicap-Index vom Spillr: ",
     "calculate": "Scorekaart mache"
+  },
+  "error": {
+    "errorOccurred": "Ei guck, do is was schief geloffe!",
+    "login": {
+      "user_not_found": "Kennde mer net!",
+      "login": "Mach de Login!"
+    },
+    "users": {
+      "permission_denied": "Darfste net!",
+      "not_authorized": "Haschd keine Erlaubnis fer des!",
+      "user_exist": "Gibds schon!"
+    },
+    "rounds": {
+      "permission_denied_Try_with_player": "Darfste net. Logg disch als Spillr ei!",
+      "permission_denied": "Darfste net!",
+      "not_authorized": "Haschd keine Erlaubnis fer des!"
+    },
+    "course": {
+      "permission_denied": "Darfste net!",
+      "not_authorized": "Haschd keine Erlaubnis fer des!"
+    },
+    "scorecard": {
+      "permission_denied": "Darfste net!"
+    }
   }
 }

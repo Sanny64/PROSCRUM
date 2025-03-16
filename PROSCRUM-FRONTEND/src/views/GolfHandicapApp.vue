@@ -15,6 +15,9 @@ import { useErrorController, errorText } from "@/composables/error-controller.ts
 import { provide, onMounted, ref, type Ref } from "vue";
 import type { User } from '../types/types.ts'
 import ErrorHandling from "@/components/error-handling.vue";
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { getActiveUserAPI, activeUserAPI } = apiCallUser();
 let onMountedBoolean = ref(false)
@@ -29,7 +32,7 @@ provide<() => Promise<void>>("refreshActiveUser", getActiveUserAPI);
 onMounted(async () => {
   await getActiveUserAPI();
   if(activeUserAPI.value === 'INVALID') {
-    setError("Bitte logge dich ein.");
+    setError(t('error.login.login'));
     await router.push("/login");
   } else {
 

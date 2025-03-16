@@ -146,13 +146,12 @@
     "signup": "Registrieren",
     "signup_page": "Registrierung"
   },
-    "loginPage": {
-        "email": "Email: ",
-        "password": "Passwort: ",
-        "login": "Anmeldungen",
-        "login_page": "Anmeldung"
+  "loginPage": {
+    "email": "Email: ",
+    "password": "Passwort: ",
+    "login": "Anmelden",
+    "login_page": "Anmeldung"
     },
-
   "filter": {
     "search": "Suchen...",
     "last_name_search": "Nachnamen suchen...",
@@ -160,7 +159,6 @@
     "maxCourseRating": "Max. Course Rating: ",
     "maxSlopeRating": "Max. Slope Rating: "
   },
-
   "scorecard": {
     "input": "Scorecard erstellen",
     "inputHDC": "Handicap-Index des Spielers: ",
@@ -169,7 +167,8 @@
   "error": {
     "errorOccurred": "Ein Fehler ist aufgetreten",
     "login": {
-      "user_not_found": "Benutzer nicht gefunden."
+      "user_not_found": "Benutzer nicht gefunden.",
+      "login": "Bitte logge dich ein."
     },
     "users": {
       "permission_denied": "Zugriff verweigert.",
