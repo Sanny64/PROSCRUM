@@ -41,7 +41,7 @@ async function signup(userCreate: UserCreate) {
 <div class="content">
 
   <form class="modern-form" @submit.prevent="signup(userCreate)">
-    <div class="form-title">{{t('singupPage.signup_page')}}</div>
+    <div class="form-title">{{t('signupPage.signup_page')}}</div>
 
     <div class="form-body">
       <div class="input-group">
@@ -63,7 +63,7 @@ async function signup(userCreate: UserCreate) {
           </svg>
           <input
             required
-            :placeholder="$t('singupPage.first_name')"
+            :placeholder="$t('signupPage.first_name')"
             class="form-input"
             v-model="userCreate.first_name"
             type="text"
@@ -90,7 +90,7 @@ async function signup(userCreate: UserCreate) {
           </svg>
           <input
             required
-            :placeholder="$t('singupPage.last_name')"
+            :placeholder="$t('signupPage.last_name')"
             class="form-input"
             v-model="userCreate.last_name"
             type="text"
@@ -109,7 +109,7 @@ async function signup(userCreate: UserCreate) {
           </svg>
           <input
             required
-            :placeholder="$t('singupPage.email')"
+            :placeholder="$t('signupPage.email')"
             class="form-input"
             v-model="userCreate.email"
             type="email"
@@ -128,7 +128,7 @@ async function signup(userCreate: UserCreate) {
           </svg>
           <input
             required
-            :placeholder="$t('singupPage.password')"
+            :placeholder="$t('signupPage.password')"
             class="form-input"
             v-model="userCreate.password"
             :type="inputType"
@@ -154,7 +154,7 @@ async function signup(userCreate: UserCreate) {
     </div>
 
     <button class="submit-button" type="submit">
-      <span class="button-text">{{t('singupPage.signup')}}</span>
+      <span class="button-text">{{t('signupPage.signup')}}</span>
       <div class="button-glow"></div>
     </button>
 
