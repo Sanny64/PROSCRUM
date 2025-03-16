@@ -151,7 +151,9 @@
     "last_name_search": "Nachname suche...",
     "number": "Nummer",
     "maxCourseRating": "Höchschd Wiesewärtung: ",
-    "maxSlopeRating": "Höchschd Hangsteigung: "
+    "maxSlopeRating": "Höchschd Hangsteigung: ",
+    "from": "Vun do: ",
+    "to": "Noh do: "
   },
   "scorecard": {
     "input": "Scorekaart mache",

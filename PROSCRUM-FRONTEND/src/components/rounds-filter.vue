@@ -105,18 +105,21 @@ watch(
     </div>
 
     <div class="DateInputContainer">
+      <b>{{t('filter.from')}}
       <input
         :placeholder="$t('filter.startDate')"
         v-model="dateRange.start"
       class="input"
       type="date"
       />
+      </b>
+      <b>{{t('filter.to')}}
       <input
         :placeholder="$t('filter.endDate')"
         v-model="dateRange.end"
       class="input"
       type="date"
-      />
+      /></b>
     </div>
 
 

@@ -157,7 +157,9 @@
     "last_name_search": "Nachnamen suchen...",
     "number": "Nummer",
     "maxCourseRating": "Max. Course Rating: ",
-    "maxSlopeRating": "Max. Slope Rating: "
+    "maxSlopeRating": "Max. Slope Rating: ",
+    "from": "Von: ",
+    "to": "Bis: "
   },
   "scorecard": {
     "input": "Scorecard erstellen",

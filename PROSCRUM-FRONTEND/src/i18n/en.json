@@ -156,7 +156,9 @@
     "search": "Search...",
     "number": "Number",
     "maxCourseRating": "Max. Course Rating: ",
-    "maxSlopeRating": "Max. Slope Rating: "
+    "maxSlopeRating": "Max. Slope Rating: ",
+    "from": "From: ",
+    "to": "To: "
   },
   "scorecard": {
     "input": "Create Scorecard",
