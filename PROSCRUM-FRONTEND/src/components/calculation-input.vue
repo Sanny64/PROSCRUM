@@ -26,6 +26,10 @@ const props = defineProps<{
 console.log('CourseList: ', props.courseList)
 console.log('lastRound: ', props.lastRound)
 // Ausgewählte Option
+min_date = "1980-01-01"
+if (props.lastRound) {
+  min_date = props.lastRound[props.lastRound.lenght - 1].date
+}
 const selectedCourseName = ref<string | null>('')
 const selectedCourse = ref<Course>()
 const isDropdownOpen = ref(false)
@@ -146,6 +150,7 @@ const btnCalculation = () => {
         <input
           type="date"
           v-model="selectedDate"
+          :min="min_date"
           id="date"
           required
         />
