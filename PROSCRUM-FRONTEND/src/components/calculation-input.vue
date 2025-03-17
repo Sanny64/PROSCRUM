@@ -26,7 +26,7 @@ const props = defineProps<{
 console.log('CourseList: ', props.courseList)
 console.log('lastRound: ', props.lastRound)
 // Ausgewählte Option
-min_date = "1980-01-01"
+let min_date = "1980-01-01"
 if (props.lastRound) {
   min_date = props.lastRound[props.lastRound.lenght - 1].date
 }
