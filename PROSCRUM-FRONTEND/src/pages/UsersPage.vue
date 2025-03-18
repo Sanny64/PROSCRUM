@@ -60,7 +60,7 @@ async function generatePDF(list_s_A: number[], course: Course, course_HC: number
   pdf.setFontSize(16);
   pdf.text(`Course: ${course.course_name}`, 14, 25);
   pdf.setFontSize(12);
-  pdf.text(`Course HC: ${course_HC}`, 14, 35)
+  pdf.text(`Course Handicap: ${course_HC}`, 14, 35)
   pdf.text('Platzparameter:', 14, 45)
   pdf.text(`Par: ${course.course_par_all}`, 50, 45)
   pdf.text(`Slope Rating: ${course.slope_rating}`, 90, 45)
