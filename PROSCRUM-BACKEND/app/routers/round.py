@@ -227,7 +227,7 @@ def update_round(round_number: int, round: RoundOut, db: Session = Depends(get_d
             updated_rounds = update_calculations(round, all_user_round_outs)
 
             for r in updated_rounds:                
-                round_query = db.query(schemas.Round).filter(schemas.Round.round_id == round.round_id)
+                round_query = db.query(schemas.Round).filter(schemas.Round.round_id == r.round_id)
                 round_db = round_query.first()
                 r_dict = r.model_dump()
                 r_dict["course_id"] = r.course.course_id
