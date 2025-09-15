@@ -69,6 +69,19 @@ npm run dev
 npm run build
 ```
 
+### Team
+Frontend Development:
+    - [Jakob Fischer](https://github.com/JakobFischer2574)
+Backend Development:
+    - [Jan Brandenstein](https://github.com/JanBrandenstein)
+    - [Martin](https://github.com/Moartin-Dev)
+    - [Robin](https://github.com/notsambutrobin)
+    - [Samuel Gerules](https://github.com/Sannynator)
+Server Hosting:
+    - [Jan Brandenstein](https://github.com/JanBrandenstein)
+Team Lead and Scrum Master:
+    - [Santino](https://github.com/Sanny64)
+
 ## Lizenz
 
 [Jakob Fischer](https://github.com/JakobFischer2574)
