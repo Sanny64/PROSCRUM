@@ -1,88 +1,157 @@
-# FRONTEND PROSCRUM
+# PROSCRUM
 
-## Aufbau der Webseite
+A Golf Handicap Calculator by Students of the Provadis School of International Management and Technologies
 
-Die Webseite ist Grundlegend auf zwei Teile aufgebaut. Die Navigationsleiste und den Inhalt
+---
 
-## Navigationsleiste
+## Table of Contents
 
-Links befindet sich das Logo und der Name der Website. Rechts kann zwischen Home und Login gewechselt werden. Je nach Auswahl ändert sich der Inhalt, die Navigation bleibt jedoch gleich.
+- [About](#about)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Backend Setup](#backend-setup)
+- [Frontend Setup](#frontend-setup)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Inhalt:
+---
 
-## Home
+## About
 
-Hier gibt es zwei Felder: Input und Output. Im Input werden die Daten für die Berechnung des Handicaps eingegeben. Im Output wird der Status der Berechnung angezeigt und das Ergebnis ausgegeben.
+PROSCRUM is a web application designed to help golfers calculate and track their handicaps. The project consists of a Python-based backend (API) and a modern TypeScript/Vue.js frontend, providing a seamless user experience for managing golf rounds, courses, and user authentication in English and German.
+Additionally Admins can manage users, courses rounds and more. 
 
-## Golfplätze
+---
 
-Hier werden alle Golfplätze angezeigt.
-- Man kann mit filtern den richtigen Golfplatz finden.
-- Man kann sich de Golfplatz genauer anschauen.
-- Man kann einen Golfplatz hinzufügen
+## Features
 
-## Runden
+- User authentication and authorization
+- Add, edit, and view golf courses
+- Record and manage golf rounds
+- Calculate golf handicaps
+- Data visualization of rounds and statistics
+- Responsive and modern UI
+- Internationalization (i18n) support
 
-Hier werden alle Runden angezeigt.
-- Man kann die Runden Filtern
-- Man kann sch Details der Runden anschauen.
-- Man kann die Runden Updaten.
-- Man kann sich Rechts den Vergeich seines Handicaps anschauen.
+---
 
-## Code Aufbau
-
-Die Ordner struckur ist wie folgt:
-
-```bash
-src/
-├── assets/          # Statische Dateien wie Bilder, Fonts oder Icons
-├── components/      # Vue-Komponenten
-├── composables/     # Logik(API Aufruf)
-├── pages/           # Seitenkomponenten(Home, Courses, Rounds)
-├── router/          # Routing-Konfiguration (z. B. index.js)
-├── style/           # CSS-Dateien für das Styling
-├── views/           # Ganze Webseite(Navbar, Inhalt)
+## Project Structure
 
 ```
-## Pages
-
-Pages sind die Schnittstellen der einzelnen Komponenten. Jeder API-Aufruf an das Backend wird von der entsprechenden Page ausgeführt. Zum Beispiel braucht die Ausgabe der Brechung alle Runden Wird in der HomePage eine Funktion aufgerufen und eine API-Anfrage an das Backend gestellt. Diese Anfrage gibt eine Liste von Runden zurück.
-So wird es bei alle andern Komponenten auch gemacht
-
-
-## Projekt Setup
-
-```sh
---> package-lock.json Löschen
---> .npmrc im Fronend Ordner erstellen
---> mit: registry=https://registry.npmjs.org
---> npm i
+PROSCRUM/
+│
+├── PROSCRUM-BACKEND/      # FastAPI backend (Python)
+│   ├── app/
+│   │   ├── routers/       # API route definitions
+│   │   ├── models.py      # Database models
+│   │   ├── calculations.py, new_calculations.py, old_calculation.py
+│   │   ├── ...            # Other backend modules
+│   ├── requirements.txt   # Python dependencies
+│   └── README.md
+│
+├── PROSCRUM-FRONTEND/     # Vue.js frontend (TypeScript)
+│   ├── src/
+│   │   ├── components/    # Vue components
+│   │   ├── pages/         # Page components
+│   │   ├── composables/   # Composable utilities
+│   │   ├── i18n/          # Localization files
+│   │   ├── assets/        # Images, icons, sounds
+│   │   └── ...            # Other frontend modules
+│   ├── public/
+│   ├── package.json       # Frontend dependencies
+│   └── README.md
+│
+├── README.md              # Project overview (this file)
+└── package.json           # (optional) Monorepo dependencies
 ```
 
-### Starten mit
-```sh
-npm run dev
-```
+---
 
-### Build mit
-```sh
-npm run build
-```
+## Backend Setup
+
+1. **Navigate to the backend directory:**
+    ```powershell
+    cd PROSCRUM-BACKEND
+    ```
+
+2. **Create a virtual environment (optional but recommended):**
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\activate
+    ```
+
+3. **Install dependencies:**
+    ```powershell
+    pip install -r requirements.txt
+    ```
+
+4. **Run the FastAPI server:**
+    ```powershell
+    uvicorn app.main:app --reload
+    ```
+
+    The API will be available at `http://127.0.0.1:8000`.
+
+---
+
+## Frontend Setup
+See PROSCRUM/blob/main/PROSCRUM-FRONTEND/README.md
+
+---
+
+## Usage
+
+- Open PROSCRUMs "Golf Handicap Calculator" in your browser at https://164.30.73.144/.
+- Register or log in.
+- Add golf courses and record your rounds.
+- View your handicap and statistics.
+
+---
+
+## Testing
+
+### Backend
+
+- Tests are located in `PROSCRUM-BACKEND/app/test/`.
+- Run tests with your preferred Python test runner (e.g., pytest).
+
+### Frontend
+
+- Frontend tests are located in `PROSCRUM-FRONTEND/src/components/__tests__/` and `src/pages/__tests__/`.
+- Run tests with:
+  ```powershell
+  npm run test
+  ```
+
+---
+
+## Technologies Used
+
+- **Backend:** Python, FastAPI, SQLAlchemy
+- **Frontend:** Vue.js 3, TypeScript, Vite, Pinia, Vue Router
+- **Other:** ESLint, Vitest, i18n, CSS
+
+---
 
 ### Team
 Frontend Development:
     - [Jakob Fischer](https://github.com/JakobFischer2574)
+
 Backend Development:
     - [Jan Brandenstein](https://github.com/JanBrandenstein)
     - [Martin](https://github.com/Moartin-Dev)
     - [Robin](https://github.com/notsambutrobin)
     - [Samuel Gerules](https://github.com/Sannynator)
+
 Server Hosting:
     - [Jan Brandenstein](https://github.com/JanBrandenstein)
-Team Lead and Scrum Master:
+
+Team Lead:
     - [Santino](https://github.com/Sanny64)
 
 ## Lizenz
-
-[Jakob Fischer](https://github.com/JakobFischer2574)
-
+This project is for educational purposes by students of the Provadis School of International Management and Technologies.
+License managed by [Jakob Fischer](https://github.com/JakobFischer2574)
