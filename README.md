@@ -36,6 +36,7 @@ Additionally Admins can manage users, courses, rounds and more in a specifc admi
 - Data visualization of rounds and statistics
 - Responsive and modern UI
 - Internationalization (i18n) support
+- E-mail notification service for round updates
 
 ---
 
