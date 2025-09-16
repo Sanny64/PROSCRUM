@@ -77,12 +77,12 @@ PROSCRUM/
 ---
 
 ## Backend Setup
-See PROSCRUM/blob/main/PROSCRUM-BACKEND/README.md
+See */PROSCRUM-BACKEND/README.md
 
 ---
 
 ## Frontend Setup
-See PROSCRUM/blob/main/PROSCRUM-FRONTEND/README.md
+See */PROSCRUM-FRONTEND/README.md
 
 ---
 
