@@ -1,7 +1,7 @@
 # PROSCRUM
 
 A Golf Handicap Calculator by Students of the Provadis School of International Management and Technologies 
-(https://www.provadis-hochschule.de)
+https://www.provadis-hochschule.de
 
 ---
 
@@ -23,7 +23,7 @@ A Golf Handicap Calculator by Students of the Provadis School of International M
 ## About
 
 PROSCRUM is a web application designed to help golfers calculate and track their handicaps. The project consists of a Python-based backend (API) and a modern TypeScript/Vue.js frontend, providing a seamless user experience for managing golf rounds, courses, and user authentication in English and German.
-Additionally Admins can manage users, courses rounds and more in a specifc admin view. 
+Additionally Admins can manage users, courses, rounds and more in a specifc admin view. 
 
 ---
 
@@ -83,7 +83,7 @@ See PROSCRUM/blob/main/PROSCRUM-FRONTEND/README.md
 
 ## Usage
 
-- Open PROSCRUMs "Golf Handicap Calculator" in your browser at https://164.30.73.144/.
+- Open PROSCRUMs "Golf Handicap Calculator" in your browser at 164.30.73.144/.
 - Register or log in.
 - Add golf courses and record your rounds.
 - View your handicap and statistics.
@@ -118,6 +118,8 @@ See PROSCRUM/blob/main/PROSCRUM-FRONTEND/README.md
 ### Team
 Frontend Development:
     - [Jakob Fischer](https://github.com/JakobFischer2574)
+    - [Robin](https://github.com/notsambutrobin)
+    - [Samuel Gerules](https://github.com/Sannynator)
 
 Backend Development:
     - [Jan Brandenstein](https://github.com/JanBrandenstein)
