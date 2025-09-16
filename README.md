@@ -140,4 +140,5 @@ Team Lead:
 
 ## License
 This project is for educational purposes by students of the Provadis School of International Management and Technologies.
+
 License managed by [Jakob Fischer](https://github.com/JakobFischer2574)
