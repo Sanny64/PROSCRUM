@@ -16,7 +16,7 @@ https://www.provadis-hochschule.de
 - [Usage](#usage)
 - [Testing](#testing)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
+- [Team](#team)
 - [License](#license)
 
 ---
@@ -31,13 +31,16 @@ Additionally Admins can manage users, courses, rounds and more in a specifc admi
 ## Features
 
 - User authentication and authorization
+  - PostgreSQL based data storage and hashed credentials
 - Add, edit, and view golf courses
 - Record and manage golf rounds
 - Calculate golf handicaps
+- E-mail notification service for round updates
+- Printable Scorecards
 - Data visualization of rounds and statistics
 - Responsive and modern UI
 - Internationalization (i18n) support
-- E-mail notification service for round updates
+- Admin View to organize app contents
 
 ---
 
@@ -135,6 +138,6 @@ Server Hosting:
 Team Lead:
     - [Santino](https://github.com/Sanny64)
 
-## Lizenz
+## License
 This project is for educational purposes by students of the Provadis School of International Management and Technologies.
 License managed by [Jakob Fischer](https://github.com/JakobFischer2574)
